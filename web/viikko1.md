@@ -33,7 +33,7 @@ Kurssilla kaikki tehtävät ovat upotettu tähän materiaaliin. Seuraavaa tehtä
 >
 > Pyyntö palauttaa siis välilehdellä response näytettävän HTML-koodin. Koodi sisältää viitteitä css-tyylitiedostoihin, javascript-tiedostoihin sekä kuviin. Sivua renderöitäessä selain hakee kunkin näistä omalla GET-pyynnöllä.
 >
-> Pidä edelleen sama networking-välilehti auki. Paina sivun vasemmassa ylälaidassa olevaa suurennuslasia, joka avaa hakukentän. Tyhjennä välilehti painamalla vasemman reunan halkaistu pallo -symbolia (:no_entry_sign:). Kirjoita jotain hakukenttään ja paina enter. Hakukenttä on toteutettu _html:n lomakkeena_ (engl. form). Lomakkeen tietojen lähetys palvelimelle tapahtuu HTTP-protokollan POST-metodin sisältävän pyynnön avulla.
+> Pidä edelleen sama networking-välilehti auki. Paina sivun oikeassa ylälaidassa olevaa suurennuslasia, joka avaa hakukentän. Tyhjennä developer toolsin välilehti painamalla vasemman reunan halkaistu pallo -symbolia (:no_entry_sign:). Kirjoita jotain hakukenttään ja paina enter. Hakukenttä on toteutettu _html:n lomakkeena_ (engl. form). Lomakkeen tietojen lähetys palvelimelle tapahtuu HTTP-protokollan POST-metodin sisältävän pyynnön avulla.
 >
 > Tutki POST-pyynnön sisältöä (listalla ylimpänä). Kohdan _headers_ alaosasta löytyy _Form data_, eli lomakkeen mukana lähtetety tieto. Huomaat, että pyyntöön vastattiin statuskoodilla 302, joka taas tarkoittaa sitä, että palvelin tekee selaimelle __uudelleenohjauksen__, eli pyytää selainta menemään vastauksen headereissa ilmoittamaan osoitteeseen. POST-pyynnön vastaus ei siis sisällä ollenkaan HTML-koodia jonka selain voisi renderöidä käyttäjälle. Heti POST-kutsun perään selain tekeekin automaattisesti GET-kutsun POST:in vastauksen headerissa __Location__ olevaan osoitteeseen. Vasta tämän uudelleenohjauksen aiheuttaman pyynnön vastauksena tullut sivu renderöidään käyttäjälle.
 >
@@ -43,7 +43,7 @@ Kurssilla kaikki tehtävät ovat upotettu tähän materiaaliin. Seuraavaa tehtä
 
 Tällä kurssilla käytämme Web-sovellusten toteuttamiseen Ruby on Rails -sovelluskehystä.
 
-Rails-sovellukset noudattavat [MVC-mallia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (tai WebMVC:tä, joka poikkeaa hiukan alkuperäisestä MVC:stä), jossa ideana on jakaa sovelluksen data- ja sovelluslogiikka (Model), näyttöjen muodostaminen (View) ja toiminnan koordinointi (Controller) selkeästi eriytettyihin osiin. Lähes kaikki moderni web-kehitys nykyään tapahtuu MVC-periaatetta noudattaen. MVC:n lisäksi moderneissa web-sovelluksissa on tosin myös kerrosarkkitehtuurien, palveluperustaisien arkkitehtuurien (SOA) tai juuri nyt kovan kohun alla olevien [mikropalveluarkkitehtuurien](http://martinfowler.com/articles/microservices.html) piirteitä.
+Rails-sovellukset noudattavat [MVC-mallia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (tai WebMVC:tä, joka poikkeaa hiukan alkuperäisestä MVC:stä), jossa ideana on jakaa sovelluksen data- ja sovelluslogiikka (Model), näyttöjen muodostaminen (View) ja toiminnan koordinointi (Controller) selkeästi eriytettyihin osiin. Lähes kaikki moderni web-kehitys nykyään tapahtuu MVC-periaatetta noudattaen. MVC:n lisäksi moderneissa web-sovelluksissa on tosin myös kerrosarkkitehtuurien tai juuri nyt kovan kohun alla olevien [mikropalveluarkkitehtuurien](http://martinfowler.com/articles/microservices.html) piirteitä.
 
 Tutkitaan mitä tapahtuu kun käyttäjä menee Railsilla toteutetulle web-sivulle, olkoon sivun URL esim. [http://wad-ratebeer.herokuapp.com/breweries](http://wad-ratebeer.herokuapp.com/breweries), eli kurssin aikana tekemämme esimerkkisovelluksen sivu, joka listaa kaikki esimerkkisovelluksen tuntemat panimot.
 
@@ -51,7 +51,7 @@ Tutkitaan mitä tapahtuu kun käyttäjä menee Railsilla toteutetulle web-sivull
 
 1. käyttäjän kirjoitettua URL:n selaimen osoiteriville, tekee selain HTTP GET-pyynnön palvelimelle wad-ratebeer.herokuapp.com
 
-2. palvelimella pyörivä web-palvelinohjelmisto (esim. Apache) ohjaa pyynnön osoitteeseen rekisteröityyn Rails-sovellukseen. Sovellus selvittää mikä sovelluksen _kontrolleri_ on rekisteröity huolehtimaan resurssiin breweries kohdistuvia GET-kutsuja. Tätä vaihetta sanotaan Rails-sovelluksen sisäiseksi reititykseksi (routing), eli etsitään "reitti minkä varrella pyyntö käsitellään".
+2. palvelimella pyörivä web-palvelinohjelmisto (esim. Apache tai Nginx) ohjaa pyynnön osoitteeseen rekisteröityyn Rails-sovellukseen. Sovellus selvittää mikä sovelluksen _kontrolleri_ on rekisteröity huolehtimaan resurssiin breweries kohdistuvia GET-kutsuja. Tätä vaihetta sanotaan Rails-sovelluksen sisäiseksi reititykseksi (routing), eli etsitään "reitti minkä varrella pyyntö käsitellään".
 
 3. kun oikea kontrolleri (esimerkissämme panimoista huolehtiva kontrolleri) ja sen metodi selviää, kutsuu sovellus metodia ja antaa sille parametriksi HTTP-pyynnön mukana mahdollisesti tulleen datan. kontrolleri hoitaa sitten operaatioon liittyvät toimenpiteet, yleensä toimenpiteiden suorittaminen edellyttää joihinkin sovelluksen dataa ja sovelluslogiikkaa sisältäviin _modeleihin_ tapahtuvaa metodikutsua.
 
@@ -69,7 +69,7 @@ MVC-mallissa modelit ovat useimmiten olioita, joiden tila talletetaan tietokanta
 
 Railsin taustalla on vahvana periaatteena __convention over configuration__, mikä tarkoittaa tapaa, jolla Rails pyrkii minimoimaan konfiguraatioiden tekemisen tarpeen määrittelemällä joukon konventioita esim. tiedostojen nimennälle ja niiden sijainnille tiedostohierarkiassa. Tulemme pian näkemään mitä CoC-periaate tarkoittaa käytännössä sovellusohjelmoijan kannalta. Rails mahdollistaa toki konventiosta poikkeamisen, mutta siinä tapauksessa ohjelmoijan on jossain määrin konfiguroitava asioita käsin.
 
-Railsilla sovellusten tekeminen edellyttää luonnollisesti jonkinasteista Rubyn hallintaa. Ruby on dynaamisesti tyypitetty tulkattu oliokieli joka mahdollistaa myös funktionaalisen ohjelmointityylin. Ruby-koodia ei siis käännetä ollenkaan, vaan tulkki suorittaa koodia komento komennolta. Koska kääntäjää ei ole, ilmenevät myös koodiin tehdyt syntaksivirheet vasta ajon aikana toisin kuin käännettävillä kielillä. Modernit kehitysympäristöt auttavat hiukan, tarjoten jonkin verran lennossa tapahtuvaa "syntaksitarkastusta", mutta kehitysympäristön tuki ei ole läheskään samaa luokkaa kuin esim. Javalla.
+Railsilla sovellusten tekeminen edellyttää luonnollisesti jonkinasteista Rubyn hallintaa. Ruby on dynaamisesti tyypitetty tulkattu oliokieli, joka mahdollistaa myös funktionaalisen ohjelmointityylin. Ruby-koodia ei siis käännetä ollenkaan, vaan tulkki suorittaa koodia komento komennolta. Koska kääntäjää ei ole, ilmenevät myös koodiin tehdyt syntaksivirheet vasta ajon aikana toisin kuin käännettävillä kielillä. Modernit kehitysympäristöt auttavat hiukan, tarjoten jonkin verran lennossa tapahtuvaa "syntaksitarkastusta", mutta kehitysympäristön tuki ei ole läheskään samaa luokkaa kuin esim. Javalla.
 
 > ## Tehtävä 2: Rubyn alkeet
 >
@@ -86,13 +86,15 @@ Railsilla tapahtuvassa sovelluskehityksessä komentorivin käyttön hallinta on 
 
 ## Kurssin suoritusmuoto
 
-Kurssin rakenne poikkeaa jossain määrin laitoksen kurssistandardista. Kurssilla tehdään ainoastaan yksi sovellus, samaa sovellusta tehdään sekä kurssimateriaalissa että materiaalin sekaan upotetuissa laskareissa. Kurssin materiaalia ei pystykään pelkästään lukemaan; Materiaalia seuratessa tulee itse rakentaa matkan varrella täydentyvää sovellusta, sillä muuten tehtävien tekeminen on mahdotonta. Toisin sanoen **kurssia on seurattava tasaisesti koko kurssin ajan**.
+Kurssin rakenne poikkeaa jossain määrin laitoksen kurssistandardista. Kurssilla tehdään ainoastaan yksi sovellus, samaa sovellusta tehdään sekä kurssimateriaalissa että materiaalin sekaan upotetuissa laskareissa. Kurssin materiaalia ei pystykään pelkästään lukemaan. Materiaalia seuratessa tulee itse rakentaa matkan varrella täydentyvää sovellusta, sillä muuten tehtävien tekeminen on mahdotonta. Toisin sanoen **kurssia on seurattava tasaisesti koko kurssin ajan**.
 
 Jokaisen viikon deadlinen (sunnuntai klo 23.59) jälkeen julkaistaan edellisen viikon esimerkkivastaus. Seuraavalla viikolla on mahdollista jatkaa joko oman sovelluksen rakentamista tai ottaa pohjaksi edellisen viikon esimerkkivastaus.
 
 Osa viikon tehtävistä on käytännössä pakollisia, muuten eteneminen pysähtyy viikon osalta. Osa tehtävistä taas on vapaaehtoisia, eikriittisten ominaisuuksien toteutuksia. Osa näistä ominaisuuksista oletetaan olevan ohjelmistossa seuraavalla viikolla, joten jos et ole tehnyt kaikkia viikon tehtäviä, kannattaa aloittaa esimerkkivastauksesta tai vaihtoehtoisesti copypasteta sieltä tarvittavat asiat koodiisi.
 
 ## Railsin asennus
+
+**HUOM** Railsin versio 5.0 on jo ilmestynyt, emme kuitenkaan käytä kurssilla sitä. Voit omalla vastuulla käyttää myös versiota 5.0, mutta siinä tapauksessa joudut itse selvittämään versioiden välillä tapahtuneet muutokset.
 
 Asennusohje osoitteessa https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/railsin-asennus
 
@@ -275,15 +277,15 @@ ja suorita komentoriviltä komento <code>bundle install</code>
 Tee kaikki seuraavat komennot myös itse (komentoa on merkin > jälkeen oleva merkkijono):
 
 ```ruby
-2.2.1 :001 > Brewery.all
+irb(main):001 > Brewery.all
   Brewery Load (2.3ms)  SELECT "breweries".* FROM "breweries"
  => #<ActiveRecord::Relation [#<Brewery id: 1, name: "Koff", year: 1897, created_at: "2017-01-15 16:08:44", updated_at: "2017-01-15 16:08:44">, #<Brewery id: 2, name: "Weihenstephan", year: 1042, created_at: "2017-01-15 16:08:56", updated_at: "2017-01-15 16:08:56">]>
-2.2.1 :002 > Brewery.count
+irb(main):002 > Brewery.count
    (0.2ms)  SELECT COUNT(*) FROM "breweries"
  => 2
-2.2.1 :003 > Brewery
+irb(main):003 > Brewery
  => Brewery(id: integer, name: string, year: integer, created_at: datetime, updated_at: datetime)
-2.2.1 :004 >
+irb(main):004 >
 ```
 
 Komento <code>Brewery.all</code> siis näyttää kaikki tietokannassa olevat panimot. Konsoli näyttää ensin tietokantaoperaation aiheuttaman SQL-kyselyn ja sen jälkeen kannasta saatavat panimo-oliot. Komento <code>Brewery.count</code> näyttää kannassa olevien panimoiden määrän.
@@ -304,6 +306,8 @@ Rails-guiden (http://guides.rubyonrails.org/active_record_basics.html) sanoin:
 <blockquote>
 Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database. It is an implementation of the Active Record pattern (https://en.wikipedia.org/wiki/Active_record_pattern) which itself is a description of an Object Relational Mapping system.
 </blockquote>
+
+> **HUOM:** Railsin versiossa 5 model-luokat eivät enää peri suraan luokkaa <code>ActiveRecord::Base</code> vaan ne perivät luokan <code>ApplicationRecord</code>. Tämä kannattaa muistaa dokumentaatiota lukiessa!
 
 Periaatteena ActiveRecordissa on lyhyesti sanottuna se, että jokaista tietokannan taulua (esim. breweries) vastaa koodissa oma luokka (Brewery). Luokka tarjoaa __luokkametodeina__ metodit, joiden avulla tietokantaa käsitellään. Kun tietokannasta haetaan rivillinen dataa (yhden panimon tiedot), luodaan siitä luokan instanssi (eli Brewery-olio).
 
@@ -334,15 +338,15 @@ Olion voi myös luoda ja tallettaa suoraan kantaan käyttämällä new:n sijaan 
 Kun olio luodaan komennolla <code>new</code>, huomaamme, että olio sisältää kenttiä joiden arvoa ei ole asetettu:
 
 ```ruby
-2.2.1 :007 > b = Brewery.new(name:"Stadin Panimo", year:1997)
+irb(main):007 > b = Brewery.new(name:"Stadin Panimo", year:1997)
  => #<Brewery id: nil, name: "Stadin Panimo", year: 1997, created_at: nil, updated_at: nil>
 ```
 
 Kun olio sitten talletetaan, tulee näillekin kentille arvo:
 
 ```ruby
-2.2.1 :008 > b.save
-2.2.1 :009 > b
+irb(main):008 > b.save
+irb(main):009 > b
  => #<Brewery id: 4, name: "Stadin Panimo", year: 1997, created_at: "2017-01-11 13:21:37", updated_at: "2017-01-11 13:21:37">
 ```
 
@@ -413,16 +417,16 @@ Huomaa, että jätimme edellä kaikissa esimerkeissä metodikutsuista sulut pois
 Edellisen metodikutsun palauttamaan arvoon voi konsolissa viitata alaviivalla, eli merkillä <code>_</code>, eli jos konsolissa työskennellessä unohtuu sijoittaa metodin tulos muuttujaan, saa tuloksen vielä kiinni alaviivalla:
 
 ```ruby
-2.2.1 :013 > Brewery.where "year<1900"
+irb(main):013 > Brewery.where "year<1900"
 ```
 tuloksen tallettaminen muuttujaan unohtui... käytetään alaviivaa
 ```ruby
-2.2.1 :014 > vanhat = _
-2.2.1 :015 > vanhat.count
+irb(main):014 > vanhat = _
+irb(main):015 > vanhat.count
  => 3
-2.2.1 :016 > vanhat.first
+irb(main):016 > vanhat.first
  => #<Brewery id: 1, name: "Schlenkerla", year: 1687, created_at: "2017-01-11 13:17:06", updated_at: "2017-01-11 13:17:06">
-2.2.1 :017 >
+irb(main):017 >
 ```
 
 > ## Tehtävä 4
@@ -484,17 +488,19 @@ irb(main):035:0> Beer
 => Beer(id: integer, name: string, style: string, brewery_id: integer, created_at: datetime, updated_at: datetime)
 ```
 
+Jos et ole vielä hakenut oluita kannasta, edellinen komento ei toimi halutusti. Suorita ensin esim. komento <code>Beer.count</code> ja tämän jälkeen myös pelkkä <code>Beer</code> toimii.
+
 Oluella on siis luonnollisesti myös kaikille ActiveRecord-olioille automaattisesti lisättävät kentät eli <code>id</code>, <code>created_at</code> ja <code>updated_at</code>.
 
 Luodaan konsolista käsin muutama olut ja liitetään ne panimoon vierasavaimen <code>brewery_id</code> avulla (huom: jos konsolisi oli jo auki, saatat joutua antamaan konsolissa komennon <code>reload!</code>, joka lataa oluiden ohjelmakoodin konsolin käytettäväksi):
 
 ```ruby
-2.2.1 :043 > koff = Brewery.first
-2.2.1 :044 > Beer.create name:"iso 3", style:"Lager", brewery_id:koff.id
+irb(main):043 > koff = Brewery.first
+irb(main):044 > Beer.create name:"iso 3", style:"Lager", brewery_id:koff.id
  => #<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">
-2.2.1 :045 > Beer.create name:"Karhu", style:"Lager", brewery_id:koff.id
+irb(main):045 > Beer.create name:"Karhu", style:"Lager", brewery_id:koff.id
  => #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">
-2.2.1 :046 >
+irb(main):046 >
 ```
 
 Luodut oluet __iso 3__ ja __Karhu__ siis liitetään panimoon Koff. Tietokannan tasolla oluiden ja panimon välillä on liitos. Koodin tasolla liitos ei kuitenkaan vielä toimi.
@@ -518,26 +524,26 @@ Mennään taas konsoliin. Jos konsoli oli auki kun teit muutokset koodiin, anna 
 Kokeillaan ensin miten pääsemme käsiksi panimon oluisiin:
 
 ```ruby
-2.2.1 :047 > koff = Brewery.find_by name:"Koff"
-2.2.1 :048 > koff.beers.count
+irb(main):047 > koff = Brewery.find_by name:"Koff"
+irb(main):048 > koff.beers.count
  => 2
-2.2.1 :049 > koff.beers
+irb(main):049 > koff.beers
  => #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">]>
 ```
 
 <code>Brewery</code>-olioille on siis ilmestynyt metodi <code>beers</code>, joka palauttaa panimoon liittyvät <code>Beer</code>-oliot. Rails generoi automaattisesti tämän metodin nähtyään <code>Brewery</code>-luokassa rivin <code>has_many :beers</code>. Oikeastaan metodi <code>beers</code> ei palauta panimoon liittyviä olioita suoraan, vaan oluiden kokoelmaa edustavan <code>ActiveRecord::Associations::CollectionProxy</code>-tyyppisen olion, jonka kautta oluiden kokoelmaan pääsee käsiksi. Proxy-olio toimii Rubyn kokoelmien kaltaisesti, eli yksittäisiin panimoon liittyviin oluisiin pääsee käsiksi seuraavasti:
 
 ```ruby
-2.2.1 :050 > koff = Brewery.find_by name:"Koff"
-2.2.1 :051 > koff.beers.first
+irb(main):050 > koff = Brewery.find_by name:"Koff"
+irb(main):051 > koff.beers.first
  => #<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">
-2.2.1 :052 > koff.beers.last
+irb(main):052 > koff.beers.last
  => #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">
-2.2.1 :053 > koff.beers[1]
+irb(main):053 > koff.beers[1]
  => #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">
-2.2.1 :054 > koff.beers.to_a
+irb(main):054 > koff.beers.to_a
  => [#<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">]
-2.2.1 :055 >
+irb(main):055 >
 ```
 
 Kokoelmaproxyä voi siis käyttää normaalin taulukon tai kokoelman tyyliin yksittäisiä kokoelman jäseniä aksessoitaessa. Kuten viimeisestä kohdasta huomaamme, proxyyn liittyvät oluet saa taulukkona seuraavasti <code>koff.beers.to_a</code>.
@@ -545,7 +551,7 @@ Kokoelmaproxyä voi siis käyttää normaalin taulukon tai kokoelman tyyliin yks
 Kokoelmaproxyn alkioiden läpikäynti esim. <code>each</code>-iteraattorilla tapahtuu samoin kuin esim. normaalin taulukon läpikäynti eachilla:
 
 ```ruby
-2.2.1 :055 > koff.beers.each { |beer| puts beer.name }
+irb(main):055 > koff.beers.each { |beer| puts beer.name }
 iso 3
 Karhu
 ```
@@ -553,11 +559,11 @@ Karhu
 Myös olueeseen liittyvään panimoon pääsee käsiksi helposti kooditasolla:
 
 ```ruby
-2.2.1 :056 > bisse = Beer.first
+irb(main):056 > bisse = Beer.first
  => #<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">
-2.2.1 :057 > bisse.brewery
+irb(main):057 > bisse.brewery
  => #<Brewery id: 8, name: "Koff", year: 1897, created_at: "2017-01-11 13:51:26", updated_at: "2017-01-11 13:51:26">
-2.2.1 :058 >
+irb(main):058 >
 ```
 
 Eli <code>Beer</code>-luokkaan lisätty rivi <code>belongs_to :brewery</code> lisää oluille metodin <code>brewery</code>, joka palauttaa olueeseen tietokannassa liitetyn panimo-olion.
@@ -583,26 +589,26 @@ b3.beers.create name:"Hefeweizen", style:"Weizen"
 b3.beers.create name:"Helles", style:"Lager"
 ```
 
-Tiedoston sisältö on siis normaalia Rails-koodia. Saat suoritettua tiedoston komennolla
-
-    rake db:seed
-
-Poistetaan ensin kaikki vanha data tietokannasta antamalla komentoriviltä komento:
+Poistetaan kaikki vanha data tietokannasta antamalla komentoriviltä komento:
 
     rake db:reset
 
-Komento "seedaa" kannan automaattisesti eli vanhan datan poistamisen lisäksi suorittaa myös tiedoston seeds.rb sisällön.
+Komento "seedaa" kannan automaattisesti eli vanhan datan poistamisen lisäksi suorittaa myös tiedoston seeds.rb sisällön. 
 
 Sovellus kannattaa uudelleenkäynnistää seedauksen jälkeen.
+
+**HUOM:** et välttämättä tarvitse sovelluksessasi ollenkaan tiedostoon _seeds.rb_ määriteltyä dataa. Seediin määritelty data voi olla tarpeen jos sovellus tarvitsee esim. käynnistyäkseen joitan valmiksi määriteltyjä olioita. Tällöin seedin olemassaolo helpottaa uuden sovelluskehittäjän työtä, hän saa sovelluksen heti toimimaan omalla koneellaan ilman potentiaalisesti vaivalloista välttämättömien olioiden luomista.
+
+## lisää konsolin käyttöä
 
 Tutkitaan uutta dataa konsolista käsin:
 
 ```ruby
-2.2.1 :058 > koff = Brewery.first
+irb(main):058 > koff = Brewery.first
  => #<Brewery id: 8, name: "Koff", year: 1897, created_at: "2017-01-11 13:51:26", updated_at: "2017-01-11 13:51:26">
-2.2.1 :059 > koff.beers
+irb(main):059 > koff.beers
  => #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 1, name: "iso 3", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:09", updated_at: "2017-01-11 13:54:09">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 8, created_at: "2017-01-11 13:54:20", updated_at: "2017-01-11 13:54:20">]>
-2.2.1 :060 >
+irb(main):060 >
 ```
 
 Luodaan uusi olut-olio. Käytetään tällä kertaa new-metodia, jolloin olio ei vielä talletu tietokantaan:
@@ -615,24 +621,24 @@ irb(main):050:0> b = Beer.new name:"Lite", style:"Lager"
 Olut ei ole tietokannassa, eikä myöskään liity vielä mihinkään panimoon:
 
 ```ruby
-2.2.1 :061 > b.brewery
+irb(main):061 > b.brewery
  => nil
 ```
 
 Oluen voi liittää panimoon muutamallakin tavalla. Voimme asettaa oluen panimokentän arvon käsin:
 
 ```ruby
-2.2.1 :062 > b.brewery = koff
-2.2.1 :063 > b
+irb(main):062 > b.brewery = koff
+irb(main):063 > b
  => #<Beer id: nil, name: "Lite", style: "Lager", brewery_id: 8, created_at: nil, updated_at: nil>
-2.2.1 :064 >
+irb(main):064 >
 ```
 
 Kuten huomaamme, tulee oluen brewery_id-vierasavaimeksi panimon id. Olut ei ole vielä tietokannassa, eikä panimokaan vielä tästä syystä tiedä, että luotu olut liittyy siihen:
 
 ```ruby
-2.2.1 :064 > koff.reload
-2.2.1 :065 > koff.beers.include? b
+irb(main):064 > koff.reload
+irb(main):065 > koff.beers.include? b
  => false
 ```
 
@@ -641,19 +647,19 @@ Huom: kutsuimme ensin varalta panimon tietokannasta uudelleenlataavaa metodia <c
 Olut saadaan tallettumaan tuttuun tapaan komennolla <code>save</code>. Tämän jälkeen myös panimon mielestä olut liittyy panimoon (jälleen lataamme olion ensin kannasta uudelleen):
 
 ```ruby
-2.2.1 :066 > b.save
+irb(main):066 > b.save
  => true
-2.2.1 :067 > koff.reload
-2.2.1 :068 > koff.beers.include? b
+irb(main):067 > koff.reload
+irb(main):068 > koff.beers.include? b
  => true
 ```
 
 Hieman kätevämpi tapa on liittää olut panimon oluiden joukkoon <code><<</code> operaattorilla:
 
 ```ruby
-2.2.1 :069 > b = Beer.new name:"IVB", style:"Lager"
+irb(main):069 > b = Beer.new name:"IVB", style:"Lager"
  => #<Beer id: nil, name: "IVB", style: "Lager", brewery_id: nil, created_at: nil, updated_at: nil>
-2.2.1 :070 > koff.beers << b
+irb(main):070 > koff.beers << b
 ```
 
 Vaikka luotua olutta ei tässä eksplisiittisesti talletettu <code>save</code>-metodilla, tallentuu olut kantaan operaattorin <code><<</code> käytön ansiosta.
@@ -661,7 +667,7 @@ Vaikka luotua olutta ei tässä eksplisiittisesti talletettu <code>save</code>-m
 Kolmas tapa on tiedostossa <code>seeds.rb</code> käytetty tyyli, jossa metodia <code>create</code> kutsutaan suoraan panimon beers-kokoelmalle:
 
 ```ruby
-2.2.1 :071 > koff.beers.create name:"Extra Light Triple Brewed", style:"Lager"
+irb(main):071 > koff.beers.create name:"Extra Light Triple Brewed", style:"Lager"
 ```
 
 > ## Tehtävä 5: Panimoja ja oluita
