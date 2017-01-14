@@ -1,1 +1,5 @@
-# WebPalvelinohjelmointi2017
+Web-palvelinohjelmointi kevät 2016, Tietojenkäsittelytieteen laitos, Helsingin Yliopisto
+
+[https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki)
+
+materiaali ja tehtävät [1](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko1.md) 
