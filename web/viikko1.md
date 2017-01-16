@@ -315,17 +315,17 @@ ActiveRecordissa luokilla on siis kaksoisrooli, luokkametodien (joita Rubyssä k
 
 Jatketaan konsolista tapahtuvia kokeiluja. Luodaan uusi panimo:
 
-    Brewery.new(name:"Stadin Panimo", year:1997)
+    Brewery.new(name: "Stadin Panimo", year: 1997)
 
 Railsissa siis konstruktoria kutsutaan hieman eri tyyliin kuin esim. Javassa. Huomaa, että sulkujen käyttö konstruktori- tai metodikutsussa ei ole välttämätöntä, edellinen oltaisiinkin voitu antaa muodossa
 
-    Brewery.new name:"Stadin Panimo", year:1997
+    Brewery.new name: "Stadin Panimo", year: 1997
 
 Listaa nyt panimot ja tarkista niiden lukumäärä metodeilla <code>Brewery.all</code> ja <code>Brewery.count</code>. Huomaat, että vaikka loimme uuden olion, ei se mene kuitenkaan tietokantaan!
 
 Olio saadaan talletettua tietokantaan seuraavasti:
 
-    b = Brewery.new name:"Stadin Panimo", year:1997
+    b = Brewery.new name: "Stadin Panimo", year: 1997
     b.save
 
 Eli otettiin luotu olio talteen muuttujaan <code>b</code> ja kutsuttiin oliolle metodia <code>save</code>. Huomaa, että muuttujan tyyppiä ei tarvitse (eikä voi) määritellä sillä Ruby on dynaamisesti tyypitetty kieli!
@@ -333,12 +333,12 @@ Save on ActiveRecordilta peritty oliometodi, joka kuten arvata saattaa, talletta
 
 Olion voi myös luoda ja tallettaa suoraan kantaan käyttämällä new:n sijaan luokan metodia create:
 
-    Brewery.create name:"Weihenstephan", year:1042
+    Brewery.create name: "Weihenstephan", year: 1042
 
 Kun olio luodaan komennolla <code>new</code>, huomaamme, että olio sisältää kenttiä joiden arvoa ei ole asetettu:
 
 ```ruby
-irb(main):007 > b = Brewery.new(name:"Stadin Panimo", year:1997)
+irb(main):007 > b = Brewery.new(name: "Stadin Panimo", year: 1997)
  => #<Brewery id: nil, name: "Stadin Panimo", year: 1997, created_at: nil, updated_at: nil>
 ```
 
@@ -356,21 +356,21 @@ Katso tilannetta taas [www-sivulta](http://localhost:3000/breweries). Luotujen p
 
 Metodien <code>new</code> ja <code>create</code> kutsu näytti hieman erikoiselta
 
-    Brewery.new name:"Stadin Panimo", year:1997
+    Brewery.new name: "Stadin Panimo", year: 1997
 
 Olemme tässä hyödyntäneet Rubyn vapaamielistä suhtautumista sulkujen käyttöön. Eli sulkujen kanssa kutsu näyttää seuraavalta:
 
-    Brewery.new( name:"Stadin Panimo", year:1997 )
+    Brewery.new( name: "Stadin Panimo", year: 1997 )
 
 Myös parametri on hieman erikoisessa formaatissa. Kyseessä on symboleilla indeksöity assosiatiivinen taulukko eli _hash_, ks. https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/rubyn_perusteita.md#hash-ja-symbolit
 
 Kuten yo. linkistä selviää, hashit määritellään aaltosuluissa, tyyliin
 
-    { name:"Stadin Panimo", year:1997 }
+    { name: "Stadin Panimo", year: 1997 }
 
 Metodikutsun voisi siis kirjoittaa myös muodossa
 
-    Brewery.new( { name:"Stadin Panimo", year:1997 } )
+    Brewery.new( { name: "Stadin Panimo", year: 1997 } )
 
 Metodin parametrina olevassa hashissa ei ole kuitankaan pakko käyttää aaltosulkuja kaikissa tapauksissa, joten usein ne jätetäänkin pois. Jos metodilla on useita parametreja, ovat aaltosulkeet joissain tilanteissa tarpeen.
 
