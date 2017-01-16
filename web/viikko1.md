@@ -307,7 +307,7 @@ Rails-guiden (http://guides.rubyonrails.org/active_record_basics.html) sanoin:
 Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database. It is an implementation of the Active Record pattern (https://en.wikipedia.org/wiki/Active_record_pattern) which itself is a description of an Object Relational Mapping system.
 </blockquote>
 
-> **HUOM:** Railsin versiossa 5 model-luokat eivät enää peri suraan luokkaa <code>ActiveRecord::Base</code> vaan ne perivät luokan <code>ApplicationRecord</code>. Tämä kannattaa muistaa dokumentaatiota lukiessa!
+> **HUOM:** Railsin versiossa 5 model-luokat eivät enää peri suoraan luokkaa <code>ActiveRecord::Base</code> vaan ne perivät luokan <code>ApplicationRecord</code>. Tämä kannattaa muistaa dokumentaatiota lukiessa!
 
 Periaatteena ActiveRecordissa on lyhyesti sanottuna se, että jokaista tietokannan taulua (esim. breweries) vastaa koodissa oma luokka (Brewery). Luokka tarjoaa __luokkametodeina__ metodit, joiden avulla tietokantaa käsitellään. Kun tietokannasta haetaan rivillinen dataa (yhden panimon tiedot), luodaan siitä luokan instanssi (eli Brewery-olio).
 
