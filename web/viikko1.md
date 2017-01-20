@@ -1049,6 +1049,7 @@ Asenna herokun komentoriviliittymä
 * **Laitoksen koneella:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu em. sivun ohjeiden mukaan. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille komennolla  
   `gem install heroku`  
 ja vastaamalla `y` kesken asennusprosessin esitettävään kysymykseen.
+* Laitoksen koneella joudut myös toimimaan [tämän ohjeen mukaan](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/heroku-ongelma), jotta saat herokun toimimaan
 
 Asennettuasi komentorivikäyttöliittymän mene sovelluksen juurihakemistoon, ja luo sovellusta varten heroku-instanssi komennolla <code>heroku create</code>:
 
