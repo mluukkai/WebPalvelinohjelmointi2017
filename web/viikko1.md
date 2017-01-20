@@ -1042,16 +1042,15 @@ Sovelluksen deployaaminen Herokuun onnistuu helpoiten jos sovelluksen hakemisto 
 Luo Herokuun tunnus.
 
 Luo ssh-avain ja lisää se herokuun sivulla https://dashboard.heroku.com/account
-* ohje ssh-avaimen luomiseen http://www.cs.helsinki.fi/group/kuje/compfac/ssh_avain.html
-Asenna herokun komentoriviliittymän sisältävä Heroku Toolbelt sivun https://toolbelt.heroku.com/ ohjeiden mukaan.
+* ohje ssh-avaimen luomiseen http://www.cs.helsinki.fi/group/kuje/compfac/ssh_avain.html  
 
-**Huom:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu em. sivun ohjeiden mukaan. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille komennolla
-
-    gem install heroku
-    
+Asenna herokun komentoriviliittymä
+* **Omalla koneella:** Asenna komentoriviliittymän sisältävä Heroku Toolbelt sivun https://toolbelt.heroku.com/ ohjeiden mukaan.
+* **Laitoksen koneella:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu em. sivun ohjeiden mukaan. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille komennolla  
+  `gem install heroku`  
 ja vastaamalla `y` kesken asennusprosessin esitettävään kysymykseen.
 
-Mene sitten sovelluksen juurihakemistoon, ja luo sovellusta varten heroku-instanssi komennolla <code>heroku create</code>:
+Asennettuasi komentorivikäyttöliittymän mene sovelluksen juurihakemistoon, ja luo sovellusta varten heroku-instanssi komennolla <code>heroku create</code>:
 
 ```ruby
 $ heroku create
