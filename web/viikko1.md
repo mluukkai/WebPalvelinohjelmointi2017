@@ -1231,7 +1231,7 @@ Testausympäristöön tutustumme kurssin viikolla 4.
 
 Joskus eri ympäristöt tarvitsevat erilaisia riippuvuuksia, esim. kun sovellusta suoritetaan Herokussa production-ympäristössä on käytössä PostgreSQL-tietokanta, kun taas sovelluskehityksessä käytetään kevyempää sqlite3-tietokantaa. Samat gemit eivät siis sovellu kaikkiin suoritusympäristöihin.
 
-Eri ympäristöjen käyttäminen gemit voidaan määritellä Gemfilessä group-lohkojen avulla. Seuraavassa sovelluksemme Gemfile Herokun edellyttämien muutosten jälkeen:
+Eri ympäristöjen käyttämät gemit voidaan määritellä Gemfilessä group-lohkojen avulla. Seuraavassa sovelluksemme Gemfile Herokun edellyttämien muutosten jälkeen:
 
 ```ruby
 source 'https://rubygems.org'
