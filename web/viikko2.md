@@ -1035,9 +1035,9 @@ Better_errors on muokannut virhetilanteesta kertovan sivun täysin erilaiseksi:
 
 Better_errorsin konsolista pääsee käsiksi suoraan näkymän muuttujiin ja ongelma aiheuttava olut löytyy välittömästi.
 
-Voit käyttää better_errorsia jos haluat, jos et, poista gem ja suorita uudelleen <code>bundle install</code>
+Voit käyttää better_errorsia jos haluat. Jos et, poista gem ja suorita uudelleen <code>bundle install</code>
 
-Muista myös, että voit debugata _byebugin_ sijaan Pryllä krijotamalla koodiin komennon <code>binding.pry</code>
+Muista myös, että voit debugata _byebugin_ sijaan _Pryllä_ krijotamalla koodiin komennon <code>binding.pry</code>
 
 ## Polkuapumetodit
 
@@ -1057,7 +1057,7 @@ Kuten yleensäkin, kovakoodaus ei ole järkevää osoitteidenkaan suhteen.
 Tarjolla olevia automaattisesti generoituja polkuja pääsee tarkastelemaan komentoriviltä komennolla <code>rake routes</code>
 
 ```ruby
-➜  ratebeer git:(master) ✗ rake routes
+mluukkai@melkki.~/ratebeer$ rake routes
       Prefix Verb   URI Pattern                   Controller#Action
        beers GET    /beers(.:format)              beers#index
              POST   /beers(.:format)              beers#create
@@ -1084,7 +1084,7 @@ edit_brewery GET    /breweries/:id/edit(.:format) breweries#edit
 Esim alimmat 3 reittiä kertovat seuraavaa:
 * metodikutsu <code>ratings_path</code> generoi linkin, joka vie osoitteeseen "ratings" ja ohjautuu ratings-kontrollerin metodille <code>index</code>.
 * metodikutsu <code>ratings_new_path</code> generoi linkin, joka vie osoitteeseen "ratings/new" ja ohjautuu ratings-kontrollerin metodille <code>new</code>. Tämä taas renderöi reittauksentekoformin
-** huom. kuten ylempänä olevia reittejä vertailemalla huomaamme, ei <code>ratings_new_path</code> ole samanlainen kuin esim uusien oluiden luontipolku, asia korjataan myöhemmin
+  * huom. kuten ylempänä olevia reittejä vertailemalla huomaamme, ei <code>ratings_new_path</code> ole samanlainen kuin esim uusien oluiden luontipolku, asia korjataan myöhemmin
 * POST-kutsu osoitteeseen "ratings" ohjataan ratings-kontrollerin metodille <code>create</code>
 
 Kuten olemme jo huomanneet Rails 4:ssä komennon <code>rake routes</code> informaatio tulee myös virhetilanteissa renderöityvälle web-sivulle. Sivu jopa tarjoaa interaktiivisen työkalun, jonka avulla voi kokeilla miten sovellus reitittää syötetyn esimerkkipolun:
