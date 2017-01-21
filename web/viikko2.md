@@ -265,7 +265,7 @@ Seurauksena on uusi virheilmoitus
 
 joka taas johtuu siitä, että Rails yrittää renderöidä kontrollerin metodia vastaavan oletusarvoisen, hakemistossa /app/views/ratings/index.html.erb olevan näkymätemplaten, mutta sellaista ei löydy.
 
-Luodaan tiedosto /app/views/ratings/index.html.erb jolla on seuraava sisältö:
+Luodaan tiedosto /app/views/ratings/index.html.erb jolla on seuraava sisältö (joudut myös luomaan hakemiston _/app/views/ratings_):
 
 ```erb
 <h2>List of ratings</h2>
@@ -346,10 +346,10 @@ Eli jokaiseen olueeseen liittyy useita reittauksia ja reittaus kuuluu aina täsm
 Käynnistetään Rails-konsoli antamalla komentoriviltä komento <code>rails c</code>. Huomaa, että jos konsolisi oli jo auki, saat lisätyn koodin konsolin käyttöön komennolla <code>reload!</code>. Luodaan muutama reittaus:
 
 ```ruby
-irb(main):001 > b = Beer.first
-irb(main):002 > b.ratings.create score:10
-irb(main):003 > b.ratings.create score:21
-irb(main):004 > b.ratings.create score:17
+[1] pry(main) > b = Beer.first
+[2] pry(main) > b.ratings.create score:10
+[3] pry(main) > b.ratings.create score:21
+[4] pry(main) > b.ratings.create score:17
 ```
 
 Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huomaa luontitapa, saman asian olisi ajanut monimutkaisempi tapa
@@ -409,12 +409,12 @@ end
 Panimoilla on nimi <code>name</code> ja perustamisvuosi <code>year</code>. Konsolista käsin pääsemme näihin käsiksi tuttuun tyyliin:
 
 ```ruby
-irb(main):001:0> b = Brewery.first
-irb(main):002:0> b.name
+[13] pry(main)> b = Brewery.first
+[14] pry(main)> b.name
 => "Koff"
-irb(main):003:0> b.year
+[15] pry(main)> b.year
 => 1897
-irb(main):004:0>
+[16] pry(main)>
 ```
 
 Teknisesti ottaen esim. <code>b.year</code> on metodikutsu. Rails luo model-olioon jokaiselle vastaavan tietokantataulun skeeman määrittelemälle sarakkeelle kentän eli attribuutin ja metodit attribuutin arvon lukemista ja arvon muuttamista varten. Nämä automaattisesti generoidut metodit ovat sisällöltään suunilleen seuraavat:
@@ -457,8 +457,8 @@ eli olion sisältä metodeja (myös <code>beers</code> on metodi!) voidaan kutsu
 Ja esimerkki metodin käytöstä:
 
 ```ruby
-irb(main):001:0> b = Brewery.first
-irb(main):002:0> b.print_report
+[17] pry(main)> b = Brewery.first
+[18] pry(main)> b.print_report
 Koff
 established at year 1897
 number of beers 2
@@ -486,14 +486,14 @@ Tehdään sitten panimolle metodi, jonka avulla panimon voi 'uudelleenkäynnist�
 kokeillaan
 
 ```ruby
-irb(main):024:0> b = Brewery.first
-irb(main):025:0> b.year
+[18] pry(main)> b = Brewery.first
+[19] pry(main)> b.year
 => 1897
-irb(main):026:0> b.restart
+[20] pry(main)> b.restart
 changed year to 2017
-irb(main):027:0> b.year
+[21] pry(main)> b.year
 => 1897
-irb(main):028:0>
+[22] pry(main)>
 ```
 
 eli huomaamme, että vuoden muuttaminen ei toimikaan odotetulla tavalla! Syynä tähän on se, että <code>year = 2017</code> metodin <code>restart</code> sisällä ei kutsukaan metodia
@@ -513,14 +513,14 @@ Jotta sijoitus onnistuu, on metodia kutsuttava <code>self</code>-viitteen kautta
 ja nyt toiminnallisuus on odotetun kaltainen:
 
 ```ruby
-irb(main):029:0> b = Brewery.first
-irb(main):030:0> b.year
+[23] pry(main)> b = Brewery.first
+[24] pry(main)> b.year
 => 1897
-irb(main):031:0> b.restart
+[25] pry(main)> b.restart
 changed year to 2017
-irb(main):032:0> b.year
+[26] pry(main)> b.year
 => 2017
-irb(main):033:0>
+[27] pry(main)>
 ```
 
 **HUOM:** Rubyssä olioiden instanssimuuttujat määritellään <code>@</code>-alkuisina. Instanssimuuttujat _eivät_ kuitenkaan ole sama asia kuin ActiveRecordin avulla tietokantaan talletettavat olioiden  attribuutit. Eli seuraavakaan metodi ei toimisi odotetulla tavalla:
@@ -548,10 +548,10 @@ Tehtävän jälkeen reittausten sivujen tulisi näyttää suunnilleen seuraavalt
 Huom: kun kirjoitat sovelluksellesi uutta koodia, useimmiten on järkevämpää tehdä kokeiluja konsolista käsin. Seuraavassa kokeillaan reittauksen oletusarvoista <code>to_s</code>-metodin palauttamaa arvoa:
 
 ```ruby
-irb(main):024:0> r = Rating.last
-irb(main):025:0> r.to_s
+[60] pry(main)> r = Rating.last
+[61] pry(main)> r.to_s
 => "#<Rating:0x007f8054b1cb10>"
-irb(main):026:0>
+[62] pry(main)>
 ```
 
 Määritellään reittaukselle <code>to_s</code>-metodi:
@@ -569,7 +569,7 @@ end
 ja kokeillaan uudelleen konsolista:
 
 ```ruby
-irb(main):026:0> r.to_s
+[63] pry(main)> r.to_s
 => "#<Rating:0x007f8054b1cb10>"
 ```
 
@@ -578,15 +578,15 @@ Muutos ei kuitenkaan vaikuta tulleen voimaan, missä vika?
 Jotta muutettu koodi tulisi voimaan, on uusi koodi ladattava konsolin käyttöön komennolla <code>reload!</code> ja käytettävä uudestaan kannasta haettua olioa:
 
 ```ruby
-irb(main):027:0> reload!
+[64] pry(main)> reload!
 Reloading...
 => true
-irb(main):028:0> r.to_s
+[65] pry(main)> r.to_s
 => "#<Rating:0x007f8054b1cb10>"
-irb(main):029:0> r = Rating.last
-irb(main):030:0> r.to_s
+[66] pry(main)> r = Rating.last
+[67] pry(main)> r.to_s
 => "tekstiesitys"
-irb(main):031:0>
+[68] pry(main)>
 ```
 
 Eli kuten yllä näemme, ei pelkkä koodin uudelleenlataaminen vielä riitä, sillä muuttujassa <code>r</code> olevassa oliossa on käytössä edelleen vanha koodi.
@@ -778,6 +778,18 @@ Debuggerin tärkeimmät komennot lienevät _step, next, continue_ ja _help_. Ste
 
 Lisätietoa byebugista seuraavassa http://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-byebug-gem
 
+
+## debuggas Pry:n avulla
+
+Jos lisäät koodiin komennon <code>binding.pry</code> voit käyttää Pry:tä debuggerina:
+
+```ruby
+  def create
+    binding.pry
+  end
+```
+
+kun koodirivi suoritetaan, suoritus pysähtyy ja Pry-sessio aukeaa koodirivin kohdalle. Voit jatkaa suoritusta komennolla <code>exit</code>. On kumpaa käytät debuggaukseen _byebugia_ vai _Prytä_.
 
 ## Reittauksen talletus
 
@@ -971,20 +983,23 @@ Lisäsimme siis templaten renderöinnin sekaan komennon <code><% byebug if beer.
 Kun nyt menemme kaikkien oluiden sivulle, debuggeri käynnistyy ja pääsemme tarkastelemaan näkymätemplaten paikallisen muuttujan arvoa eli ongelman aiheuttanutta olutta:
 
 ```ruby
-[11, 20] in /Users/mluukkai/kurssirepot/ratebeer/app/views/beers/index.html.erb
-   11:   </thead>
-   12:
-   13:   <tbody>
-   14:     <% @beers.each do |beer| %>
-   15:       <% byebug if beer.brewery.nil? %>
-=> 16:       <tr>
-   17:         <td><%= link_to beer.name, beer %></td>
-   18:         <td><%= beer.style %></td>
-   19:         <td><%= link_to beer.brewery.name, beer.brewery %></td>
-   20:         <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
+[13, 22] in /Users/mluukkai/opetus/ratebeer/app/views/beers/index.html.erb
+   13:   </thead>
+   14:
+   15:   <tbody>
+   16:     <% @beers.each do |beer| %>
+   17:     <% byebug if beer.brewery.nil? %>
+=> 18:       <tr>
+   19:         <td><%= link_to beer.name, beer %></td>
+   20:         <td><%= beer.style %></td>
+   21:         <td><%= link_to beer.brewery.name, beer.brewery %></td>
+   22:         <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
 (byebug) beer
-#<Beer id: 13, name: "crap beer", style: "lowalcohol", brewery_id: nil, created_at: "2017-01-17 16:11:49", updated_at: "2017-01-17 16:11:49">
-(byebug)
+#<Beer id: 13, name: "crap beer", style: "lowalcohol", brewery_id: nil, created_at: "2017-01-21 18:01:32", updated_at: "2017-01-21 18:01:32">
+(byebug) beer.brewery
+nil
+(byebug) beer.brewery.name
+*** NoMethodError Exception: undefined method `name' for nil:NilClass
 ```
 
 Voimme poistaa tai korjata ongelman aiheuttaneen olion suoraan debuggerista:
@@ -1020,6 +1035,9 @@ Better_errors on muokannut virhetilanteesta kertovan sivun täysin erilaiseksi:
 
 Better_errorsin konsolista pääsee käsiksi suoraan näkymän muuttujiin ja ongelma aiheuttava olut löytyy välittömästi.
 
+Voit käyttää better_errorsia jos haluat, jos et, poista gem ja suorita uudelleen <code>bundle install</code>
+
+Muista myös, että voit debugata _byebugin_ sijaan Pryllä krijotamalla koodiin komennon <code>binding.pry</code>
 
 ## Polkuapumetodit
 
