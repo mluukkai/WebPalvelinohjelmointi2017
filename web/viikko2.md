@@ -938,7 +938,7 @@ Web-konsoli on varsin kätevä työkalu. Valitettavasti web-konsoli ei kuitenkaa
 Luodaan sovellukseen olut, johon ei liity panimoa:
 
 ```ruby
-irb(main):024 > Beer.create name:"crap beer", style:"lowalcohol"
+[718 pry(main)> Beer.create name:"crap beer", style:"lowalcohol"
  => #<Beer id: 13, name: "crap beer", style: "lowalcohol", brewery_id: nil, created_at: "2017-01-17 16:11:49", updated_at: "2017-01-17 16:11:49">
 ```
 luodun olion vierasavaimen <code>brewery_id</code> arvoksi siis tulee <code>nil</code>.
@@ -1129,10 +1129,10 @@ eli lomakkeen <code>beer_id</code>:n arvo generoidaan HTML lomakkeen select-elem
 **Huom:** näkymäapumetodeja on mahdollista testata myös konsolista. Metodeja voi kutsua <code>helper</code>-olion kautta:
 
 ```ruby
-irb(main):026 > beers = Beer.all
-irb(main):027 > helper.options_from_collection_for_select(beers, :name, :id)
+[64] pry(main) > beers = Beer.all
+[65] pry(main) > helper.options_from_collection_for_select(beers, :name, :id)
  => "<option value=\"Iso 3\">1</option>\n<option value=\"Karhu\">2</option>\n<option value=\"Tuplahumala\">3</option>\n<option value=\"Huvila Pale Ale\">4</option>\n<option value=\"X Porter\">5</option>\n<option value=\"Hefezeizen\">6</option>\n<option value=\"Helles\">7</option>\n<option value=\"Punk IPA\">11</option>\n<option value=\"Nanny State\">12</option>"
-irb(main):028 >
+[66] pry(main)>
 ```
 
 > ## Tehtävä 8
@@ -1305,10 +1305,10 @@ eli yhteys määritellään kuten "tietokantatasolla" oleva yhteys, mutta yhteyt
 Lisää yhteys koodiisi ja kokeile seuraavaa konsolista (muista ensin <code>reload!</code>):
 
 ```ruby
-irb(main):033 > k = Brewery.find_by name:"Koff"
-irb(main):034 > k.ratings.count
+[65] pry(main) > k = Brewery.find_by name:"Koff"
+[66] pry(main)> k.ratings.count
  => 5
-irb(main):035 > k.ratings
+[67] pry(main) > k.ratings
  => #<ActiveRecord::Associations::CollectionProxy [#<Rating id: 1, score: 10, beer_id: 1, created_at: "2017-01-17 13:09:31", updated_at: "2017-01-17 13:09:31">, #<Rating id: 2, score: 21, beer_id: 1, created_at: "2017-01-17 13:09:33", updated_at: "2017-01-17 13:09:33">, #<Rating id: 3, score: 17, beer_id: 1, created_at: "2017-01-17 13:09:35", updated_at: "2017-01-17 13:09:35">, #<Rating id: 10, score: 22, beer_id: 1, created_at: "2017-01-17 15:51:02", updated_at: "2017-01-17 15:51:02">, #<Rating id: 11, score: 34, beer_id: 1, created_at: "2017-01-17 15:51:52", updated_at: "2017-01-17 15:51:52">]>
 ```
 
@@ -1318,9 +1318,11 @@ irb(main):035 > k.ratings
 >
 > Tee reittausten yhteenlasketun määrän "kieliopillisesti moitteeton" tehtävän 6 tyyliin. Jos reittauksia ei ole, älä näytä keskiarvoa.
 
-Panimon sivun tulisi näyttää muutoksen jälkeen suunnilleen seuraavalta (Kuvassa oluiden lista on muutettu ul-elementin avulla toteutetuksi bulletlistaksi, sivulta on myös poistettu scaffoldingin luoma 'back'-linkki. Voit halutessasi tehdä muutokset myös omaan koodiisi):
+Panimon sivun tulisi näyttää muutoksen jälkeen suunnilleen seuraavalta (sivulta on poistettu scaffoldingin luoma 'back'-linkki. Voit halutessasi tehdä muutoksen myös omaan koodiisi):
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w2-8.png)
+
+## Yhteisen koodin siirto moduuliin
 
 Huomaamme, että oluella ja panimolla on täsmälleen samalla tavalla toimiva ja vieläpä saman niminen metodi <code>average_rating</code>. Ei ole hyväksyttävää jättää koodia tähän tilaan.
 
@@ -1349,13 +1351,13 @@ end
 ja metodin <code>average_rating</code> tulisi edelleen toimia entiseen tyyliin:
 
 ```ruby
-irb(main):001:0> b = Beer.first
-irb(main):002:0> b.average_rating
+[11] pry(main)> b = Beer.first
+[12] pry(main)> b.average_rating
 => #<BigDecimal:7fa4bbde7aa8,'0.17E2',9(45)>
-irb(main):003:0> b = Brewery.first
-irb(main):004:0> b.average_rating
+[13] pry(main)> b = Brewery.first
+[14] pry(main)>> b.average_rating
 => #<BigDecimal:7fa4bfbf7410,'0.16E2',9(45)>
-irb(main):005:0>
+[15] pry(main)>>
 ```
 
 Jos sovelluksessa on moduuli, jota tarvitaan ainoastaan modeleissa, on _lib_-hakemistoa parempi sijoituspaikka _app/models/concerns_. Hakemiston sisältämä koodi ladataan oletusarvoisesti modelien käyttöön eli muutosta muuttujaan <code>config.autoload_paths</code> ei tarvita. Hakemistossa app/models/concerns oleviin moduuleihin on lisättävä määritelmä <code>extend ActiveSupport::Concern</code>
@@ -1370,7 +1372,7 @@ end
 
 Koska määrittelemäämme moduulia ei käytetä kuin modeleissa, on sen oikeaoppinen sijoituspaikka juuri concerns-hakemisto.
 
-Siirrä moduuli models/concerns-hakemistoon.
+**Siirrä moduuli models/concerns-hakemistoon.**
 
 Lisää conserneista, ks. http://api.rubyonrails.org/classes/ActiveSupport/Concern.html ja http://stackoverflow.com/questions/14541823/how-to-use-concerns-in-rails-4
 
@@ -1504,16 +1506,16 @@ Generoidaan seuraavaksi tilanne, jossa tietokanta joutuu hieman epäkonsistentti
 Käynnistä heroku-konsoli komennolla <code>heroku run console</code> ja luo sovellukseen olut johon ei liity mitään panimoa
 
 ```ruby
-irb(main):002:0> Beer.create name:"crap beer", style:"lager"
+[7] pry(main)> Beer.create name:"crap beer", style:"lager"
 => #<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">
 ```
 
 ja olut johon liittyvää panimoa ei ole olemassa (eli viiteavaimena oleva panimon id on virheellinen):
 
 ```ruby
-irb(main):003:0> Beer.create name:"shitty beer", style:"lager", brewery_id: 123
+[8] pry(main)> Beer.create name:"shitty beer", style:"lager", brewery_id: 123
 => #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">
-irb(main):004:0>
+[9] pry(main)>
 ```
 
 Kun menet nyt kaikkien oluiden on seurauksena jälleen ikävä ilmoitus "We're sorry, but something went wrong.". Jälleen kerran ongelmaa on etsittävä lokeista:
@@ -1547,20 +1549,20 @@ eli on olemassa olut, jonka kentässä <code>brewery</code> on arvona <code>nil<
 Kun virheen syy paljastuu, on etsittävä syylliset. Eli avataan heroku-konsoli komennolla <code>heroku run console</code> ja haetaan panimottomat oluet:
 
 ```ruby
-irb(main):006:0> Beer.all.select{ |b| b.brewery.nil? }
+[10] pry(main)> Beer.all.select{ |b| b.brewery.nil? }
 => [#<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">, #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">]
-irb(main):007:0>
+[11] pry(main)>
 ```
 
 Seuraavana toimenpiteenä on virheen aiheuttavien olioiden korjaaminen. Koska loimme ne nyt itse testaamista varten, poistamme oliot (otamme ensin <code>_</code>-muuttujassa olevat edellisen operaation palauttamat oliot talteen muuttujaan):
 
 ```ruby
-irb(main):007:0> bad_beer = _
+[12] pry(main)> bad_beer = _
 => [#<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">, #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">]
-irb(main):008:0> bad_beer.each{ |bad| bad.delete }
-irb(main):009:0> Beer.all.select{ |b| b.brewery.nil? }
+[13] pry(main)> bad_beer.each{ |bad| bad.delete }
+[14] pry(main)> Beer.all.select{ |b| b.brewery.nil? }
 => []
-irb(main):010:0>
+[15] pry(main)>
 ```
 
 Useimmiten tuotannossa vastaan tulevat ongelmat johtuvat siitä, että tietokantaskeeman muutosten takia jotkut oliot ovat joutuneet epäkonsistenttiin tilaan, eli ne esim. viittaavat olioihin joita ei ole tai viitteet puuttuvat. **Sovellus kannattaakin deployata tuotantoon mahdollisimman usein**, näin tiedetään että mahdolliset ongelmat ovat juuri tehtyjen muutosten aiheuttamia ja korjaus on helpompaa.
