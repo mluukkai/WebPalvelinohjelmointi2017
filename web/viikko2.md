@@ -25,7 +25,7 @@ end
 
 Suorita komentoriviltä komento <code>bundle install</code>
 
-Kun nyt avaat rails konsolin, eli suoritat komentoriviltä komennon <code>rails c</code> avautuu viime viikolla käyttämmme irbin sijaan Pry. Perustoiminnoiltaan Pry on täsmälleen samanlainen kuin irb. Tulostusasu on hieman ihmisystävällisempi:
+Kun nyt avaat rails konsolin, eli suoritat komentoriviltä komennon <code>rails c</code> avautuu viime viikolla käyttämme irbin sijaan Pry. Perustoiminnoiltaan Pry on täsmälleen samanlainen kuin irb. Tulostusasu on hieman ihmisystävällisempi:
 
 ```
 [1] pry(main)> Beer.first
