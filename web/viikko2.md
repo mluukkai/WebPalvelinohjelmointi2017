@@ -11,7 +11,7 @@ Tämä asetus muistetaan jatkossa, joten pelkkä `bundle install` riittää kun 
 
 ## Järkevä editori
 
-Käytäthän jo järkevää editoria, eli jotain muuta kun nanoa, geditiä tai notepadia? Suositeltavia editoreja ovat esim. RubyMine, Visual Studio Code, Sublime Text ja Atom ks. lisää (täältä)[https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki#editoriide]
+Käytäthän jo järkevää editoria, eli jotain muuta kun nanoa, geditiä tai notepadia? Suositeltavia editoreja ovat esim. RubyMine, Visual Studio Code, Sublime Text ja Atom ks. lisää [täältä](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki#editoriide)
 
 Aloin itse käyttää viime viikolla vuosien Sublime Textin käytön jälkeen [Visual Studio Codea](https://code.visualstudio.com). Suosittelen! Jos käytät VSC:tä, kannattaa ehdottamasti asentaa [Ruby-plugin](https://code.visualstudio.com/docs/languages/overview)
 
