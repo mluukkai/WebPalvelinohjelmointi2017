@@ -595,6 +595,8 @@ Poistetaan kaikki vanha data tietokannasta antamalla komentoriviltä komento:
 
 Komento "seedaa" kannan automaattisesti eli vanhan datan poistamisen lisäksi suorittaa myös tiedoston seeds.rb sisällön. 
 
+**Huom:** windowsilla komento ei välttämättä toimi. Voit antaa sen sijaan komennon <code>rake db:reset</code>. Komento suorittaa sedauksen mutta _ei poista_ vanhaa dataa kannasta.
+
 Sovellus kannattaa uudelleenkäynnistää seedauksen jälkeen.
 
 **HUOM:** et välttämättä tarvitse sovelluksessasi ollenkaan tiedostoon _seeds.rb_ määriteltyä dataa. Seediin määritelty data voi olla tarpeen jos sovellus tarvitsee esim. käynnistyäkseen joitan valmiksi määriteltyjä olioita. Tällöin seedin olemassaolo helpottaa uuden sovelluskehittäjän työtä, hän saa sovelluksen heti toimimaan omalla koneellaan ilman potentiaalisesti vaivalloista välttämättömien olioiden luomista.
