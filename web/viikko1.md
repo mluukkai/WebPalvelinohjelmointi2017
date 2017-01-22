@@ -1110,9 +1110,10 @@ Your bundle is complete!
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 ```
 
-Jos törmäsit tässä ongelmiin pg-config tiedoston kanssa ja sinulla on OS X 10.7, niin toimi [täällä](http://stackoverflow.com/questions/19625487/impossible-to-install-pg-gem-on-my-mac-with-mavericks) kuvailtujen ohjeiden mukaisesti, josse PostgreSQL asennetaan Applications-kansioon ja pg gem asennetaan erikseen. Tämän jälkeen bundle install pitäisi toimia normaalisti.
-
-Jos linkin takana ollut ohjekaan ei auttanut, kokeile komentoa <code>bundle install --without production</code>
+Jos <code>bundle install</code> aiheuttaa virheen (näin voi käydä todennäköisesti vain OS X:llä), voit joko
+* asentaa ensin _postgresql_ tietokannan omalle koneellesi ja suorittaa komennon uudeleen tai
+* suorittaa komennon lisäparametrilla <code>bundle install --without production</code>
+  * jos päädyt tähän vaihtoehtoon, joudut jatkossa suorittamaan komennon aina näin
 
 Committoidaan kaikki muutokset versionhallintaan antamalla komennot:
 
