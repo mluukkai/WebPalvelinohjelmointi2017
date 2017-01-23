@@ -366,6 +366,7 @@ b.ratings << Rating.create(score:15)
 >lisää panimolle kaksi olutta
 >* Punk IPA (tyyli IPA)
 >* Nanny State (tyyli lowalcohol)
+>
 >lisää molemmille oluille muutama reittaus
 >
 >Kertaa tarvittaessa edellisen viikon [materiaalista](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko1.md) konsolia käsittelevät osuudet.
@@ -1037,7 +1038,7 @@ Better_errorsin konsolista pääsee käsiksi suoraan näkymän muuttujiin ja ong
 
 Voit käyttää better_errorsia jos haluat. Jos et, poista gem ja suorita uudelleen <code>bundle install</code>
 
-Muista myös, että voit debugata _byebugin_ sijaan _Pryllä_ krijotamalla koodiin komennon <code>binding.pry</code>
+Muista myös, että voit debugata _byebugin_ sijaan _Pryllä_ kirjotamalla koodiin komennon <code>binding.pry</code>
 
 ## Polkuapumetodit
 
