@@ -436,7 +436,7 @@ end
 
 Metodit siis mahdollistavat olion attribuutin arvon lukemisen ja muuttamisen. Arvoa muuttava metodi ei kuitenkaan vielä tee muutosta tietokantaan, muutos tapahtuu vasta kutsuttaessa metodia <code>save</code>, kyseessä ovatkin siis automaattisesti generoituvat 'getterit ja setterit'.
 
-Olion ulkopuolelta olion attribuutteihin päästään käsiksi 'pistentotaatiolla':
+Olion ulkopuolelta olion attribuutteihin päästään käsiksi 'pistenotaatiolla':
 
     b.year
 
