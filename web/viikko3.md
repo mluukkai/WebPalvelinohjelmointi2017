@@ -1067,7 +1067,9 @@ Trendinä kuitenkin on, että metodin has_and_belongs_to_many sijaan käytetää
 
 > # Tehtävä 9
 >
-> Hio edellisessä tehävässä toteuttamaasi toiminnallisuutta siten, että käyttäjä ei voi liittyä useampaan kertaan samaan olutseuraan.
+> Hio edellisessä tehävässä toteuttamaasi toiminnallisuutta siten, että käyttäjä ei voi liittyä useampaan kertaan samaan olutseuraan. 
+>
+> Tämän tehtävän tekemiseen on monia tapoja, validointien käyttö ei ole välttämättä järkevin tapa tehtävän toteuttamiseen. Liittymislomakkeella tuskin kannattaa edes tarjota sellasia seuroja joiden jäsenenä käyttäjä jo on. 
 
 Seuraavat kaksi kuvaa antavat suuntaviivoja sille miltä sovelluksesi voi näyttää tehtävien 7-9 jälkeen.
 
