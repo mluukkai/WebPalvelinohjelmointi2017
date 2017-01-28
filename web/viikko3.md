@@ -224,7 +224,7 @@ Jos et tiedä miten joku asia tehdään Rubyllä, google tietää.
 
 Mieti sopiva hakusana niin saat melko varmasti vastauksen. Kannattaa kuitenkin olla hiukan varovainen ja tutkia ainakin muutama googlen vastaus. Ainakin kannattaa varmistaa että vastauksessa puhutaan riittävän tuoreesta rubyn tai railsin versiosta. Esim. Rails 2:ssa ja 3:ssa olevista asioista erittäin moni on muuttunut nelosversiossa.
 
-Rybyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen, eli pyörän uudelleenkeksimisen sijaan kannattaa aina googlata tai vilkuilla dokumentaatiota.
+Rubyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen, eli pyörän uudelleenkeksimisen sijaan kannattaa aina googlata tai vilkuilla dokumentaatiota.
 
 Muodostetaan sitten lopullinen versio keskiarvon laskevasta koodista:
 
