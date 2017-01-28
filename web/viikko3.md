@@ -328,8 +328,7 @@ Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [
 
 ## byebug vai binding.pry deguggaukseen?
 
-Jos käytössäsi on [Pry](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#parempi-konsoli) komento _byebug_ ei käyttäydy kaikissa tilanteissa hyvin, kannattaakin käyttää oikeastaan aina komentoa _binding.pry_
-
+Jos käytössäsi on [Pry](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#parempi-konsoli) komento `byebug` ei käyttäydy kaikissa tilanteissa hyvin, kannattaakin käyttää oikeastaan aina komentoa `binding.pry`
 ## Käyttäjä ja sessio
 
 Laajennetaan sovellusta seuraavaksi siten, että käyttäjien on mahdollista rekisteröidä itselleen järjestelmään käyttäjätunnus.
