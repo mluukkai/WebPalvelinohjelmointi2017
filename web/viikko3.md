@@ -41,7 +41,7 @@ Voisimme toteuttaa keskiarvon laskemisen "javamaisesti" laskemalla summan käym�
 
 Kaikki rubyn kokoelmamaiset asiat (mm. taulukko ja <code>has_many</code>-kenttä) sisältävät Enumerable-moduulin (ks. http://ruby-doc.org/core-2.1.0/Enumerable.html) tarjoamat apumetodit. Päätetäänkin hyödyntää apumetodeja keskiarvon laskemisessa.
 
-Koodin kirjoittamisessa kannattaa _ehdottomasti_ hyödyntää konsolia. Oikeastaan konsoliakin parempi vaihtoehdo on debuggerin käyttö. Debuggerin avulla saadaan avattua konsoli suoraan siihen kontekstiin, johon koodia ollaan kirjoittamassa. Lisätään metodikutsuun debuggerin käynnistävä komento <code>byebug</code> tai komento <code>binding.pry</code>code> (jos käytössä on pry-konsoli):
+Koodin kirjoittamisessa kannattaa _ehdottomasti_ hyödyntää konsolia. Oikeastaan konsoliakin parempi vaihtoehdo on debuggerin käyttö. Debuggerin avulla saadaan avattua konsoli suoraan siihen kontekstiin, johon koodia ollaan kirjoittamassa. Lisätään metodikutsuun debuggerin käynnistävä komento <code>byebug</code> tai komento <code>binding.pry</code>code> jos käytössä on pry-konsoli:
 
 ```ruby
 class Beer < ActiveRecord::Base
@@ -49,7 +49,7 @@ class Beer < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
 
   def average
-    byebug
+    binding.pry
   end
 end
 ```
@@ -269,7 +269,7 @@ Jatkotestaus kuitenkin paljastaa että kaikki ei ole hyvin:
 2.2.1 :011 >
 ```
 
-eli Hardcore IPA:n reittausten keskiarvo on <code>NaN</code>. Turvaudutaan jälleen debuggeriin. Laitetaan komento <code>byebug</code> keskiarvon laskevaan metodiin, uudelleenladataan koodi ja kutsutaan metodia ongelmalliselle oliolle:
+eli Hardcore IPA:n reittausten keskiarvo on <code>NaN</code>. Turvaudutaan jälleen debuggeriin. Laitetaan komento <code>binding.pry</code> keskiarvon laskevaan metodiin, uudelleenladataan koodi ja kutsutaan metodia ongelmalliselle oliolle:
 
 ```ruby
 [3, 12] in /Users/mluukkai/kurssirepot/ratebeer/app/models/beer.rb
@@ -283,7 +283,6 @@ eli Hardcore IPA:n reittausten keskiarvo on <code>NaN</code>. Turvaudutaan jäll
    10:   end
    11:
    12: end
-(byebug)
 ```
 
 Evaluoidaan lausekkeen osat debuggerissa:
@@ -326,6 +325,10 @@ Kutakin kieltä käytettäessä tulee kuitenkin mukautua kielen omaan tyyliin, v
 
 Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [debuggeria käsittelevä maeriaali].
 (https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#lis%C3%A4%C3%A4-rails-sovelluksen-debuggaamisesta)
+
+## byebug vai binding.pry deguggaukseen?
+
+Jos käytössäsi on [Pry](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#parempi-konsoli) komento _byebug_ ei käyttäydy kaikissa tilanteissa hyvin, kannattaakin käyttää oikeastaan aina komentoa _binding.pry_
 
 ## Käyttäjä ja sessio
 
