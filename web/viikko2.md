@@ -34,7 +34,7 @@ Suorita komentoriviltä komento <code>bundle install</code>
 Kun nyt avaat rails konsolin, eli suoritat komentoriviltä komennon <code>rails c</code> avautuu viime viikolla käyttämme irbin sijaan Pry. Perustoiminnoiltaan Pry on täsmälleen samanlainen kuin irb. Tulostusasu on hieman ihmisystävällisempi:
 
 ```
-[1] pry(main)> Beer.first
+> Beer.first
   Beer Load (0.4ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" ASC LIMIT 1
 => #<Beer:0x007fc265086ce8
  id: 1,
@@ -43,7 +43,7 @@ Kun nyt avaat rails konsolin, eli suoritat komentoriviltä komennon <code>rails 
  brewery_id: 1,
  created_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00,
  updated_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00>
-[2] pry(main)>
+ >
 ```
 
 Jos haluat oppia käyttämään Pryn edistyneempiä ominaisuuksia kannattaa katsoa aiheesta kertova [Rails cast](https://www.youtube.com/watch?v=A494WFSi6HU)
@@ -346,10 +346,10 @@ Eli jokaiseen olueeseen liittyy useita reittauksia ja reittaus kuuluu aina täsm
 Käynnistetään Rails-konsoli antamalla komentoriviltä komento <code>rails c</code>. Huomaa, että jos konsolisi oli jo auki, saat lisätyn koodin konsolin käyttöön komennolla <code>reload!</code>. Luodaan muutama reittaus:
 
 ```ruby
-[1] pry(main) > b = Beer.first
-[2] pry(main) > b.ratings.create score:10
-[3] pry(main) > b.ratings.create score:21
-[4] pry(main) > b.ratings.create score:17
+ > b = Beer.first
+ > b.ratings.create score:10
+ > b.ratings.create score:21
+ > b.ratings.create score:17
 ```
 
 Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huomaa luontitapa, saman asian olisi ajanut monimutkaisempi tapa
@@ -410,12 +410,12 @@ end
 Panimoilla on nimi <code>name</code> ja perustamisvuosi <code>year</code>. Konsolista käsin pääsemme näihin käsiksi tuttuun tyyliin:
 
 ```ruby
-[13] pry(main)> b = Brewery.first
-[14] pry(main)> b.name
+ > b = Brewery.first
+ > b.name
 => "Koff"
-[15] pry(main)> b.year
+ > b.year
 => 1897
-[16] pry(main)>
+ >
 ```
 
 Teknisesti ottaen esim. <code>b.year</code> on metodikutsu. Rails luo model-olioon jokaiselle vastaavan tietokantataulun skeeman määrittelemälle sarakkeelle kentän eli attribuutin ja metodit attribuutin arvon lukemista ja arvon muuttamista varten. Nämä automaattisesti generoidut metodit ovat sisällöltään suunilleen seuraavat:
@@ -458,8 +458,8 @@ eli olion sisältä metodeja (myös <code>beers</code> on metodi!) voidaan kutsu
 Ja esimerkki metodin käytöstä:
 
 ```ruby
-[17] pry(main)> b = Brewery.first
-[18] pry(main)> b.print_report
+ > b = Brewery.first
+ > b.print_report
 Koff
 established at year 1897
 number of beers 2
@@ -487,14 +487,14 @@ Tehdään sitten panimolle metodi, jonka avulla panimon voi 'uudelleenkäynnist�
 kokeillaan
 
 ```ruby
-[18] pry(main)> b = Brewery.first
-[19] pry(main)> b.year
+ > b = Brewery.first
+ > b.year
 => 1897
-[20] pry(main)> b.restart
+ > b.restart
 changed year to 2017
-[21] pry(main)> b.year
+ > b.year
 => 1897
-[22] pry(main)>
+ >
 ```
 
 eli huomaamme, että vuoden muuttaminen ei toimikaan odotetulla tavalla! Syynä tähän on se, että <code>year = 2017</code> metodin <code>restart</code> sisällä ei kutsukaan metodia
@@ -514,14 +514,14 @@ Jotta sijoitus onnistuu, on metodia kutsuttava <code>self</code>-viitteen kautta
 ja nyt toiminnallisuus on odotetun kaltainen:
 
 ```ruby
-[23] pry(main)> b = Brewery.first
-[24] pry(main)> b.year
+ > b = Brewery.first
+ > b.year
 => 1897
-[25] pry(main)> b.restart
+ > b.restart
 changed year to 2017
-[26] pry(main)> b.year
+ > b.year
 => 2017
-[27] pry(main)>
+ >
 ```
 
 **HUOM:** Rubyssä olioiden instanssimuuttujat määritellään <code>@</code>-alkuisina. Instanssimuuttujat _eivät_ kuitenkaan ole sama asia kuin ActiveRecordin avulla tietokantaan talletettavat olioiden  attribuutit. Eli seuraavakaan metodi ei toimisi odotetulla tavalla:
@@ -549,10 +549,10 @@ Tehtävän jälkeen reittausten sivujen tulisi näyttää suunnilleen seuraavalt
 Huom: kun kirjoitat sovelluksellesi uutta koodia, useimmiten on järkevämpää tehdä kokeiluja konsolista käsin. Seuraavassa kokeillaan reittauksen oletusarvoista <code>to_s</code>-metodin palauttamaa arvoa:
 
 ```ruby
-[60] pry(main)> r = Rating.last
-[61] pry(main)> r.to_s
+ > r = Rating.last
+ > r.to_s
 => "#<Rating:0x007f8054b1cb10>"
-[62] pry(main)>
+ >
 ```
 
 Määritellään reittaukselle <code>to_s</code>-metodi:
@@ -570,7 +570,7 @@ end
 ja kokeillaan uudelleen konsolista:
 
 ```ruby
-[63] pry(main)> r.to_s
+ > r.to_s
 => "#<Rating:0x007f8054b1cb10>"
 ```
 
@@ -579,15 +579,15 @@ Muutos ei kuitenkaan vaikuta tulleen voimaan, missä vika?
 Jotta muutettu koodi tulisi voimaan, on uusi koodi ladattava konsolin käyttöön komennolla <code>reload!</code> ja käytettävä uudestaan kannasta haettua olioa:
 
 ```ruby
-[64] pry(main)> reload!
+ > reload!
 Reloading...
 => true
-[65] pry(main)> r.to_s
+ > r.to_s
 => "#<Rating:0x007f8054b1cb10>"
-[66] pry(main)> r = Rating.last
-[67] pry(main)> r.to_s
+ > r = Rating.last
+ > r.to_s
 => "tekstiesitys"
-[68] pry(main)>
+ >
 ```
 
 Eli kuten yllä näemme, ei pelkkä koodin uudelleenlataaminen vielä riitä, sillä muuttujassa <code>r</code> olevassa oliossa on käytössä edelleen vanha koodi.
@@ -939,7 +939,7 @@ Web-konsoli on varsin kätevä työkalu. Valitettavasti web-konsoli ei kuitenkaa
 Luodaan sovellukseen olut, johon ei liity panimoa:
 
 ```ruby
-[718 pry(main)> Beer.create name:"crap beer", style:"lowalcohol"
+> Beer.create name:"crap beer", style:"lowalcohol"
  => #<Beer id: 13, name: "crap beer", style: "lowalcohol", brewery_id: nil, created_at: "2017-01-17 16:11:49", updated_at: "2017-01-17 16:11:49">
 ```
 luodun olion vierasavaimen <code>brewery_id</code> arvoksi siis tulee <code>nil</code>.
@@ -1130,10 +1130,10 @@ eli lomakkeen <code>beer_id</code>:n arvo generoidaan HTML lomakkeen select-elem
 **Huom:** näkymäapumetodeja on mahdollista testata myös konsolista. Metodeja voi kutsua <code>helper</code>-olion kautta:
 
 ```ruby
-[64] pry(main) > beers = Beer.all
-[65] pry(main) > helper.options_from_collection_for_select(beers, :name, :id)
+ > beers = Beer.all
+ 
  => "<option value=\"Iso 3\">1</option>\n<option value=\"Karhu\">2</option>\n<option value=\"Tuplahumala\">3</option>\n<option value=\"Huvila Pale Ale\">4</option>\n<option value=\"X Porter\">5</option>\n<option value=\"Hefezeizen\">6</option>\n<option value=\"Helles\">7</option>\n<option value=\"Punk IPA\">11</option>\n<option value=\"Nanny State\">12</option>"
-[66] pry(main)>
+ >
 ```
 
 > ## Tehtävä 8
@@ -1306,10 +1306,10 @@ eli yhteys määritellään kuten "tietokantatasolla" oleva yhteys, mutta yhteyt
 Lisää yhteys koodiisi ja kokeile seuraavaa konsolista (muista ensin <code>reload!</code>):
 
 ```ruby
-[65] pry(main) > k = Brewery.find_by name:"Koff"
-[66] pry(main)> k.ratings.count
+ > k = Brewery.find_by name:"Koff"
+ > k.ratings.count
  => 5
-[67] pry(main) > k.ratings
+ > k.ratings
  => #<ActiveRecord::Associations::CollectionProxy [#<Rating id: 1, score: 10, beer_id: 1, created_at: "2017-01-17 13:09:31", updated_at: "2017-01-17 13:09:31">, #<Rating id: 2, score: 21, beer_id: 1, created_at: "2017-01-17 13:09:33", updated_at: "2017-01-17 13:09:33">, #<Rating id: 3, score: 17, beer_id: 1, created_at: "2017-01-17 13:09:35", updated_at: "2017-01-17 13:09:35">, #<Rating id: 10, score: 22, beer_id: 1, created_at: "2017-01-17 15:51:02", updated_at: "2017-01-17 15:51:02">, #<Rating id: 11, score: 34, beer_id: 1, created_at: "2017-01-17 15:51:52", updated_at: "2017-01-17 15:51:52">]>
 ```
 
@@ -1352,13 +1352,13 @@ end
 ja metodin <code>average_rating</code> tulisi edelleen toimia entiseen tyyliin:
 
 ```ruby
-[11] pry(main)> b = Beer.first
-[12] pry(main)> b.average_rating
+ > b = Beer.first
+ > b.average_rating
 => #<BigDecimal:7fa4bbde7aa8,'0.17E2',9(45)>
-[13] pry(main)> b = Brewery.first
-[14] pry(main)>> b.average_rating
+ > b = Brewery.first
+ >> b.average_rating
 => #<BigDecimal:7fa4bfbf7410,'0.16E2',9(45)>
-[15] pry(main)>>
+ >>
 ```
 
 Jos sovelluksessa on moduuli, jota tarvitaan ainoastaan modeleissa, on _lib_-hakemistoa parempi sijoituspaikka _app/models/concerns_. Hakemiston sisältämä koodi ladataan oletusarvoisesti modelien käyttöön eli muutosta muuttujaan <code>config.autoload_paths</code> ei tarvita. Hakemistossa app/models/concerns oleviin moduuleihin on lisättävä määritelmä <code>extend ActiveSupport::Concern</code>
@@ -1507,16 +1507,16 @@ Generoidaan seuraavaksi tilanne, jossa tietokanta joutuu hieman epäkonsistentti
 Käynnistä heroku-konsoli komennolla <code>heroku run console</code> ja luo sovellukseen olut johon ei liity mitään panimoa
 
 ```ruby
-[7] pry(main)> Beer.create name:"crap beer", style:"lager"
+ > Beer.create name:"crap beer", style:"lager"
 => #<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">
 ```
 
 ja olut johon liittyvää panimoa ei ole olemassa (eli viiteavaimena oleva panimon id on virheellinen):
 
 ```ruby
-[8] pry(main)> Beer.create name:"shitty beer", style:"lager", brewery_id: 123
+ > Beer.create name:"shitty beer", style:"lager", brewery_id: 123
 => #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">
-[9] pry(main)>
+ >
 ```
 
 Kun menet nyt kaikkien oluiden on seurauksena jälleen ikävä ilmoitus "We're sorry, but something went wrong.". Jälleen kerran ongelmaa on etsittävä lokeista:
@@ -1550,20 +1550,20 @@ eli on olemassa olut, jonka kentässä <code>brewery</code> on arvona <code>nil<
 Kun virheen syy paljastuu, on etsittävä syylliset. Eli avataan heroku-konsoli komennolla <code>heroku run console</code> ja haetaan panimottomat oluet:
 
 ```ruby
-[10] pry(main)> Beer.all.select{ |b| b.brewery.nil? }
+ > Beer.all.select{ |b| b.brewery.nil? }
 => [#<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">, #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">]
-[11] pry(main)>
+ >
 ```
 
 Seuraavana toimenpiteenä on virheen aiheuttavien olioiden korjaaminen. Koska loimme ne nyt itse testaamista varten, poistamme oliot (otamme ensin <code>_</code>-muuttujassa olevat edellisen operaation palauttamat oliot talteen muuttujaan):
 
 ```ruby
-[12] pry(main)> bad_beer = _
+ > bad_beer = _
 => [#<Beer id: 4, name: "crap beer", style: "lager", brewery_id: nil, created_at: "2017-01-17 17:58:43", updated_at: "2017-01-17 17:58:43">, #<Beer id: 5, name: "shitty beer", style: "lager", brewery_id: 123, created_at: "2017-01-17 17:59:50", updated_at: "2017-01-17 17:59:50">]
-[13] pry(main)> bad_beer.each{ |bad| bad.delete }
-[14] pry(main)> Beer.all.select{ |b| b.brewery.nil? }
+ > bad_beer.each{ |bad| bad.delete }
+ > Beer.all.select{ |b| b.brewery.nil? }
 => []
-[15] pry(main)>
+ >
 ```
 
 Useimmiten tuotannossa vastaan tulevat ongelmat johtuvat siitä, että tietokantaskeeman muutosten takia jotkut oliot ovat joutuneet epäkonsistenttiin tilaan, eli ne esim. viittaavat olioihin joita ei ole tai viitteet puuttuvat. **Sovellus kannattaakin deployata tuotantoon mahdollisimman usein**, näin tiedetään että mahdolliset ongelmat ovat juuri tehtyjen muutosten aiheuttamia ja korjaus on helpompaa.

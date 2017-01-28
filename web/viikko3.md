@@ -60,7 +60,7 @@ Avataan sitten konsoli, luetaan tietokannasta reittauksia sisältävä olio ja k
 $ rails c
 Running via Spring preloader in process 28899
 Loading development environment (Rails 4.2.6)
-[1] pry(main)> b = Beer.first
+> b = Beer.first
   Beer Load (0.2ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" ASC LIMIT 1
 => #<Beer:0x007f905edeb548
  id: 1,
@@ -69,7 +69,7 @@ Loading development environment (Rails 4.2.6)
  brewery_id: 1,
  created_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00,
  updated_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00>
-[2] pry(main)> b.average
+> b.average
 
 From: /Users/mluukkai/opetus/ratebeer/app/models/beer.rb @ line 12 Beer#average:
 
@@ -83,7 +83,7 @@ eli saamme auki debuggerisession, joka avautuu metodin sisälle. Pääsemme siis
 Olioon itseensä päästään käsiksi viitteellä <code>self</code>
 
 ```ruby
-[1] pry(#<Beer>)> self
+> self
 => #<Beer:0x007f905edeb548
  id: 1,
  name: "Iso 3",
@@ -91,17 +91,17 @@ Olioon itseensä päästään käsiksi viitteellä <code>self</code>
  brewery_id: 1,
  created_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00,
  updated_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00>
- [2] pry(#<Beer>)>
+ >
 ```
 
 ja olioiden kenttiin pistenotaatiolla tai pelkällä kentän nimellä:
 
 ```ruby
-[2] pry(#<Beer>)> self.name
+> self.name
 => "Iso 3"
-[3] pry(#<Beer>)> style
+> style
 => "Lager"
-[4] pry(#<Beer>)>
+>
 ```
 
 Huomaa, että jos metodin sisällä on tarkotus muuttaa olion kentän arvoa, on käytettävä pistenotaatiota:
@@ -123,7 +123,7 @@ Huomaa, että jos metodin sisällä on tarkotus muuttaa olion kentän arvoa, on 
 Voimme siis viitata oluen reittauksiin oluen metodin sisältä kentän nimellä <code>ratings</code>:
 
 ```ruby
-[9] pry(#<Beer>)> ratings
+> ratings
   Rating Load (0.1ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."beer_id" = ?  [["beer_id", 1]]
 => [#<Rating:0x007f905ea18088
   id: 3,
@@ -137,29 +137,29 @@ Voimme siis viitata oluen reittauksiin oluen metodin sisältä kentän nimellä 
   beer_id: 1,
   created_at: Fri, 27 Jan 2017 09:41:08 UTC +00:00,
   updated_at: Fri, 27 Jan 2017 09:41:08 UTC +00:00>]
-[10] pry(#<Beer>)>
+>
 ```
 
 Katsotaan yksittäistä reittausta:
 
 ```ruby
-[10] pry(#<Beer>)> ratings.first
+> ratings.first
 => #<Rating:0x007f905ea18088
  id: 3,
  score: 15,
  beer_id: 1,
  created_at: Sat, 21 Jan 2017 17:59:28 UTC +00:00,
  updated_at: Sat, 21 Jan 2017 17:59:28 UTC +00:00>
-[11] pry(#<Beer>)>
+>
 
 ```
 
 summataksemme reittaukset, tulee siis jokaisesta reittausoliosta ottaa sen kentän <code>score</code> arvo:
 
 ```ruby
-[11] pry(#<Beer>)> ratings.first.score
+> ratings.first.score
 => 15
-[12] pry(#<Beer>)>
+>
 ```
 
 Enumerable-modulin metodi <code>map</code> tarjoaa keinon muodostaa kokoelman perusteella uusi kokoelma, jonka alkiot saadaan alkuperäisen kokelman alkioista, suorittamalla jokaiselle alkiolle mäppäys-funktio.
@@ -167,25 +167,25 @@ Enumerable-modulin metodi <code>map</code> tarjoaa keinon muodostaa kokoelman pe
 Jos alkuperäisen kokoelman alkioon viitataan nimellä <code>r</code>, mäppäysfunktio on yksinkertainen:
 
 ```ruby
-[12] pry(#<Beer>)> r = ratings.first
-[13] pry(#<Beer>)> r.score
+> r = ratings.first
+> r.score
 => 15
 ```
 
 Nyt voimme kokeilla mitä <code>map</code> tuottaa:
 
 ```ruby
-[14] pry(#<Beer>)> ratings.map { |r| r.score }
+> ratings.map { |r| r.score }
 => [15, 33]
-[15] pry(#<Beer>)>
+>
 ```
 
 mäppäysfunktio siis annetaan metodille <code>map</code> parametriksi aaltosulkein erotettuna koodilohkona. Koodilohko voitaisiin erottaa myös <code>do end</code>-parina, molemmat tuottavat saman lopputuloksen:
 
 ```ruby
-[14] pry(#<Beer>)> ratings.map do |r| r.score end
+> ratings.map do |r| r.score end
 => [15, 33]
-[15] pry(#<Beer>)>
+>
 ```
 
 Metodin map avulla saamme siis muodostettua reittausten kokoelmasta taulukon reittausten arvoja. Seuraava tehtävä on summata nämä arvot.
@@ -194,29 +194,29 @@ Rails on lisännyt kaikille Enumerableille metodin
 [sum](http://apidock.com/rails/Enumerable/sum), kokeillaan sitä mapilla aikansaamaamme taulukkoon.
 
 ```ruby
-[15] pry(#<Beer>)> ratings.map { |r| r.score }.sum
+> ratings.map { |r| r.score }.sum
 => 48
-[16] pry(#<Beer>)>
+>
 ```
 
 Jotta saamme vielä aikaan keskiarvon, on näin saatava summa jaettava alkioiden kokonaismäärällä. Varmistetaan ensin kokonaismäärän laskevan metodin <code>count</code> tominta:
 
 ```ruby
-[16] pry(#<Beer>)> ratings.count
+> ratings.count
 => 2
 ```
 
 ja muodostetaan sitten keskiarvon laskeva onelineri:
 
 ```ruby
-[17] pry(#<Beer>)> ratings.map { |r| r.score }.sum / ratings.count
+> ratings.map { |r| r.score }.sum / ratings.count
 => 24
 ```
 
 huomaamme että lopputulos pyöristyy väärin. Kyse on tietenkin siitä että sekä jaettava että jakaja ovat kokonaislukuja. Muutetaan toinen näistä liukuluvuksi. Kokeillaan ensin miten kokonaisluvusta liukuluvun tekevä metodi toimii:
 
 ```ruby
-[18] pry(#<Beer>)> 1.to_f
+> 1.to_f
 => 1.0
 ```
 
@@ -229,7 +229,7 @@ Rybyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen
 Muodostetaan sitten lopullinen versio keskiarvon laskevasta koodista:
 
 ```ruby
-[19] pry(#<Beer>)> ratings.map{ |r| r.score }.sum / ratings.count.to_f
+> ratings.map{ |r| r.score }.sum / ratings.count.to_f
 => 24.0
 ```
 
@@ -250,21 +250,21 @@ end
 Testataan metodia, eli poistutaan debuggerista (prystä poistutaan komennolla exit ja byebugista komennolla c eli jatkamalla aiemman tyhjän metodin suoritus loppuun), _lataamalla_ uusi koodi, hakemalla olio ja suorittamalla metodi:
 
 ```ruby
-[20] pry(#<Beer>)> exit
+> exit
 => nil
-[3] pry(main)> reload!
+> reload!
 Reloading...
 => true
-[4] pry(main)> b = Beer.first
-[5] pry(main)> b.average
+> b = Beer.first
+> b.average
 => 24.0
 ```
 
 Jatkotestaus kuitenkin paljastaa että kaikki ei ole hyvin:
 
 ```ruby
-[6] pry(main)> b = Beer.last
-[7] pry(main)> b.average
+> b = Beer.last
+> b.average
 => NaN
 2.2.1 :011 >
 ```
@@ -288,16 +288,16 @@ eli Hardcore IPA:n reittausten keskiarvo on <code>NaN</code>. Turvaudutaan jäll
 Evaluoidaan lausekkeen osat debuggerissa:
 
 ```ruby
-[1] pry(#<Beer>)> ratings.map{ |r| r.score }.sum
+> ratings.map{ |r| r.score }.sum
 => 0
-[2] pry(#<Beer>)> ratings.count.to_f
+> ratings.count.to_f
 => 0.0
 ```
 
 Olemme siis jakamassa kokonaisluku nollaa luvulla nolla, katsotaan mikä laskuoperaation tulos on:
 
 ```ruby
-[3] pry(#<Beer>)> 0/0.0
+> 0/0.0
 => NaN
 ```
 
@@ -607,29 +607,29 @@ Migraatiot ovat varsin laaja aihe ja harjoittelemme niitä vielä lisää myöhe
 Huomaamme nyt konsolista, että yhteys olioiden välillä toimii:
 
 ```ruby
-[6] pry(main)> u = User.first
-[7] pry(main)> u.ratings
+> u = User.first
+> u.ratings
   Rating Load (0.4ms)  SELECT "ratings".* FROM "ratings"  WHERE "ratings"."user_id" = ?  [["user_id", 1]]
  => #<ActiveRecord::Associations::CollectionProxy []>
-[8] pry(main)>
+>
 ```
 
 Toistaiseksi antamamme reittaukset eivät liity mihinkään käyttäjään:
 
 ```ruby
-[8] pry(main)> r = Rating.first
-[9] pry(main)> r.user
+> r = Rating.first
+> r.user
  => nil
-[10] pry(main)>
+>
 ```
 
 Päätetään että laitetaan kaikkien olemassaolevien reittausten käyttäjäksi järjestelmään ensimmäisenä luotu käyttäjä:
 
 ```ruby
-[11] pry(main)> u = User.first
-[12] pry(main)> Rating.all.each{ |r| u.ratings << r }
+> u = User.first
+> Rating.all.each{ |r| u.ratings << r }
  => 14
-[14] pry(main)>
+>
 ```
 
 **HUOM:** reittausten tekeminen käyttöliittymän kautta ei toistaiseksi toimi kunnolla, sillä näin luotuja uusia reittauksia ei vielä liitetä mihinkään käyttäjään. Korjaamme tilanteen pian.
@@ -1126,17 +1126,17 @@ Salasanatoiminnallisuus <code>has_secure_password</code> lisää oliolle  attrib
 Talletetaan käyttäjälle salasana:
 
 ```ruby
-[1] pry(main)> u = User.first
-[2] pry(main)> u.password = "salainen"
-[3] pry(main)> u.password_confirmation = "salainen"
-[4] pry(main)> u.save
+> u = User.first
+> u.password = "salainen"
+> u.password_confirmation = "salainen"
+> u.save
    (0.2ms)  begin transaction
   User Exists (0.3ms)  SELECT  1 AS one FROM "users"  WHERE ("users"."username" = 'mluukkai' AND "users"."id" != 1) LIMIT 1
 Binary data inserted for `string` type on column `password_digest`
   SQL (0.4ms)  UPDATE "users" SET "password_digest" = ?, "updated_at" = ? WHERE "users"."id" = 1  [["password_digest", "$2a$10$DZaWkl73GurTQG3ilOVz9./X6jGT49ngZb3Q9ZCF3YjVvXPrl1JLm"], ["updated_at", "2017-01-24 18:28:24.069587"]]
    (0.8ms)  commit transaction
  => true
-[5] pry(main)>
+>
 ```
 
 Jos komento <code>u.password = "salainen"</code> saa aikaan virheilmoituksen <code>NoMethodError: undefined method `password_digest=' for ...</code>, käynnistä konsoli uudelleen ja muista myös suorittaa migraatio!
@@ -1144,7 +1144,7 @@ Jos komento <code>u.password = "salainen"</code> saa aikaan virheilmoituksen <co
 Autentikointi tapahtuu <code>User</code>-olioille lisätyn metodin <code>authenticate</code> avulla seuraavasti:
 
 ```ruby
-[6] pry(main)> u.authenticate "salainen"
+> u.authenticate "salainen"
 => #<User:0x007f833eac8b40
  id: 1,
  username: "mluukkai",
@@ -1152,9 +1152,9 @@ Autentikointi tapahtuu <code>User</code>-olioille lisätyn metodin <code>authent
  updated_at: Sat, 28 Jan 2017 12:27:18 UTC +00:00,
  password_digest:
   "$2a$10$eBOVzbk3oETQtbk9N9FMFuxG3NvjcwQLfRFSEZvstqkUIHcGTyUXK">
-[7] pry(main)> u.authenticate "this_is_wrong_password"
+> u.authenticate "this_is_wrong_password"
  => false
-[8] pry(main)>
+>
 ```
 
 eli metodi <code>authenticate</code> palauttaa <code>false</code>, jos sille parametrina annettu salasana on väärä. Jos salasana on oikea, palauttaa metodi olion itsensä.
