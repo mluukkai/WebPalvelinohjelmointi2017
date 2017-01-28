@@ -323,7 +323,7 @@ Käytämme onliner-if:iä ja kokoelman metodia <code>empty?</code> joka evaluoit
 
 Kutakin kieltä käytettäessä tulee kuitenkin mukautua kielen omaan tyyliin, varsinkin jos on mukana projekteissa joita ohjelmoi useampi ihminen.
 
-Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [debuggeria käsittelevä maeriaali].
+Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [debuggeria käsittelevä materiaali].
 (https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#lis%C3%A4%C3%A4-rails-sovelluksen-debuggaamisesta)
 
 ## byebug vai binding.pry deguggaukseen?
