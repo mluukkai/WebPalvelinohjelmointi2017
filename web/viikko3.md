@@ -1110,9 +1110,6 @@ Rails käyttää tiivisteen tallettamiseen <code>bcrypt-ruby</code> gemiä. Otet
 
 Tämän jälkeen annetaan komentoriviltä komento <code>bundle install</code> jotta gem asentuu.
 
-**Huom:** jos käytät hieman vanhempaa railsin versiota, joudut käyttämään eri gemiä:
-
-    gem 'bcrypt-ruby', '~> 3.1.2'
 
 Kokeillaan nyt hieman uutta toiminnallisuutta konsolista (joudut uudelleenkäynnistämään konsolin, jotta se saa käyttöönsä uuden gemin).
 
@@ -1124,17 +1121,17 @@ Salasanatoiminnallisuus <code>has_secure_password</code> lisää oliolle  attrib
 Talletetaan käyttäjälle salasana:
 
 ```ruby
-2.2.1 :004 > u = User.first
-2.2.1 :005 > u.password = "salainen"
-2.2.1 :006 > u.password_confirmation = "salainen"
-2.2.1 :007 > u.save
+[1] pry(main)> u = User.first
+[2] pry(main)> u.password = "salainen"
+[3] pry(main)> u.password_confirmation = "salainen"
+[4] pry(main)> u.save
    (0.2ms)  begin transaction
   User Exists (0.3ms)  SELECT  1 AS one FROM "users"  WHERE ("users"."username" = 'mluukkai' AND "users"."id" != 1) LIMIT 1
 Binary data inserted for `string` type on column `password_digest`
   SQL (0.4ms)  UPDATE "users" SET "password_digest" = ?, "updated_at" = ? WHERE "users"."id" = 1  [["password_digest", "$2a$10$DZaWkl73GurTQG3ilOVz9./X6jGT49ngZb3Q9ZCF3YjVvXPrl1JLm"], ["updated_at", "2017-01-24 18:28:24.069587"]]
    (0.8ms)  commit transaction
  => true
-2.2.1 :008 >
+[5] pry(main)>
 ```
 
 Jos komento <code>u.password = "salainen"</code> saa aikaan virheilmoituksen <code>NoMethodError: undefined method `password_digest=' for ...</code>, käynnistä konsoli uudelleen ja muista myös suorittaa migraatio!
@@ -1142,11 +1139,17 @@ Jos komento <code>u.password = "salainen"</code> saa aikaan virheilmoituksen <co
 Autentikointi tapahtuu <code>User</code>-olioille lisätyn metodin <code>authenticate</code> avulla seuraavasti:
 
 ```ruby
-2.2.1 :008 > u.authenticate "salainen"
- => #<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 18:28:24", password_digest: "$2a$10$DZaWkl73GurTQG3ilOVz9./X6jGT49ngZb3Q9ZCF3Yj...">
-2.2.1 :009 > u.authenticate "wrong"
+[6] pry(main)> u.authenticate "salainen"
+=> #<User:0x007f833eac8b40
+ id: 1,
+ username: "mluukkai",
+ created_at: Fri, 27 Jan 2017 20:55:11 UTC +00:00,
+ updated_at: Sat, 28 Jan 2017 12:27:18 UTC +00:00,
+ password_digest:
+  "$2a$10$eBOVzbk3oETQtbk9N9FMFuxG3NvjcwQLfRFSEZvstqkUIHcGTyUXK">
+[7] pry(main)> u.authenticate "this_is_wrong_password"
  => false
-2.2.1 :010 >
+[8] pry(main)>
 ```
 
 eli metodi <code>authenticate</code> palauttaa <code>false</code>, jos sille parametrina annettu salasana on väärä. Jos salasana on oikea, palauttaa metodi olion itsensä.
@@ -1198,8 +1201,8 @@ Käyttäjien luomisesta huolehtivan kontrollerin apumetodia <code>user_params</c
 
 ```erb
  def user_params
-     params.require(:user).permit(:username, :password, :password_confirmation)
-  end
+   params.require(:user).permit(:username, :password, :password_confirmation)
+ end
 ```
 
 Kokeile mitä tapahtuu, jos password confirmatioksi annetaan eri arvo kuin passwordiksi.
@@ -1210,7 +1213,7 @@ Huom: jos saat sisäänkirjautumisyrityksessä virheilmoitusen <code>BCrypt::Err
 >
 > Tee luokalle User-validointi, joka varmistaa, että salasanan pituus on vähintää 4 merkkiä, ja että salasana sisältää vähintään yhden ison kirjaimen (voit unohtaa skandit) ja yhden numeron.
 
-**Huom**: Säännöllisiä lausekkeita Rubyn tapaan voi testailla Rubular sovelluksella: http://rubular.com/
+**Huom**: Säännöllisiä lausekkeita voi testailla Rubular sovelluksella: http://rubular.com/
 
 
 ## Vain omien reittausten poisto
@@ -1253,6 +1256,8 @@ Huomaa, että pelkkä **delete**-linkin poistaminen ei estä poistamasta muiden 
 > ## Tehtävä 12
 >
 > Luo uusi käyttäjätunnus, kirjaudu käyttäjänä ja tuhoa käyttäjä. Käyttäjätunnuksen tuhoamisesta seuraa ikävä virhe. **Pääset virheestä eroon tuhoamalla selaimesta cookiet.** Mieti mistä virhe johtuu ja korjaa asia myös sovelluksesta siten, että käyttäjän tuhoamisen jälkeen sovellus ei joudu virhetilanteeseen.
+>
+> Tämä tehtävä on vuosien varrella osoittautunut hankalaksi. Jos et pääse eteenpäin, kysy apua pajassa, kurssin telegram- tai irc-kanavalta, ks. kurssisivu
 
 > ## Tehtävä 13
 >
