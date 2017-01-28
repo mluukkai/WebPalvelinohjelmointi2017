@@ -458,6 +458,14 @@ Huom2: Rubyssa yhdistelmän <code>if not</code> sijaan voidaan käyttää myös 
   session[:user_id] = user.id unless user.nil?
 ```
 
+Paras muoto komennolle on kuitenkin
+
+```ruby
+  session[:user_id] = user.id if user
+```
+
+Rubyssä nimittäin kaikki muut arvoit paitsi _nil_ ja _false_ tulkitaan todeksi. Eli nyt komento suoritetaan jos _user_ on jotain muuta kuin _nil_ ja se on täsmälleen haluamamme toiminto.
+
 Lisätään application layoutiin seuraava koodi, joka lisää kirjautuneen käyttäjän nimen kaikille sivuille (edellisessä luvussa lisätyt sessioharjoittelukoodit voi samalla poistaa):
 
 ```erb
