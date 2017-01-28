@@ -91,7 +91,6 @@ Olioon itseensä päästään käsiksi viitteellä <code>self</code>
  brewery_id: 1,
  created_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00,
  updated_at: Sat, 14 Jan 2017 13:47:57 UTC +00:00>
- >
 ```
 
 ja olioiden kenttiin pistenotaatiolla tai pelkällä kentän nimellä:
@@ -101,7 +100,6 @@ ja olioiden kenttiin pistenotaatiolla tai pelkällä kentän nimellä:
 => "Iso 3"
 > style
 => "Lager"
->
 ```
 
 Huomaa, että jos metodin sisällä on tarkotus muuttaa olion kentän arvoa, on käytettävä pistenotaatiota:
@@ -266,7 +264,6 @@ Jatkotestaus kuitenkin paljastaa että kaikki ei ole hyvin:
 > b = Beer.last
 > b.average
 => NaN
-2.2.1 :011 >
 ```
 
 eli Hardcore IPA:n reittausten keskiarvo on <code>NaN</code>. Turvaudutaan jälleen debuggeriin. Laitetaan komento <code>binding.pry</code> keskiarvon laskevaan metodiin, uudelleenladataan koodi ja kutsutaan metodia ongelmalliselle oliolle:
@@ -990,18 +987,16 @@ end
 Ja monen suhde moneen -yhteys toimii käyttäjästä päin:
 
 ```ruby
-2.2.1 :009 > User.first.beers
+> User.first.beers
  => #<ActiveRecord::Associations::CollectionProxy [#<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2017-01-11 14:29:25", updated_at: "2017-01-11 14:29:25">, #<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2017-01-11 14:29:25", updated_at: "2017-01-11 14:29:25">, #<Beer id: 11, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2017-01-17 13:12:12", updated_at: "2017-01-17 13:12:12">, #<Beer id: 11, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2017-01-17 13:12:12", updated_at: "2017-01-17 13:12:12">, #<Beer id: 11, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2017-01-17 13:12:12", updated_at: "2017-01-17 13:12:12">, #<Beer id: 12, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2017-01-17 13:12:27", updated_at: "2017-01-17 13:12:52">, #<Beer id: 12, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2017-01-17 13:12:27", updated_at: "2017-01-17 13:12:52">, #<Beer id: 7, name: "Helles", style: "Lager", brewery_id: 3, created_at: "2017-01-11 14:29:25", updated_at: "2017-01-11 14:29:25">, #<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2017-01-11 14:29:25", updated_at: "2017-01-11 14:29:25">, #<Beer id: 4, name: "Huvila Pale Ale", style: "Pale Ale", brewery_id: 2, created_at: "2017-01-11 14:29:25", updated_at: "2017-01-11 14:29:25">, ...]>
-2.2.1 :011 >
+>
 ```
 
 ja oluesta päin:
 
 ```ruby
-2.2.1 :011 > Beer.first.users
+> Beer.first.users
  => #<ActiveRecord::Associations::CollectionProxy [#<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 2, username: "pekka", created_at: "2017-01-24 16:51:42", updated_at: "2017-01-24 16:51:42">]>
-2.2.1 :013 >
-irb(main):010:0>
 ```
 
 Vaikuttaa ihan toimivalta, mutta tuntuu hieman kömpeltä viitata oluen reitanneisiin käyttäjiin nimellä <code>users</code>. Luontevampi viittaustapa oluen reitanneisiin käyttäjiin olisi kenties <code>raters</code>. Tämä onnistuu vaihtamalla yhteyden määrittelyä seuraavasti
@@ -1015,19 +1010,17 @@ Oletusarvoisesti <code>has_many</code> etsii liitettävää taulun nimeä ensimm
 Yhteytemme uusi nimi toimii:
 
 ```ruby
-2.2.1 :014 > b = Beer.first
-2.2.1 :015 > b.raters
+> b = Beer.first
+> b.raters
  => #<ActiveRecord::Associations::CollectionProxy [#<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 2, username: "pekka", created_at: "2017-01-24 16:51:42", updated_at: "2017-01-24 16:51:42">]>
-2.2.1 :016 >
 ```
 
 Koska sama käyttäjä voi tehdä useita reittauksia samasta oluesta, näkyy käyttäjä useaan kertaan oluen reittaajien joukossa. Jos haluamme yhden reittaajan näkymään ainoastaan kertaalleen, onnistuu tämä esim. seuraavasti:
 
 ```ruby
-irb(main):013:0> b.raters.uniq
-2.2.1 :016 > b.raters.uniq
+> b.raters.uniq
+> b.raters.uniq
  => [#<User id: 1, username: "mluukkai", created_at: "2017-01-24 14:20:10", updated_at: "2017-01-24 14:20:10">, #<User id: 2, username: "pekka", created_at: "2017-01-24 16:51:42", updated_at: "2017-01-24 16:51:42">]
-2.2.1 :017 >
 ```
 
 Olisi mahdollista myös määritellä, että oluen <code>raters</code> palauttaisi oletusarvoisesti vain kertaalleen yksittäisen käyttäjän. Tämä onnistuisi asettamalla <code>has_many</code>-määreelle __scope__, joka rajoittaa niiden olioiden joukkoa, jotka näytetään assosiaatioon liittyviksi:
