@@ -604,30 +604,29 @@ Migraatiot ovat varsin laaja aihe ja harjoittelemme niitä vielä lisää myöhe
 Huomaamme nyt konsolista, että yhteys olioiden välillä toimii:
 
 ```ruby
-2.2.1 :001 > u = User.first
-2.2.1 :002 > u.ratings
+[6] pry(main)> u = User.first
+[7] pry(main)> u.ratings
   Rating Load (0.4ms)  SELECT "ratings".* FROM "ratings"  WHERE "ratings"."user_id" = ?  [["user_id", 1]]
  => #<ActiveRecord::Associations::CollectionProxy []>
-2.2.1 :003 >
-irb(main):003:0>
+[8] pry(main)>
 ```
 
 Toistaiseksi antamamme reittaukset eivät liity mihinkään käyttäjään:
 
 ```ruby
-2.2.1 :003 > r = Rating.first
-2.2.1 :004 > r.user
+[8] pry(main)> r = Rating.first
+[9] pry(main)> r.user
  => nil
-2.2.1 :005 >
+[10] pry(main)>
 ```
 
 Päätetään että laitetaan kaikkien olemassaolevien reittausten käyttäjäksi järjestelmään ensimmäisenä luotu käyttäjä:
 
 ```ruby
-2.2.1 :005 > u = User.first
-2.2.1 :006 > Rating.all.each{ |r| u.ratings << r }
+[11] pry(main)> u = User.first
+[12] pry(main)> Rating.all.each{ |r| u.ratings << r }
  => 14
-2.2.1 :008 >
+[14] pry(main)>
 ```
 
 **HUOM:** reittausten tekeminen käyttöliittymän kautta ei toistaiseksi toimi kunnolla, sillä näin luotuja uusia reittauksia ei vielä liitetä mihinkään käyttäjään. Korjaamme tilanteen pian.
@@ -813,9 +812,9 @@ Entä mitä metodin päättävä <code>respond_to</code> tekee? Jos olion luonti
 
 ```ruby
  if @user.save
-  redirect_to @user, notice: 'User was successfully created.'
+   redirect_to @user, notice: 'User was successfully created.'
  else
-  render action: 'new'
+   render action: 'new'
  end
 ```
 
@@ -832,7 +831,7 @@ class Rating < ActiveRecord::Base
                                     less_than_or_equal_to: 50,
                                     only_integer: true }
 
-   # ...
+  # ...
 end
 ```
 
@@ -916,7 +915,7 @@ http://guides.rubyonrails.org/active_record_validations.html ja http://apidock.c
 > Lisää ohjelmaasi seuraavat validoinnit
 > * oluen ja panimon nimi on epätyhjä
 > * panimon perustamisvuosi on kokonaisluku väliltä 1042-2017
-> * käyttäjätunnuksen eli User-luokan attribuutin username pituus on vähintään 3 mutta enintään 15 merkkiä
+> * käyttäjätunnuksen eli User-luokan attribuutin username pituus on vähintään 3 mutta enintään 30 merkkiä
 
 Jos yrität luoda oluen tyhjällä nimellä, seurauksena on virheilmoitus:
 
