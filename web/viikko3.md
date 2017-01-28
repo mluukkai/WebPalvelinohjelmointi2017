@@ -224,7 +224,7 @@ Jos et tiedä miten joku asia tehdään Rubyllä, google tietää.
 
 Mieti sopiva hakusana niin saat melko varmasti vastauksen. Kannattaa kuitenkin olla hiukan varovainen ja tutkia ainakin muutama googlen vastaus. Ainakin kannattaa varmistaa että vastauksessa puhutaan riittävän tuoreesta rubyn tai railsin versiosta. Esim. Rails 2:ssa ja 3:ssa olevista asioista erittäin moni on muuttunut nelosversiossa.
 
-Rybyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen, eli pyörän uudelleenkeksimisen sijaan kannattaa aina googlata tai vilkuilla dokumentaatiota.
+Rubyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen, eli pyörän uudelleenkeksimisen sijaan kannattaa aina googlata tai vilkuilla dokumentaatiota.
 
 Muodostetaan sitten lopullinen versio keskiarvon laskevasta koodista:
 
@@ -323,13 +323,12 @@ Käytämme onliner-if:iä ja kokoelman metodia <code>empty?</code> joka evaluoit
 
 Kutakin kieltä käytettäessä tulee kuitenkin mukautua kielen omaan tyyliin, varsinkin jos on mukana projekteissa joita ohjelmoi useampi ihminen.
 
-Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [debuggeria käsittelevä maeriaali].
+Jos et ole jo rutinoitunut debuggerin käyttöön, muista kerrata viime viikon [debuggeria käsittelevä materiaali].
 (https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#lis%C3%A4%C3%A4-rails-sovelluksen-debuggaamisesta)
 
 ## byebug vai binding.pry deguggaukseen?
 
-Jos käytössäsi on [Pry](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#parempi-konsoli) komento _byebug_ ei käyttäydy kaikissa tilanteissa hyvin, kannattaakin käyttää oikeastaan aina komentoa _binding.pry_
-
+Jos käytössäsi on [Pry](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#parempi-konsoli) komento `byebug` ei käyttäydy kaikissa tilanteissa hyvin, kannattaakin käyttää oikeastaan aina komentoa `binding.pry`
 ## Käyttäjä ja sessio
 
 Laajennetaan sovellusta seuraavaksi siten, että käyttäjien on mahdollista rekisteröidä itselleen järjestelmään käyttäjätunnus.
