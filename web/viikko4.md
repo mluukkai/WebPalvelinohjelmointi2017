@@ -1,4 +1,4 @@
-Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 3 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2016/tree/master/malliv/viikko3). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
+Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 3 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2017/tree/master/malliv/viikko3). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
 
 Jos otat edellisen viikon mallivastauksen tämän viikon pohjaksi, kopioi hakemisto muualle kurssirepositorion alta (olettaen että olet kloonannut sen) ja tee sovelluksen sisältämästä hakemistosta uusi repositorio.
 
@@ -37,7 +37,7 @@ eli pudotusvalikkojen valintavaihtoehdot välitetään lomakkeelle muuttujissa <
 
 Näiden muutosten jälkeen oluen tietojen editointi ei yllättäen enää toimi. Seurauksena on virheilmoitus <code>undefined method `map' for nil:NilClass</code>, johon olet kenties jo kurssin aikana törmännyt:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-0.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w4-0.png)
 
 Syynä tälle on se, että uuden oluen luominen ja oluen tietojen editointi käyttävät molemmat samaa lomakkeen generoivaa näkymätemplatea (app/views/beers/_form.html.erb) ja muutosten jälkeen näkymän toiminta edellyttää, että muuttuja <code>@breweries</code> sisältää panimoiden listan ja muuttuja <code>@styles</code> sisältää oluiden tyylit. Oluen tietojen muutossivulle mennään kontrollerimetodin <code>edit</code> suorituksen jälkeen, ja joudummekin muuttamaan kontrolleria seuraavasti korjataksemme virheen:
 
@@ -112,26 +112,26 @@ Seuraavassa tyypillisen ongelmatilanteen loki:
 
 ```ruby
 mbp-18:ratebeer-public mluukkai$ heroku logs
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                   ON a.attrelid = d.adrelid AND a.attnum = d.adnum
-2016-02-03T18:53:05.867973+00:00 app[web.1]:
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                                           ^
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                WHERE a.attrelid = '"users"'::regclass
-2016-02-03T18:53:05.874380+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
-2016-02-03T18:53:05.878587+00:00 app[web.1]: :               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
-2016-02-03T18:53:05.878587+00:00 app[web.1]:                                           ^
-2016-02-03T18:53:05.878587+00:00 app[web.1]:
-2016-02-03T18:53:05.868310+00:00 app[web.1]:
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                      pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                  AND a.attnum > 0 AND NOT a.attisdropped
-2016-02-03T18:53:05.868310+00:00 app[web.1]:                ORDER BY a.attnum
-2016-02-03T18:53:05.878587+00:00 app[web.1]:                WHERE a.attrelid = '"users"'::regclass
-2016-02-03T18:53:05.867973+00:00 app[web.1]:                 FROM pg_attribute a LEFT JOIN pg_attrdef d
-2016-02-03T18:53:05.882824+00:00 app[web.1]: LINE 5:                WHERE a.attrelid = '"users"'::regclass
-2016-02-03T18:53:05.882824+00:00 app[web.1]:                                           ^
-2016-02-03T18:53:05.878587+00:00 app[web.1]:                      pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
-2016-02-03T18:53:05.878587+00:00 app[web.1]:                   ON a.attrelid = d.adrelid AND a.attnum = d.adnum
-2016-02-03T18:53:05.874380+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
-2016-02-03T18:53:05.878587+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "users" does not exist
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                   ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+2017-02-03T18:53:05.867973+00:00 app[web.1]:
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                                           ^
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                WHERE a.attrelid = '"users"'::regclass
+2017-02-03T18:53:05.874380+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
+2017-02-03T18:53:05.878587+00:00 app[web.1]: :               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+2017-02-03T18:53:05.878587+00:00 app[web.1]:                                           ^
+2017-02-03T18:53:05.878587+00:00 app[web.1]:
+2017-02-03T18:53:05.868310+00:00 app[web.1]:
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                      pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                  AND a.attnum > 0 AND NOT a.attisdropped
+2017-02-03T18:53:05.868310+00:00 app[web.1]:                ORDER BY a.attnum
+2017-02-03T18:53:05.878587+00:00 app[web.1]:                WHERE a.attrelid = '"users"'::regclass
+2017-02-03T18:53:05.867973+00:00 app[web.1]:                 FROM pg_attribute a LEFT JOIN pg_attrdef d
+2017-02-03T18:53:05.882824+00:00 app[web.1]: LINE 5:                WHERE a.attrelid = '"users"'::regclass
+2017-02-03T18:53:05.882824+00:00 app[web.1]:                                           ^
+2017-02-03T18:53:05.878587+00:00 app[web.1]:                      pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+2017-02-03T18:53:05.878587+00:00 app[web.1]:                   ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+2017-02-03T18:53:05.874380+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
+2017-02-03T18:53:05.878587+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "users" does not exist
 ```
 
 lokia tarkasti lukemalla selviää että syynä on seuraava
@@ -146,22 +146,22 @@ eli migraatiot ovat jääneet suorittamatta. Korjaus on helppo:
 Seuraavassa loki eräästä toisesta hyvin tyypillisestä virhetilanteesta:
 
 ```ruby
-2016-02-03T19:04:43.830852+00:00 app[web.1]: Started POST "/ratings" for 84.253.203.234 at 2016-02-03 19:04:43 +0000
-2016-02-03T19:04:43.833992+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"n1VTj7WrICHZUT594fbxJBue2uqcSk6wrYQR7lY5nzk=", "rating"=>{"beer_id"=>"2", "score"=>"10"}, "commit"=>"Create Rating"}
-2016-02-03T19:04:43.833913+00:00 app[web.1]: Processing by RatingsController#create as HTML
-2016-02-03T19:04:43.833992+00:00 app[web.1]: Processing by RatingsController#create as HTML
-2016-02-03T19:04:43.833992+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"n1VTj7WrICHZUT594fbxJBue2uqcSk6wrYQR7lY5nzk=", "rating"=>{"beer_id"=>"2", "score"=>"10"}, "commit"=>"Create Rating"}
-2016-02-03T19:04:43.853276+00:00 app[web.1]:
-2016-02-03T19:04:43.851427+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
-2016-02-03T19:04:43.852028+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
-2016-02-03T19:04:43.853276+00:00 app[web.1]:   app/controllers/ratings_controller.rb:15:in `create'
-2016-02-03T19:04:43.853276+00:00 app[web.1]:
-2016-02-03T19:04:43.853276+00:00 app[web.1]: NoMethodError (undefined method `ratings' for nil:NilClass):
-2016-02-03T19:04:43.853276+00:00 app[web.1]:   app/controllers/ratings_controller.rb:15:in `create'
-2016-02-03T19:04:43.853276+00:00 app[web.1]:
-2016-02-03T19:04:43.853276+00:00 app[web.1]:
-2016-02-03T19:04:43.853276+00:00 app[web.1]: NoMethodError (undefined method `ratings' for nil:NilClass):
-2016-02-03T19:04:43.853276+00:00 app[web.1]:
+2017-02-03T19:04:43.830852+00:00 app[web.1]: Started POST "/ratings" for 84.253.203.234 at 2017-02-03 19:04:43 +0000
+2017-02-03T19:04:43.833992+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"n1VTj7WrICHZUT594fbxJBue2uqcSk6wrYQR7lY5nzk=", "rating"=>{"beer_id"=>"2", "score"=>"10"}, "commit"=>"Create Rating"}
+2017-02-03T19:04:43.833913+00:00 app[web.1]: Processing by RatingsController#create as HTML
+2017-02-03T19:04:43.833992+00:00 app[web.1]: Processing by RatingsController#create as HTML
+2017-02-03T19:04:43.833992+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"n1VTj7WrICHZUT594fbxJBue2uqcSk6wrYQR7lY5nzk=", "rating"=>{"beer_id"=>"2", "score"=>"10"}, "commit"=>"Create Rating"}
+2017-02-03T19:04:43.853276+00:00 app[web.1]:
+2017-02-03T19:04:43.851427+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
+2017-02-03T19:04:43.852028+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
+2017-02-03T19:04:43.853276+00:00 app[web.1]:   app/controllers/ratings_controller.rb:15:in `create'
+2017-02-03T19:04:43.853276+00:00 app[web.1]:
+2017-02-03T19:04:43.853276+00:00 app[web.1]: NoMethodError (undefined method `ratings' for nil:NilClass):
+2017-02-03T19:04:43.853276+00:00 app[web.1]:   app/controllers/ratings_controller.rb:15:in `create'
+2017-02-03T19:04:43.853276+00:00 app[web.1]:
+2017-02-03T19:04:43.853276+00:00 app[web.1]:
+2017-02-03T19:04:43.853276+00:00 app[web.1]: NoMethodError (undefined method `ratings' for nil:NilClass):
+2017-02-03T19:04:43.853276+00:00 app[web.1]:
 ```
 
 Virhe on aiheutunut tiedoston *app/controllers/ratings_controller.rb* rivillä 15 ja syynä on <code>NoMethodError (undefined method `ratings' for nil:NilClass)</code>.
@@ -205,18 +205,18 @@ eli jos käyttäjä ei ole kirjautunut, ohjataan selain kirjautumissivulle. Kann
 Tarkastellaan lopuksi erään suorastaan klassikon asemaan nousseen virheen lokia:
 
 ```ruby
-2016-02-03T19:32:31.609344+00:00 app[web.1]:     6:   <% @ratings.each do |rating| %>
-2016-02-03T19:32:31.609530+00:00 app[web.1]:
-2016-02-03T19:32:31.609530+00:00 app[web.1]:
-2016-02-03T19:32:31.609530+00:00 app[web.1]:   app/views/ratings/index.html.erb:6:in `_app_views_ratings_index_html_erb___254869282653960432_70194062879340'
-2016-02-03T19:32:31.609530+00:00 app[web.1]:
-2016-02-03T19:32:31.609530+00:00 app[web.1]: ActionView::Template::Error (undefined method `username' for nil:NilClass):
-2016-02-03T19:32:31.609344+00:00 app[web.1]:   app/views/ratings/index.html.erb:7:in `block in _app_views_ratings_index_html_erb___254869282653960432_70194062879340'
-2016-02-03T19:32:31.609530+00:00 app[web.1]:     7:       <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
-2016-02-03T19:32:31.609530+00:00 app[web.1]:     4:
-2016-02-03T19:32:31.609530+00:00 app[web.1]:     6:   <% @ratings.each do |rating| %>
-2016-02-03T19:32:31.609530+00:00 app[web.1]:     5: <ul>
-2016-02-03T19:32:31.609715+00:00 app[web.1]:    10:
+2017-02-03T19:32:31.609344+00:00 app[web.1]:     6:   <% @ratings.each do |rating| %>
+2017-02-03T19:32:31.609530+00:00 app[web.1]:
+2017-02-03T19:32:31.609530+00:00 app[web.1]:
+2017-02-03T19:32:31.609530+00:00 app[web.1]:   app/views/ratings/index.html.erb:6:in `_app_views_ratings_index_html_erb___254869282653960432_70194062879340'
+2017-02-03T19:32:31.609530+00:00 app[web.1]:
+2017-02-03T19:32:31.609530+00:00 app[web.1]: ActionView::Template::Error (undefined method `username' for nil:NilClass):
+2017-02-03T19:32:31.609344+00:00 app[web.1]:   app/views/ratings/index.html.erb:7:in `block in _app_views_ratings_index_html_erb___254869282653960432_70194062879340'
+2017-02-03T19:32:31.609530+00:00 app[web.1]:     7:       <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
+2017-02-03T19:32:31.609530+00:00 app[web.1]:     4:
+2017-02-03T19:32:31.609530+00:00 app[web.1]:     6:   <% @ratings.each do |rating| %>
+2017-02-03T19:32:31.609530+00:00 app[web.1]:     5: <ul>
+2017-02-03T19:32:31.609715+00:00 app[web.1]:    10:
 ```
 
 Tarkka silmä huomaa lokin seasta että ongelma on _ActionView::Template::Error (undefined method `username' for nil:NilClass)_ ja virhe syntyi tiedoston _app/views/ratings/index.html.erb_ riviä 7 suoritettaessa. Virheen aiheuttanut rivi on
@@ -225,19 +225,19 @@ Tarkka silmä huomaa lokin seasta että ongelma on _ActionView::Template::Error 
 <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
 ```
 
-vaikuttaa siis siltä, että tietokannassa on <code>rating</code>-olio, johon liittyvä <code>user</code> on <code>nil</code>. Kyseessä on siis jo [viikolta 2 tuttu](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#ongelmia-herokussa) ongelma.
+vaikuttaa siis siltä, että tietokannassa on <code>rating</code>-olio, johon liittyvä <code>user</code> on <code>nil</code>. Kyseessä on siis jo [viikolta 2 tuttu](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#ongelmia-herokussa) ongelma.
 
 Ongelman perimmäinen syy on joko se, että jonkin ratingin <code>user_id</code>-kentän arvo on <code>nil</code>, tai että jonkin rating-olion <code>user_id</code>:n arvona on virheellinen id. Tilanteesta selvitään esim. tuhoamalla 'huonot' rating-oliot komennolla <code>heroku run console</code> käynnistyvän Herokun konsolin avulla:
 
 
 ```ruby
-irb(main):001:0> bad_ratings = Rating.all.select{ |r| r.user.nil? or r.beer.nil? }
-=> [#<Rating id: 1, score: 10, beer_id: 2, created_at: "2016-02-03 19:04:43", updated_at: "2016-02-03 19:04:43", user_id: nil>]
-irb(main):002:0> bad_ratings.each{ |bad| bad.destroy }
-=> [#<Rating id: 1, score: 10, beer_id: 2, created_at: "2016-02-03 19:04:43", updated_at: "2016-02-03 19:04:43", user_id: nil>]
-irb(main):003:0> Rating.all.select{ |r| r.user.nil? or r.beer.nil? }
+> bad_ratings = Rating.all.select{ |r| r.user.nil? or r.beer.nil? }
+=> [#<Rating id: 1, score: 10, beer_id: 2, created_at: "2017-02-03 19:04:43", updated_at: "2017-02-03 19:04:43", user_id: nil>]
+> bad_ratings.each{ |bad| bad.destroy }
+=> [#<Rating id: 1, score: 10, beer_id: 2, created_at: "2017-02-03 19:04:43", updated_at: "2017-02-03 19:04:43", user_id: nil>]
+> Rating.all.select{ |r| r.user.nil? or r.beer.nil? }
 => []
-irb(main):004:0>
+>
 ```
 
 Ylläoleva hakee varalta kannasta myös ratingit, joihin ei liity mitään olemassaolevaa olutta.
@@ -269,7 +269,7 @@ Otetaan käyttöön rspec-rails gem lisäämällä Gemfileen seuraava:
 
 ```ruby
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5'
 end
 ```
 
@@ -320,7 +320,7 @@ eli seurauksena on melko ikävä, noin 30 riviä pitkä virheilmoitus. Virheilmo
 
      Migrations are pending; run 'bin/rake db:migrate RAILS_ENV=test' to resolve this issue.
 
-eli migraatiot ovat jostain syystä suorittamatta. Syynä tälle on [viikolla 1](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko1.md#riippuvuuksien-hallinta-ja-suoritusymp%C3%A4rist%C3%B6t) esiin nostamamme seikka, eli Railsissa on käytössä oma ympäristö sovelluskehitykseen, tuotantoon ja testaamiseen ja jokaisessa ympäristössä on käytössä oma tietokanta. Vaikka sovelluskehitysympäristön tietokannan migraatiot ovat ajan tasalla, ei testausympäristön migraatioita ole suoritettu ja sen takia testienkään suorittaminen ei onnistu.
+eli migraatiot ovat jostain syystä suorittamatta. Syynä tälle on [viikolla 1](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko1.md#riippuvuuksien-hallinta-ja-suoritusymp%C3%A4rist%C3%B6t) esiin nostamamme seikka, eli Railsissa on käytössä oma ympäristö sovelluskehitykseen, tuotantoon ja testaamiseen ja jokaisessa ympäristössä on käytössä oma tietokanta. Vaikka sovelluskehitysympäristön tietokannan migraatiot ovat ajan tasalla, ei testausympäristön migraatioita ole suoritettu ja sen takia testienkään suorittaminen ei onnistu.
 
 *Huom:* uudemmilla Railsin versioilla testitietokannan migraatiot suoritetaan automaattisesti rspecin alustuksen yhteydessä ja et törmää edellä olevaan virheilmoitukseen.
 
@@ -847,8 +847,8 @@ Koska järjestäminen perustui suoraan reittauksen attribuuttiin <code>score</co
 Miten metodi itseasiassa toimiikaan? Suoritetaan operaatio konsolista:
 
 ```ruby
-irb(main):020:0> u = User.first
-irb(main):021:0> u.ratings.sort_by(&:score).last.beer
+> u = User.first
+> u.ratings.sort_by(&:score).last.beer
   Rating Load (0.2ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."user_id" = ?  [["user_id", 1]]
   Beer Load (0.1ms)  SELECT "beers".* FROM "beers" WHERE "beers"."id" = ? ORDER BY "beers"."id" ASC LIMIT 1  [["id", 1]]
 ```
@@ -873,7 +873,7 @@ Tutkimalla dokumentaatiota (http://guides.rubyonrails.org/active_record_querying
 Voimme konsolista käsin tarkastaa operaation tuloksena olevan SQL-kyselyn (huomaa, että metodi <code>to_sql</code>):
 
 ```ruby
-irb(main):033:0> u.ratings.order(score: :desc).limit(1).to_sql
+> u.ratings.order(score: :desc).limit(1).to_sql
 => "SELECT  \"ratings\".* FROM \"ratings\"  WHERE \"ratings\".\"user_id\" = ?  ORDER BY \"ratings\".\"score\" DESC LIMIT 1"
 ```
 
@@ -1012,7 +1012,7 @@ FactoryGirl.define do
 end
 ```
 
-Tämä saattaa aiheuttaa yllättäviä tilanteita (jos määrittelet itse saman nimisen tehtaan, käytetään sen sijaan oletusarvoista tehdasta!), eli kannattanee määritellä gemi ainoastaan testausympäristöön luvun https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#testiymp%C3%A4rist%C3%B6t-eli-fixturet ohjeen tapaan.
+Tämä saattaa aiheuttaa yllättäviä tilanteita (jos määrittelet itse saman nimisen tehtaan, käytetään sen sijaan oletusarvoista tehdasta!), eli kannattanee määritellä gemi ainoastaan testausympäristöön luvun https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko4.md#testiymp%C3%A4rist%C3%B6t-eli-fixturet ohjeen tapaan.
 
 Normaalisti rspec-tyhjentää tietokannan jokaisen testin suorituksen jälkeen. Tämä johtuu sitä, että oletusarvoisesti rspec suorittaa jokaisen testin transaktiossa, joka rollbackataan eli perutaan testin suorituksen jälkeen. Testit eivät siis todellisuudessa edes talleta mitään tietokantaan.
 
@@ -1176,7 +1176,7 @@ eli _jokainen_ panimo saa nimekseen 'anonymous' ja jos panimon nimi on määrite
 
 ## testit ja debuggeri
 
-Toivottavasti olet jo tässä vaiheessa kurssia rutinoitunut [byebugin](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#debuggeri) käyttäjä. Koska testitkin ovat normaalia ruby-koodia, on myös byebug käytettävissä sekä testikoodissa että testattavassa koodissa. Testausympäristön tietokannan tila saattaa joskus olla yllättävä, kuten edellä olevista esimerkeistä näimme. Ongelmatilanteissa kannattaa ehdottomasti pysäyttää testikoodi debuggerilla ja tutkia vastaako testattavien olioiden tila oletettua.
+Toivottavasti olet jo tässä vaiheessa kurssia rutinoitunut [byebugin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#debuggeri) käyttäjä. Koska testitkin ovat normaalia ruby-koodia, on myös byebug käytettävissä sekä testikoodissa että testattavassa koodissa. Testausympäristön tietokannan tila saattaa joskus olla yllättävä, kuten edellä olevista esimerkeistä näimme. Ongelmatilanteissa kannattaa ehdottomasti pysäyttää testikoodi debuggerilla ja tutkia vastaako testattavien olioiden tila oletettua.
 
 > ## Tehtävä 3
 >
@@ -1545,7 +1545,7 @@ Kirjautumisen toteutuksen siirtäminen apumetodiin siis kasvattaa myös testien 
 >
 > Tee testi, joka varmistaa, että järjestelmään voidaan lisätä www-sivun kautta olut, jos oluen nimikenttä saa validin arvon (eli se on epätyhjä). Tee myös testi, joka varmistaa, että selain näyttää asiaan kuuluvan virheilmoituksen jos oluen nimi ei ole validi, ja että tälläisessä tapauksessa tietokantaan ei talletu mitään.
 >
-> **HUOM:** ohjelmassasi on ehkä bugi tilanteessa, jossa yritetään luoda epävalidin nimen omaava olut. Kokeile toiminnallisuutta selaimesta. Syynä tälle on selitetty viikon alussa, kohdassa https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#muutama-huomio. Korjaa vika koodistasi.
+> **HUOM:** ohjelmassasi on ehkä bugi tilanteessa, jossa yritetään luoda epävalidin nimen omaava olut. Kokeile toiminnallisuutta selaimesta. Syynä tälle on selitetty viikon alussa, kohdassa https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko4.md#muutama-huomio. Korjaa vika koodistasi.
 >
 > Muista ongelmatilanteissa komento <code>save_and_open_page</code>!
 
@@ -1729,7 +1729,7 @@ Coverage report generated for RSpec to /Users/mluukkai/kurssirepot/ratebeer/cove
 
 Testien rivikattavuus on siis 43.7 prosenttia. Tarkempi raportti on nähtävissä avaamalla selaimella tiedosto coverage/index.html. Kuten kuva paljastaa, on suuria osia ohjelmasta, erityisesti kontrollereista vielä erittäin huonosti testattu:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-1.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w4-1.png)
 
 Suurikaan rivikattavuus ei tietysti vielä takaa että testit testaavat järkeviä asioita. Helposti mitattavana metriikkana se on kuitenkin parempi kuin ei mitään ja näyttää ainakin ilmeisimmät puutteet testeissä.
 
@@ -1822,7 +1822,7 @@ Sovelluskehittäjän elämää helpottavien pilvipalveluiden määrä kasvaa kov
 
 ## Kirjautuneiden toiminnot
 
-Jätetään testien teko hetkeksi ja palataan muutamaan aiempaan teemaan. Viikolla 2 rajoitimme http basic -autentikaation avulla sovellustamme siten, että ainoastaan admin-salasanan syöttämällä oli mahdollista  poistaa panimoita. [Viikolla](3 https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko3.md#vain-omien-reittausten-poisto) rajoitimme sovelluksen toiminnallisuutta siten, että reittausten poistaminen ei ole mahdollista kuin reittauksen tehneelle käyttäjälle. Sen sijaan esim.  olutkerhojen ja oluiden luominen, poistaminen ja editionti on tällä hetkellä mahdollista jopa ilman kirjautumista.
+Jätetään testien teko hetkeksi ja palataan muutamaan aiempaan teemaan. Viikolla 2 rajoitimme http basic -autentikaation avulla sovellustamme siten, että ainoastaan admin-salasanan syöttämällä oli mahdollista  poistaa panimoita. [Viikolla](3 https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko3.md#vain-omien-reittausten-poisto) rajoitimme sovelluksen toiminnallisuutta siten, että reittausten poistaminen ei ole mahdollista kuin reittauksen tehneelle käyttäjälle. Sen sijaan esim.  olutkerhojen ja oluiden luominen, poistaminen ja editionti on tällä hetkellä mahdollista jopa ilman kirjautumista.
 
 Luovutaan http basic -autentikoinnin käytöstä ja muutetaan sovellusta siten, että oluita, panimoita ja olutkerhoja voivat luoda, muokata ja poistaa ainoastaan kirjautuneet käyttäjät.
 
@@ -1880,7 +1880,7 @@ Määritellään luokkaan <code>ApplicationController</code>  seuraava metodi:
 
 Eli jos metodia kutsuttaessa käyttäjä ei ole kirjautunut, suoritetaan uudelleenohjaus kirjautumissivulle. Koska metodi on sijoitettu luokkaan <code>ApplicationController</code> jonka kaikki kontrollerit perivät, on se kaikkien kontrollereiden käytössä.
 
-Lisätään metodi esifiltteriksi (ks. http://guides.rubyonrails.org/action_controller_overview.html#filters ja https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#yksinkertainen-suojaus) olut- ja panimo- ja olutkerhokontrollerille kaikille metodeille paitsi index:ille ja show:lle:
+Lisätään metodi esifiltteriksi (ks. http://guides.rubyonrails.org/action_controller_overview.html#filters ja https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#yksinkertainen-suojaus) olut- ja panimo- ja olutkerhokontrollerille kaikille metodeille paitsi index:ille ja show:lle:
 
 ```ruby
 class BeersController < ApplicationController
@@ -1908,11 +1908,11 @@ Kokeile selaimella, että muutokset toimivat, eli että kirjautumaton käyttäj�
 
 Voit halutessasi tehdä hienosäätöä sovelluksen näkymiin, esim. poistaa resurssien poisto- ja editointilinkit listaussivulta:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-2.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w4-2.png)
 
 ja lisätä poistolinkki yksittäisen resurssin sivulle:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-3.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w4-3.png)
 
 nämä muutokset eivät ole välttämättömiä ja tulevat viikotkaan eivät muutoksiin nojaa.
 
@@ -1920,4 +1920,4 @@ nämä muutokset eivät ole välttämättömiä ja tulevat viikotkaan eivät muu
 
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
 
-Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/
+Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2017.herokuapp.com/
