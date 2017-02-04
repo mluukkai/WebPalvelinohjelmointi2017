@@ -1176,7 +1176,7 @@ eli _jokainen_ panimo saa nimekseen 'anonymous' ja jos panimon nimi on määrite
 
 ## testit ja debuggeri
 
-Toivottavasti olet jo tässä vaiheessa kurssia rutinoitunut [byebugin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#debuggeri) käyttäjä. Koska testitkin ovat normaalia ruby-koodia, on myös byebug käytettävissä sekä testikoodissa että testattavassa koodissa. Testausympäristön tietokannan tila saattaa joskus olla yllättävä, kuten edellä olevista esimerkeistä näimme. Ongelmatilanteissa kannattaa ehdottomasti pysäyttää testikoodi debuggerilla ja tutkia vastaako testattavien olioiden tila oletettua.
+Toivottavasti olet jo tässä vaiheessa kurssia rutinoitunut [debuggerin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#debuggeri) käyttäjä. Koska testitkin ovat normaalia ruby-koodia, ovat myös _byebug_ ja _binding.pry_ käytettävissä sekä testikoodissa että testattavassa koodissa. Testausympäristön tietokannan tila saattaa joskus olla yllättävä, kuten edellä olevista esimerkeistä näimme. Ongelmatilanteissa kannattaa ehdottomasti pysäyttää testikoodi debuggerilla ja tutkia vastaako testattavien olioiden tila oletettua.
 
 > ## Tehtävä 3
 >
@@ -1247,6 +1247,8 @@ Toinen vaihoehto on lisätä testiin komento <code>save_and_open_page</code>, jo
 
 Määrittely on voimassa vain siinä shellissä jossa teet sen. Jos haluat määrittelystä pysyvän, lisää se tiedostoon ~/.bashrc
 
+**HUOM:** komento save_and_open_page ei valitettavasti toimi jos suoritat rails-sovellusta virtuaalikoneella.
+
 Suorita nyt testi tuttuun tapaan komennolla <code>rspec spec</code>. Jos haluat ajaa ainoastaan nyt määritellyn testin, muista että voit rajata suoritettavat testit antamalla komennon esim. muodossa
 
     rspec spec/features/breweries_page_spec.rb
@@ -1259,7 +1261,7 @@ Lisätään testi, joka testaa tilannetta, jossa tietokannassa on 3 panimoa:
   it "lists the existing breweries and their total number" do
     breweries = ["Koff", "Karjala", "Schlenkerla"]
     breweries.each do |brewery_name|
-      FactoryGirl.create(:brewery, name:brewery_name)
+      FactoryGirl.create(:brewery, name: brewery_name)
     end
 
     visit breweries_path
@@ -1293,7 +1295,7 @@ Lisätään vielä testi, joka tarkastaa, että panimoiden sivulta pääsee link
 
 Testi menee läpi olettaen että sivulla käytetty kirjoitusasu on sama kuin testissä. Ongelmatilanteissa testiin kannattaa lisätä komento <code>save_and_open_page</code> ja varmistaa visuaalisesti testin avaaman sivun sisältö.
 
-Kahdessa viimeisessä testissämme on sama alkuosa, eli aluksi luodaan kolme panimoa ja navigoidaan panimojen sivulle.
+Kahdessa edellisessä testissä on sama alkuosa, eli aluksi luodaan kolme panimoa ja navigoidaan panimojen sivulle.
 
 Seuraavassa vielä refaktoroitu lopputulos, jossa yhteisen alustuksen omaavat testit on siirretty omaan describe-lohkoon, jolle on määritelty <code>before :each</code> -lohko alustusta varten.
 
@@ -1341,7 +1343,7 @@ Huomaa, että describe-lohkon sisällä oleva <code>before :each</code> suoritet
 
 ## Käyttäjän toiminnallisuuden testaaminen
 
-Siirrytään käyttäjän toiminnallisuuteen, luodaan tätä varten tiedosto features/users_spec.rb. Aloitetaan testillä, joka varmistaa, että käyttäjä pystyy kirjautumaan järjestelmään:
+Siirrytään käyttäjän toiminnallisuuteen, luodaan tätä varten tiedosto _features/users_page_spec.rb_. Aloitetaan testillä, joka varmistaa, että käyttäjä pystyy kirjautumaan järjestelmään:
 
 ```ruby
 require 'rails_helper'
@@ -1423,7 +1425,7 @@ Edellinen testi siis testasi, että selaimen tasolla tehty operaatio luo olion t
 
 Potentiaalisia testauksen kohteita on kuitenkin niin paljon, että kattava testaus on mahdotonta ja testejä tulee pyrkiä ensisijaisesti kirjoittamaan niille asioille, jotka ovat riskialttiita hajoamaan.
 
-Tehdään vielä testi oluen reittaamiselle. Tehdään testiä varten oma tiedosto spec/features/ratings_spec.rb
+Tehdään vielä testi oluen reittaamiselle. Tehdään testiä varten oma tiedosto _spec/features/ratings_page_spec.rb_
 
 ```ruby
 require 'rails_helper'
@@ -1747,6 +1749,8 @@ Githubissa olevat Rails-projektit on helppo asettaa Travisin tarkkailtavaksi.
 
 > ## Tehtävä 11
 >
+> ### Tämän ja seuraavan tehtävän tekeminen ei ole välttämätöntä viikon jatkamisen kannalta. Voit tehdä tämän tehtävän myös viikon muiden tehtävien jälkeen.
+>
 > Tee repositorion juureen Travisia varten konfiguraatiotiedosto .travis.yml (HUOM! Kohtaan ```rvm:``` aseta käyttämäsi rubyn versio.) jolla on seuraava sisältö:
 >
 >```ruby
@@ -1785,6 +1789,8 @@ Eriyisesti Web-sovellusten yhteydessä jatkuva deployaaminen saattaa olla hyvink
 
 > ## Tehtävä 12
 >
+> ### Tämän ja seuraavan tehtävän tekeminen ei ole välttämätöntä viikon jatkamisen kannalta. Voit tehdä tämän tehtävän myös viikon muiden tehtävien jälkeen.
+>
 > Toteuta sovelluksellesi jatkuva deployaaminen Herokuun Travis-CI:n avulla. Konfiguroi myös migraatiot suoritettavaksi depolymentin yhteydessä
 >
 > Ks. ohjeita seuraavista
@@ -1800,6 +1806,8 @@ ja http://about.travis-ci.org/blog/2013-07-09-introducing-continuous-deployment-
 Testauskattavuuden lisäksi myös koodin laatua kannattaa valvoa. SaaS-palveluna toimivan Codeclimaten https://codeclimate.com avulla voidaan generoida Rails-koodista erilaisia laatumetriikoita.
 
 > ## Tehtävä 13
+>
+> ### Tämän ja seuraavan tehtävän tekeminen ei ole välttämätöntä viikon jatkamisen kannalta. Voit tehdä tämän tehtävän myös viikon muiden tehtävien jälkeen.
 >
 >Codeclimate on ilmainen opensource-projekteille. Rekisteröi projektisi sivulta https://codeclimate.com/pricing löytyvän hieman huomaamattoman linkin "Add an OS repo" avulla.
 >
@@ -1839,12 +1847,12 @@ Näkymistä on helppo poistaa oluiden, olutkerhojen ja panimoiden muokkaus -ja l
 Esim. näkymästä views/beers/index.html.erb voidaan nyt poistaa kirjautumattomilta käyttäjiltä sivun lopussa oleva oluiden luomislinkki:
 
 ```erb
-<% if not current_user.nil? %>
+<% if current_user.nil? %>
   <%= link_to('New Beer', new_beer_path) %>
 <% end %>
 ```
 
-Eli linkkielementti näytetään ainoastaan jos <code>current_user</code> ole <code>nil</code>. Voimme myös hyödyntää if:in kompaktimpaa muotoa:
+Eli linkkielementti näytetään ainoastaan jos <code>current_user</code> ei ole <code>nil</code>. Voimme myös hyödyntää if:in kompaktimpaa muotoa:
 
 ```erb
 <%= link_to('New Beer', new_beer_path) if not current_user.nil? %>
