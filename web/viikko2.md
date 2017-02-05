@@ -790,7 +790,7 @@ Jos lisäät koodiin komennon <code>binding.pry</code> voit käyttää Pry:tä d
   end
 ```
 
-kun koodirivi suoritetaan, suoritus pysähtyy ja Pry-sessio aukeaa koodirivin kohdalle. Voit jatkaa suoritusta komennolla <code>exit</code>. On kumpaa käytät debuggaukseen _byebugia_ vai _Prytä_.
+kun koodirivi suoritetaan, suoritus pysähtyy ja Pry-sessio aukeaa koodirivin kohdalle. Voit jatkaa suoritusta komennolla <code>exit</code>. On makuasia kumpaa käytät debuggaukseen _byebugia_ vai _Prytä_.
 
 ## Reittauksen talletus
 
