@@ -474,7 +474,7 @@ Lisätään application layoutiin seuraava koodi, joka lisää kirjautuneen käy
 <% end %>
 ```
 
-menemällä osoitteeseen [http://localhost:3000/session/new](/session/new) voimme nyt kirjautua sovellukseen (olettaen, että sovellukseen on luotu käyttäjiä). Uloskirjautuminen ei vielä toistaiseksi onnistu.
+menemällä osoitteeseen [/session/new](http://localhost:3000/session/new) voimme nyt kirjautua sovellukseen (olettaen, että sovellukseen on luotu käyttäjiä). Uloskirjautuminen ei vielä toistaiseksi onnistu.
 
 **HUOM:** jos saat virheilmoituksen <code>uninitialized constant SessionsController></code> **varmista että määrittelit reitit routes.rb:hen oikein, eli**
 
@@ -484,7 +484,7 @@ menemällä osoitteeseen [http://localhost:3000/session/new](/session/new) voimm
 
 > ## Tehtävä 1
 >
-> Tee kaikki ylläesitetyt muutokset ja varmista, että kirjautuminen onnistuu (eli kirjautunut käyttäjä näytetään sivulla) olemassaolevalla käyttäjätunnuksella (jonka siis voit luoda osoitteessa [http://localhost:3000/signup](/signup). Vaikka uloskirjautuminen ei ole mahdollista, voit kirjautua uudella tunnuksella kirjautumisosoitteessa ja vanha kirjautuminen ylikirjoittuu.
+> Tee kaikki ylläesitetyt muutokset ja varmista, että kirjautuminen onnistuu (eli kirjautunut käyttäjä näytetään sivulla) olemassaolevalla käyttäjätunnuksella (jonka siis voit luoda osoitteessa [/signup](http://localhost:3000/signup). Vaikka uloskirjautuminen ei ole mahdollista, voit kirjautua uudella tunnuksella kirjautumisosoitteessa ja vanha kirjautuminen ylikirjoittuu.
 
 ## Kontrollerien ja näkymien apumetodi
 
@@ -529,7 +529,7 @@ Kirjautumisen osoite __sessions/new__ on hieman ikävä. Määritelläänkin kir
   delete 'signout', to: 'sessions#destroy'
 ```
 
-eli sisäänkirjautumislomake on nyt osoitteessa [http://localhost:3000/signin][/signin] ja uloskirjautuminen tapahtuu osoitteeseen _signout_ tehtävän _HTTP DELETE_ -pyynnön avulla.
+eli sisäänkirjautumislomake on nyt osoitteessa [/signin](http://localhost:3000/signin) ja uloskirjautuminen tapahtuu osoitteeseen _signout_ tehtävän _HTTP DELETE_ -pyynnön avulla.
 
 Olisi periaatteessa ollut mahdollista määritellä myös
 
@@ -776,7 +776,7 @@ Mistä kontrolleri tietää, että validointi on epäonnistunut? Kuten mainittii
 ```ruby
   @user = User.new(parametrit)
   if @user.save
-  	# validointi onnistui, uudelleenohjaa selain halutulle sivulle
+    # validointi onnistui, uudelleenohjaa selain halutulle sivulle
   else
     # validointi epäonnistui, renderöi näkymätemplate :new
   end
@@ -873,7 +873,7 @@ Muutetaan lomaketta siten, että lomake näyttää kentän <code>@rating.errors<
 
 <%= form_for(@rating) do |f| %>
   <% if @rating.errors.any? %>
-  	<%= @rating.errors.inspect %>
+    <%= @rating.errors.inspect %>
   <% end %>
 
   <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s) %>
