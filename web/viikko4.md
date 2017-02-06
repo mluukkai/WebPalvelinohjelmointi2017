@@ -504,8 +504,10 @@ On huomattavaa, että rspec **nollaa tietokannan aina ennen jokaisen testin ajam
 ```ruby
   it "with a proper password and two ratings, has the correct average rating" do
     user = User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1"
-    rating = Rating.new score:10
-    rating2 = Rating.new score:20
+    brewery = Brewery.new name: "test", year: 2000
+    beer = Beer.new name: "testbeer", style: "teststyle"
+    rating = Rating.new score: 10, beer: beer
+    rating2 = Rating.new score: 20, beer: beer
 
     user.ratings << rating
     user.ratings << rating2
