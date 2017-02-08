@@ -1,4 +1,4 @@
-Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 3 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2017/tree/master/malliv/viikko3). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
+Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 3 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2017/tree/master/mallivastaus/viikko3). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
 
 Jos otat edellisen viikon mallivastauksen tämän viikon pohjaksi, kopioi hakemisto muualle kurssirepositorion alta (olettaen että olet kloonannut sen) ja tee sovelluksen sisältämästä hakemistosta uusi repositorio.
 
@@ -258,6 +258,22 @@ Jos haluat poistaa scaffold-generaattorin luomat tiedostot, onnistuu tämä kome
 
 missä _resurssin_nimi_ on scaffoldilla luomasi resurssin nimi. **HUOM:** jos suoritit jo huonoon scaffoldiin liittyvän migraation, tee ehdottomasti ennen scaffoldin tuhoamista <code>rake db:rollback</code>
 
+## Huomio Rails 5:n käyttäjille
+
+Rails 5:n hieman nelosversiosta poikkeavan oletuskäyttäytymisen (ks.
+<http://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html>) takia
+takia tee luokkan <code>Rating</code> seuraava lisäys:
+
+```ruby
+class Rating < ApplicationRecord
+  # lisätään määre optionl: true
+  belongs_to :beer, optional: true   
+  
+  # muu jää ennalleen
+end
+```
+
+Muuten kaikki allaoleva koodi ei toimi ilman muutoksia.
 
 ## Testaaminen
 
@@ -506,8 +522,8 @@ On huomattavaa, että rspec **nollaa tietokannan aina ennen jokaisen testin ajam
     user = User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1"
     brewery = Brewery.new name: "test", year: 2000
     beer = Beer.new name: "testbeer", style: "teststyle"
-    rating = Rating.new score: 10, beer: beer
-    rating2 = Rating.new score: 20, beer: beer
+    rating = Rating.new score: 10
+    rating2 = Rating.new score: 20
 
     user.ratings << rating
     user.ratings << rating2
@@ -689,7 +705,6 @@ Muutetaan nyt testimme käyttämään FactoryGirliä.
     end
   end
 ```
-
 
 Testi on nyt siistiytynyt jossain määrin.
 
