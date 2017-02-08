@@ -1073,8 +1073,8 @@ eli tällä kertaa routeissa määriteltiin, että panimon id:hen viitataan <cod
 >
 > ## Bonustehtävä
 > 
-> Sisällytä sivulle ravintolan sijaintia kuvaava kartta. Helpoin tapa kartan sijoittamiseen on [iframen](http://www.w3schools.com/tags/tag_iframe.asp)  
-> Itse kartan generointi onnistuu helposti Googlen kartta-apin avulla, ks. [ohje](https://developers.google.com/maps/documentation/embed/). Joudut rekisteröimään itsellesi karttaa varten Googlen API-keyn. Käsittele sitä ohjelmassasi järkevästi, ts. älä kovakoodaa avainta koodin joukkoon vaan käytä ympäristömuuttujaa.
+> Sisällytä sivulle ravintolan sijaintia kuvaava kartta. Helpoin tapa lienee [iframen](http://www.w3schools.com/tags/tag_iframe.asp)  käyttä.
+> Itse kartan generointi onnistuu helposti Googlen kartta-apin avulla, ks. [sivun](https://developers.google.com/maps/documentation/embed/) kohta "Demos and sample code" hieman alempaa sivulta. Joudut rekisteröimään itsellesi karttaa varten Googlen api-avaimen. Käsittele sitä ohjelmassasi järkevästi, ts. älä kovakoodaa avainta koodin joukkoon vaan käytä ympäristömuuttujaa.
 
 Tehtävän jälkeen sovelluksesi voi näyttää esim. seuraavalta:
 
