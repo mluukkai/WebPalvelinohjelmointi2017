@@ -479,7 +479,7 @@ Kannattaako näin tehdä? Kyse on osittain makuasiasta. Määrittelemällä näy
   </thead>
 ```
 
-Jos nyt päättäisimme lisätä tai poistaa jotain näytettäviä kenttiä, riittää kun muutamme luokan _Places_ määrittelemää listaa ja näkymään ei tarvitse erikseen koskea:
+Jos nyt päättäisimme lisätä tai poistaa jotain näytettäviä kenttiä, riittää kun muutamme luokan <code>Places</code> määrittelemää listaa ja näkymään ei tarvitse erikseen koskea:
 
 ```ruby
 class Place < OpenStruct
