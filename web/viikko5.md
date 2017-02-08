@@ -900,8 +900,9 @@ describe "BeermappingApi" do
   end
 end
 
-
 ```
+
+Ensimmäisessä <code>describe</code>-lohkossa oleva <code>before each</code>-lohko tyhjentää välimuistin ennen testien suorittamista, eli kun itse testi tekee metodikutsun <code>BeermappingApi.places_in</code>, haetaan olutpaikkojen tiedot HTTP-pyynnöllä. Toisessa <code>describe</code>-lohkossa taas testeissä kutsutaan metodia <code>BeermappingApi.places_in</code> kaksi kertaa. Ensimmäinen kutsu varmistaa, että haettavan paikan tiedot talletetaan välimuistiin. Toisen kutsun tulos tulee välimuistista ja tulosta testataan testikoodissa.
 
 Testi sisältää nyt paljon toisteisuutta ja kaipaisi refaktorointia, mutta menemme kuitenkin eteenpäin.
 
