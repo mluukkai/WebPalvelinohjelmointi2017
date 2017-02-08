@@ -103,19 +103,29 @@ Kokeillaan nyt etsiä konsolista käsin Helsingin ravintoloita (muista uudelleen
 ```ruby
 > api_key = "dd3be700f05c183f8dd40f99a451d424"
 > url = "http://beermapping.com/webservice/loccity/#{api_key}/"
-> HTTParty.get url+"helsinki"
+> HTTParty.get "#{url}helsinki"
 ```
 
 **HUOM:** voit siis nyt ja jatkossa käyttää vaihtoehtoisesti välimuistipalvelinta eli määritellä <code>url = 'http://stark-oasis-9187.herokuapp.com/api/'</code>
 
-Kutsu siis palauttaa luokan <code>HTTParty::Response</code>-olion. Oliolta voidaan kysyä esim. vastaukseen liittyvät headerit:
+Kutsu siis palauttaa luokan <code>HTTParty::Response</code>-olion. Oliolta voidaan kysyä esim. vastaukseen liittyvät _headerit_:
 
 ```ruby
-> response = HTTParty.get url+"helsinki"
+> response = HTTParty.get "#{url}helsinki"
 > response.headers
- => {"date"=>["Sat, 07 Feb 2017 12:20:01 GMT"], "server"=>["Apache"], "expires"=>["Mon, 26 Jul 1997 05:00:00 GMT"], "last-modified"=>["Sat, 07 Feb 2017 12:20:01 GMT"], "cache-control"=>["no-store, no-cache, must-revalidate", "post-check=0, pre-check=0"], "pragma"=>["no-cache"], "vary"=>["Accept-Encoding"], "content-length"=>["4887"], "connection"=>["close"], "content-type"=>["text/xml"]}
+=> {"date"=>["Wed, 08 Feb 2017 09:35:14 GMT"], "server"=>["Apache"], "upgrade"=>["h2,h2c"], "connection"=>["Upgrade, close"], "set-cookie"=>["easylogin_session=3325fcfe881d3f21f1b3ad1e624d3593; path=/"], "expires"=>["Mon, 26 Jul 1997 05:00:00 GMT"], "cache-control"=>["no-store, no-cache, must-revalidate", "post-check=0, pre-check=0"], "pragma"=>["no-cache"], "last-modified"=>["Wed, 08 Feb 2017 09:35:15 GMT"], "vary"=>["Accept-Encoding"], "content-length"=>["816"], "content-type"=>["text/xml;charset=UTF-8"]}
 >
 ```
+
+Headerit sisältävät HTTP-pyynnön vastaukseen liittyvää metadataa, esim. vastauksen muodon kertoo _content-type_
+
+```
+"content-type"=>["text/xml;charset=UTF-8"]
+```
+
+Eli vastaukseen liittyvä data on UTF-8-muodossa enkoodattua XML:ää.
+
+**HUOM:** jos käytät Prytä, se näyttää pitkät tulosteet siten että voit selata niitä nuolinäppäimillä, ja pääset takaisin konsoliin painamalla _q_.
 
 ja HTTP-kutsun statuskoodi:
 
@@ -130,8 +140,37 @@ Vastausolion metodi <code>parsed_response</code> palauttaa metodin palauttaman d
 
 ```ruby
 > response.parsed_response
- => {"bmp_locations"=>{"location"=>[{"id"=>"6742", "name"=>"Pullman Bar", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=6742", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6742&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm", "street"=>"Kaivokatu 1", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"+358 9 0307 22", "overall"=>"72.500025", "imagecount"=>"0"}, {"id"=>"6743", "name"=>"Belge", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=6743", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6743&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6743&d=1&type=norm", "street"=>"Kluuvikatu 5", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"+358 10 766 35", "overall"=>"67.499925", "imagecount"=>"1"}, {"id"=>"6919", "name"=>"Suomenlinnan Panimo", "status"=>"Brewpub", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=6919", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6919&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6919&d=1&type=norm", "street"=>"Rantakasarmi", "city"=>"Helsinki", "state"=>nil, "zip"=>"00190", "country"=>"Finland", "phone"=>"+358 9 228 5030", "overall"=>"69.166625", "imagecount"=>"0"}, {"id"=>"12408", "name"=>"St. Urho's Pub", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=12408", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=12408&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=12408&d=1&type=norm", "street"=>"Museokatu 10", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"+358 9 5807 7222", "overall"=>"95", "imagecount"=>"0"}, {"id"=>"12409", "name"=>"Kaisla", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=12409", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=12409&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=12409&d=1&type=norm", "street"=>"Vilhonkatu 4", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"+358 10 76 63850", "overall"=>"83.3334", "imagecount"=>"0"}, {"id"=>"12410", "name"=>"Pikkulintu", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=12410", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=12410&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=12410&d=1&type=norm", "street"=>"Klaavuntie 11", "city"=>"Helsinki", "state"=>nil, "zip"=>"00910", "country"=>"Finland", "phone"=>"+358 9 321 5040", "overall"=>"91.6667", "imagecount"=>"0"}, {"id"=>"18418", "name"=>"Bryggeri Helsinki", "status"=>"Brewpub", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=18418", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=18418&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=18418&d=1&type=norm", "street"=>"Sofiankatu 2", "city"=>"Helsinki", "state"=>nil, "zip"=>"FI-00170", "country"=>"Finland", "phone"=>"010 235 2500", "overall"=>"0", "imagecount"=>"0"}, {"id"=>"18844", "name"=>"Stadin Panimo", "status"=>"Brewery", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=18844", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=18844&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=18844&d=1&type=norm", "street"=>"Kaasutehtaankatu 1, rakennus 6", "city"=>"Helsinki", "state"=>nil, "zip"=>"00540", "country"=>"Finland", "phone"=>"09 170512", "overall"=>"0", "imagecount"=>"0"}, {"id"=>"18855", "name"=>"Panimoravintola Bruuveri", "status"=>"Brewpub", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=18855", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=18855&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=18855&d=1&type=norm", "street"=>"Fredrikinkatu 63AB", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"09 685 66 88", "overall"=>"0", "imagecount"=>"0"}]}}
->
+=> {"bmp_locations"=>
+  {"location"=>
+    [{"id"=>"6742",
+      "name"=>"Pullman Bar",
+      "status"=>"Beer Bar",
+      "reviewlink"=>"https://beermapping.com/location/6742",
+      "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6742&d=5",
+      "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm",
+      "street"=>"Kaivokatu 1",
+      "city"=>"Helsinki",
+      "state"=>nil,
+      "zip"=>"00100",
+      "country"=>"Finland",
+      "phone"=>"+358 9 0307 22",
+      "overall"=>"72.500025",
+      "imagecount"=>"0"},
+     {"id"=>"6743",
+      "name"=>"Belge",
+      "status"=>"Beer Bar",
+      "reviewlink"=>"https://beermapping.com/location/6743",
+      "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6743&d=5",
+      "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6743&d=1&type=norm",
+      "street"=>"Kluuvikatu 5",
+      "city"=>"Helsinki",
+      "state"=>nil,
+      "zip"=>"00100",
+      "country"=>"Finland",
+      "phone"=>"+358 10 766 35",
+      "overall"=>"67.499925",
+      "imagecount"=>"1"},
+...
 ```
 
 Vaikka palvelin siis palauttaa vastauksensa XML-muodossa, parsii HTTParty-gem vastauksen ja mahdollistaa sen käsittelyn suoraan miellyttävämmässä muodossa Rubyn hashinä.
@@ -147,25 +186,12 @@ Helsingistä tunnetaan siis 9 paikkaa. Tutkitaan ensimmäistä:
 
 ```ruby
 > places.first
- => {"id"=>"6742", "name"=>"Pullman Bar", "status"=>"Beer Bar", "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=6742", "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6742&d=5", "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm", "street"=>"Kaivokatu 1", "city"=>"Helsinki", "state"=>nil, "zip"=>"00100", "country"=>"Finland", "phone"=>"+358 9 0307 22", "overall"=>"72.500025", "imagecount"=>"0"}
- > places.first.keys
- => ["id", "name", "status", "reviewlink", "proxylink", "blogmap", "street", "city", "state", "zip", "country", "phone", "overall", "imagecount"]
->
-```
-
-Jälkimmäinen komento <code>places.first.keys</code> kertoo mitä kenttiä ravintoloihin liittyy.
-
-Hieman monimutkaisempia hasheja tutkiessa kannattaa huomata, että Rails tarjoaa komennon <code>pp</code>, jonka avulla hash on mahdollista tulostaa ihmisystävällisemmin muotoiltuna:
-
-```ruby
-> pp places.first
-{"id"=>"6742",
+=> {"id"=>"6742",
  "name"=>"Pullman Bar",
  "status"=>"Beer Bar",
- "reviewlink"=>"http://beermapping.com/maps/reviews/reviews.php?locid=6742",
+ "reviewlink"=>"https://beermapping.com/location/6742",
  "proxylink"=>"http://beermapping.com/maps/proxymaps.php?locid=6742&d=5",
- "blogmap"=>
-  "http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm",
+ "blogmap"=>"http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm",
  "street"=>"Kaivokatu 1",
  "city"=>"Helsinki",
  "state"=>nil,
@@ -174,33 +200,77 @@ Hieman monimutkaisempia hasheja tutkiessa kannattaa huomata, että Rails tarjoaa
  "phone"=>"+358 9 0307 22",
  "overall"=>"72.500025",
  "imagecount"=>"0"}
+>
 ```
+
+Pry muotoilee tulostuksen oletusarvoisesti melko hyvin, eli tulostaa jokaisen hashin alkion omalle rivilleen. Jos käytät normaalia rails konsolia, kannattaa hyödyntää komentoa <code>pp</code>, jonka avulla hash on mahdollista tulostaa Pry:n tapaan muotoiltuna.
 
 Luodaan panimoiden esittämiseen oma olio, kutsuttakoon sitä nimellä <code>Place</code>. Sijoitetaan luokka models-hakemistoon.
 
 ```ruby
-class Place
-  include ActiveModel::Model
-
-  attr_accessor :id, :name, :status, :reviewlink, :proxylink, :blogmap, :street, :city, :state, :zip, :country, :phone, :overall, :imagecount
+class Place < OpenStruct
 end
 ```
 
-Koska kyseessä ei ole "normaali" luokan <code>ActiveRecord::Base</code> perivä luokka, joudumme määrittelemään metodin <code>attr_accessor</code> avulla olion attribuutit. Metodi luo jokaista parametrina olevaa symbolia kohti "getterin ja setterin", eli metodit attribuutin arvon lukemista ja päivittämistä varten.
+Koska luomme luokan olutravintolaa esittävän hashin perusteella, teemme luokan siten että perimme siihen Rubyn valmiin [OpenStruc](https://ruby-doc.org/stdlib-2.0.0/libdoc/ostruct/rdoc/OpenStruct.html)-luokan toiminnallisuuden.
 
-Olioon on määritelty attribuutti kaikille beermappingin yhtä ravintolaa kohti palauttamille kentille.
+OpenStructin avulla hash on helppo "kääriä" olioksi, joka mahdollistaa hashin kenttiin viittaamisen pistenotaatiolla.
 
-Luokkaan on sisällytetty moduuli <code>ActiveModel::Model</code> (ks. http://api.rubyonrails.org/classes/ActiveModel/Model.html), joka mahdollistaa mm. konstruktorissa kaikkien attribuuttien alustamisen suoraan API:n palauttaman hashin perusteella. Eli voimme luoda API:n palauttamasta datasta Place-olioita seuraavasti:
+Esim. jos meillä on normaali hash, joka on määritelty seuraavasti
+
+```ruby
+baari_hash = {
+ "name"=>"Pullman Bar",
+ "status"=>"Beer Bar",
+  "city"=>"Helsinki"
+}
+```
+
+joudumme viittaamaan sen kenttiin hakasulkeilla:
+
+```ruby
+> baari_hash['name']
+=> "Pullman Bar"
+> baari_hash['city']
+=> "Helsinki"
+```
+
+Jos "käärimme" hashin OpenStruct-olioksi:
+
+```ruby
+> baari = OpenStruct.new baari_hash
+```
+
+pääsemme kaikkiin kenttiin käsiksi pistenotaatiolla:
+
+```ruby
+baari.name
+=> "Pullman Bar"
+baari.city
+=> "Helsinki"
+
+ja näin saamme aikaan olion joka muistuttaa käyttötavaltaan normaaleja Railsin modeleja, kuten Beer, Brewery ym.
+
+Emme kuitenkaan halua käyttää ohjelmassamme suoraan OpenStrcteja ja siksi luomme olutpaikoille oman luokan _Places_ joka perii OpenStructin:
+
+```ruby
+class Place < OpenStruct
+end
+```
+
+Oman luokan määritteleminen tekee koodista selkeämmän ja mahdollistaa tarvittaessa metodien liittämisen luokan olioille.
+
+Luokkaamme siis käytetään siten, että annetaan sille konstruktoriparametriksi olutpaikkaa vastaava hash:
 
 ```ruby
 > baari = Place.new places.first
- => #<Place:0x000001035a2040 @id="6742", @name="Pullman Bar", @status="Beer Bar", @reviewlink="http://beermapping.com/maps/reviews/reviews.php?locid=6742", @proxylink="http://beermapping.com/maps/proxymaps.php?locid=6742&d=5", @blogmap="http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm", @street="Kaivokatu 1", @city="Helsinki", @state=nil, @zip="00100", @country="Finland", @phone="+358 9 0307 22", @overall="72.500025", @imagecount="0">
-> baari.name
- => "Pullman Bar"
-> baari.street
- => "Kaivokatu 1"
->
+=> #<Place id="6742", name="Pullman Bar", status="Beer Bar", reviewlink="https://beermapping.com/location/6742", proxylink="http://beermapping.com/maps/proxymaps.php?locid=6742&d=5", blogmap="http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm", street="Kaivokatu 1", city="Helsinki", state=nil, zip="00100", country="Finland", phone="+358 9 0307 22", overall="72.500025", imagecount="0">
+[32] pry(main)> baari.name
+=> "Pullman Bar"
+> baari.zip
+=> "00100"
 ```
+
 
 Kirjoitetaan sitten kontrolleriin alustava koodi. Kovakoodataan etsinnän tapahtuvan aluksi Helsingistä ja luodaan ainoastaan ensimmäisestä löydetystä paikasta Place-olio:
 
