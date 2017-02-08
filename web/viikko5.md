@@ -899,7 +899,6 @@ describe "BeermappingApi" do
     end
   end
 end
-
 ```
 
 Ensimmäisessä <code>describe</code>-lohkossa oleva <code>before each</code>-lohko tyhjentää välimuistin ennen testien suorittamista, eli kun itse testi tekee metodikutsun <code>BeermappingApi.places_in</code>, haetaan olutpaikkojen tiedot HTTP-pyynnöllä. Toisessa <code>describe</code>-lohkossa taas testeissä kutsutaan metodia <code>BeermappingApi.places_in</code> kaksi kertaa. Ensimmäinen kutsu varmistaa, että haettavan paikan tiedot talletetaan välimuistiin. Toisen kutsun tulos tulee välimuistista ja tulosta testataan testikoodissa.
@@ -952,17 +951,17 @@ Koodiin on myös lisätty suoritettavaksi poikkeus tilanteessa, jossa apiavainta
 Ympäristömuuttujan arvon tulee siis olla määritelty jos käytät olutravintoloiden hakutoimintoa. Saat määriteltyä ympäristömuuttujan käynnistämällä sovelluksen seuraavasti:
 
 ```ruby
-mluukkai@melkki$export APIKEY="dd3be700f05c183f8dd40f99a451d424"
-mluukkai@melkki$rails s
+mluukkai@melkki$ export APIKEY="dd3be700f05c183f8dd40f99a451d424"
+mluukkai@melkki$ rails s
 ```
 
 tai määrittelemällä ympäristömuuttujan käynnistyskomennon yhteydessä:
 
 ```ruby
-mluukkai@melkki$APIKEY="dd3be700f05c183f8dd40f99a451d424" rails s
+mluukkai@melkki$ APIKEY="dd3be700f05c183f8dd40f99a451d424" rails s
 ```
 
-Voit myös määritellä ympäristömuuttujan arvon (export-komennolla) komentotulkin käynistyksen yhteydessä suoritettavassa tiedostossa (.zshrc, .bascrc tai .profile komentotulkista riippuen).
+Voit myös määritellä ympäristömuuttujan arvon (export-komennolla) komentotulkin käynnistyksen yhteydessä suoritettavassa tiedostossa (.zshrc, .bascrc tai .profile komentotulkista riippuen).
 
 Ympäristömuuttujille on helppo asettaa arvo myös Herokussa, ks.
 https://devcenter.heroku.com/articles/config-vars
@@ -1053,9 +1052,7 @@ eli tällä kertaa routeissa määriteltiin, että panimon id:hen viitataan <cod
 
 > ## Tehtävät 5-6 (vastaa kahta tehtävää)
 >
-> Tee sovellukselle ominaisuus, jossa ravintolan nimeä klikkaamalla avautuu oma sivu, jossa on näkyvillä ravintolan tiedot. Sisällytä sivulle (esim. iframena) myös kartta, johon on merkattu ravintolan sijainti. Huomaa, että kartan url löytyy suoraan ravintolan tiedoista. Jos haluat hifistellä, iframeja parempi vaihtoehto on [Googlen Map APIn](https://developers.google.com/maps/) käyttö.
->
-> HUOM Jos käytät ravintolan tiedoissa olevaa karttaa iframessa, kartta ei toimi herokussa jos määrittelet selaimessa protokollaksi https, eli kirjoitat osoiteriville https://..., jos kirjoitat http://..., kartan pitäisi toimia myös herokussa.
+> Tee sovellukselle ominaisuus, jossa ravintolan nimeä klikkaamalla avautuu oma sivu, jossa on näkyvillä ravintolan yhteystiedot. 
 >
 >* ravintolan urliksi kannattaa vailta Rails-konvention mukainen places/:id, routes.rb voi näyttää esim. seuraavalta:
 >
@@ -1073,6 +1070,11 @@ eli tällä kertaa routeissa määriteltiin, että panimon id:hen viitataan <cod
 > Toinen tapa toiminnallisuuden toteuttamiseen on sivulla http://beermapping.com/api/reference/ oleva "Locquery Service"
 >
 > Kokeile hajottaako ravointoloiden sivun lisääminen mitään olemassaolevaa testiä. Jos, niin voit yrittää korjata testit. Välttämätöntä se ei kuitenkaan tässä vaiheessa ole.
+>
+> ## Bonustehtävä
+> 
+> Sisällytä sivulle myös ravintolan sijaintia kuvaava kartan. Helpoin tapa kartan generointiin on [iframen](http://www.w3schools.com/tags/tag_iframe.asp)  
+> Itse kartan generointi onnistuu helposti Googlen kartta-apin avulla, ks [ohje](https://developers.google.com/maps/documentation/embed/)
 
 
 Tehtävän jälkeen sovelluksesi voi näyttää esim. seuraavalta:
