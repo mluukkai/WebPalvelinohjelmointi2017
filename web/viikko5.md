@@ -370,13 +370,10 @@ end
 Koodi on tällä hetkellä rumaa, mutta parantelemme sitä hetken kuluttua. Näytetään baareista enemmän tietoja sivulla. Määritellään näytettävät kentät Place-luokan staattisena metodina:
 
 ```ruby
-class Place
-  include ActiveModel::Model
-  attr_accessor :id, :name, :status, :reviewlink, :proxylink, :blogmap, :street, :city, :state, :zip, :country, :phone, :overall, :imagecount
-
+class Place < OpenStruct
   def self.rendered_fields
     [:id, :name, :status, :street, :city, :zip, :country, :overall ]
-  end
+  end  
 end
 ```
 
@@ -407,6 +404,92 @@ index.html.erb:n paranneltu koodi seuraavassa:
   </table>
 <% end %>
 ```
+
+Taulukon rivit muodostava koodi on muodossa
+
+```erb
+  <tr>
+    <% Place.rendered_fields.each do |f| %>
+      <td><%= place.send(f) %></td>
+    <% end %>
+  </tr>   
+```
+
+## Olion metodien kutsuminen _send_-metodin avulla
+
+Mistä tässä oikeastaan on kyse?
+
+Ennen muutosta näkymä muodostettiin seuraavasti:
+
+```erb
+<% @places.each do |place| %>
+  <li><%= place.name %></li>
+<% end %>
+```
+
+eli jokaisesta baarista näytettiin sen nimi _place.name_
+
+Nykyinen koodimme saa aikaan saman kuin seuraava helpommin ymmärrettävissä muodossa oleva koodi:
+
+```erb
+  <tr>
+    <td><%= place.id %></td>
+    <td><%= place.name %></td>
+    <td><%= place.status %></td>
+    <td><%= place.street %></td>
+    <td><%= place.city %></td> 
+    <td><%= place.zip %></td> 
+    <td><%= place.country %></td> 
+    <td><%= place.overall %></td>        
+  </tr>
+```
+
+Rubyssä olioiden metodeja voidaan kutsua myös "epäsuoraan" käyttämällä metodia _send_. Eli sen sijaan että sanomme _place.name_ voimme tehdä metdoikutsun syntaksilla  _place.send(:name)_. Olutpaikan rivin muodostaminen voidaan siis muuttaa muotoon:
+
+```erb
+  <tr>
+    <td><%= place.send(:id) %></td>
+    <td><%= place.send(name) %></td>
+    <td><%= place.send(status) %></td>
+    <td><%= place.send(street) %></td>
+    <td><%= place.send(city) %></td> 
+    <td><%= place.send(zip) %></td> 
+    <td><%= place.send(country) %></td> 
+    <td><%= place.send(overall) %></td>        
+  </tr>
+```
+
+Ja koska määrittelimme metodin _Place.rendered_fields_ palauttaa listan <code>[ :id, :name, :status, :street, :city, :zip, :country, :overall ]</code>, voimme generoida  _td_-tagit on kuitenkin toteutettu _each_-loopin avulla.
+
+```erb
+  <tr>
+    <% Place.rendered_fields.each do |f| %>
+      <td><%= place.send(f) %></td>
+    <% end %>
+  </tr>   
+```
+
+Kannattaako näin tehdä? Kyse on osittain makuasiasta. Määrittelemällä näytettävien kenttien listan saimme nyt tehtyä myös taulukon otsakerivin looppaamalla:
+
+```erb
+  <thead>
+    <% Place.rendered_fields.each do |f| %>
+      <td><%= f %></td>
+    <% end %>
+  </thead>
+```
+
+Jos nyt päättäisimme lisätä tai poistaa jotain näytettäviä kenttiä, riittää kun muutamme luokan _Places_ määrittelemää listaa ja näkymään ei tarvitse erikseen koskea:
+
+```ruby
+class Place < OpenStruct
+  def self.rendered_fields
+    [ :id, :name, :status, :street, :city, :zip, :country, :overall ]
+  end  
+end
+```
+
+## Erikoismerkkejä sisältävät nimet
 
 Sovelluksessamme on vielä pieni ongelma Jos yritämme etsiä New Yorkin olutravintoloita on seurauksena virhe. Välilyönnit on korvattava URL:ssä koodilla %20. Korvaamista ei kannata tehdä itse 'käsin', välilyönti ei nimittäin ole ainoa merkki joka on koodattava URL:iin. Kuten arvata saattaa, on Railsissa tarjolla tarkoitusta varten valmis metodi <code>ERB::Util.url_encode</code>. Kokeillaan metodia konsolista:
 
