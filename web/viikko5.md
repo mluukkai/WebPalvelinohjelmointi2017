@@ -444,7 +444,7 @@ Nykyinen koodimme saa aikaan saman kuin seuraava, helpommin ymmärrettävissä m
   </tr>
 ```
 
-Rubyssä olioiden metodeja voidaan kutsua myös "epäsuoraan" käyttämällä metodia _send_. Eli sen sijaan että sanomme _place.name_ voimme tehdä metdoikutsun syntaksilla  _place.send(:name)_. Olutpaikan rivin muodostaminen voidaan siis muuttaa muotoon:
+Rubyssä olioiden metodeja voidaan kutsua myös "epäsuoraan" käyttämällä metodia <code>send</code>. Eli sen sijaan että sanomme <code>place.name</code> voimme tehdä metdoikutsun syntaksilla  <code>place.send(:name)</code>. Olutpaikan rivin muodostaminen voidaan siis muuttaa muotoon:
 
 ```erb
   <tr>
