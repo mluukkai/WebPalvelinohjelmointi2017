@@ -405,6 +405,8 @@ index.html.erb:n paranneltu koodi seuraavassa:
 <% end %>
 ```
 
+## Olion metodien kutsuminen _send_-metodin avulla
+
 Taulukon rivit muodostava koodi on muodossa
 
 ```erb
@@ -414,8 +416,6 @@ Taulukon rivit muodostava koodi on muodossa
     <% end %>
   </tr>   
 ```
-
-## Olion metodien kutsuminen _send_-metodin avulla
 
 Mistä tässä oikeastaan on kyse?
 
@@ -427,9 +427,9 @@ Ennen muutosta näkymä muodostettiin seuraavasti:
 <% end %>
 ```
 
-eli jokaisesta baarista näytettiin sen nimi _place.name_
+eli jokaisesta baarista näytettiin sen nimi eli _place.name_
 
-Nykyinen koodimme saa aikaan saman kuin seuraava helpommin ymmärrettävissä muodossa oleva koodi:
+Nykyinen koodimme saa aikaan saman kuin seuraava, helpommin ymmärrettävissä muodossa oleva koodi:
 
 ```erb
   <tr>
@@ -449,17 +449,17 @@ Rubyssä olioiden metodeja voidaan kutsua myös "epäsuoraan" käyttämällä me
 ```erb
   <tr>
     <td><%= place.send(:id) %></td>
-    <td><%= place.send(name) %></td>
-    <td><%= place.send(status) %></td>
-    <td><%= place.send(street) %></td>
-    <td><%= place.send(city) %></td> 
-    <td><%= place.send(zip) %></td> 
-    <td><%= place.send(country) %></td> 
-    <td><%= place.send(overall) %></td>        
+    <td><%= place.send(:name) %></td>
+    <td><%= place.send(:status) %></td>
+    <td><%= place.send(:street) %></td>
+    <td><%= place.send(:city) %></td> 
+    <td><%= place.send(:zip) %></td> 
+    <td><%= place.send(:country) %></td> 
+    <td><%= place.send(:overall) %></td>        
   </tr>
 ```
 
-Ja koska määrittelimme metodin _Place.rendered_fields_ palauttaa listan <code>[ :id, :name, :status, :street, :city, :zip, :country, :overall ]</code>, voimme generoida  _td_-tagit on kuitenkin toteutettu _each_-loopin avulla.
+Ja koska määrittelimme metodin <code>Place.rendered_fields</code> palauttamaan listan <code>[ :id, :name, :status, :street, :city, :zip, :country, :overall ]</code>, voimme generoida  _td_-tagit on kuitenkin toteutettu _each_-loopin avulla.
 
 ```erb
   <tr>
