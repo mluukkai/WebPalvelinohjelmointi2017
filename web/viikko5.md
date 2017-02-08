@@ -1114,7 +1114,6 @@ Näkymätemplatea /views/beers/show.html.erb muutetaan seuraavasti:
 <% end %>
 
 <% if current_user %>
-
   <h4>give a rating:</h4>
 
   <%= form_for(@rating) do |f| %>
@@ -1122,9 +1121,9 @@ Näkymätemplatea /views/beers/show.html.erb muutetaan seuraavasti:
     score: <%= f.number_field :score %>
     <%= f.submit %>
   <% end %>
-
+  
   <%= link_to 'Edit', edit_beer_path(@beer) %>
-
+  <%= link_to 'Destroy', @beer, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 ```
 
@@ -1175,7 +1174,7 @@ Eli muutetaan näkymätemplate app/views/ratings/new.html.erb seuraavaan muotoon
 <% end %>
 ```
 
-Sama ongelma itse asiassa vaivaa muutamia sovelluksemme lomakkeita, kokeile esim. mitä tapahtuu kun editoit oluen tietoja. Korjaa lomake jos haluat.
+Sama ongelma itse asiassa vaivaa muutamia sovelluksemme lomakkeita, kokeile esim. mitä tapahtuu kun yrität luoda oluen jolle et anna nimeä. Korjaa lomake jos haluat.
 
 > ## Tehtävä 7
 >
