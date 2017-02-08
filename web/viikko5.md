@@ -1073,12 +1073,12 @@ eli tällä kertaa routeissa määriteltiin, että panimon id:hen viitataan <cod
 >
 > ## Bonustehtävä
 > 
-> Sisällytä sivulle myös ravintolan sijaintia kuvaava kartan. Helpoin tapa kartan generointiin on [iframen](http://www.w3schools.com/tags/tag_iframe.asp)  
-> Itse kartan generointi onnistuu helposti Googlen kartta-apin avulla, ks [ohje](https://developers.google.com/maps/documentation/embed/)
+> Sisällytä sivulle ravintolan sijaintia kuvaava kartta. Helpoin tapa kartan sijoittamiseen on [iframen](http://www.w3schools.com/tags/tag_iframe.asp)  
+> Itse kartan generointi onnistuu helposti Googlen kartta-apin avulla, ks. [ohje](https://developers.google.com/maps/documentation/embed/). Joudut rekisteröimään itsellesi karttaa varten Googlen API-keyn. Käsittele sitä ohjelmassasi järkevästi, ts. älä kovakoodaa avainta koodin joukkoon vaan käytä ympäristömuuttujaa.
 
 Tehtävän jälkeen sovelluksesi voi näyttää esim. seuraavalta:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w5-2a.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w5-2b.png)
 
 
 ## Oluen reittaus suoraan oluen sivulta
