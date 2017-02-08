@@ -15,9 +15,9 @@ Suuri osa internetin palveluista hyödyntää nykyään joitain avoimia rajapint
 Myös oluihin liittyviä avoimia rajapintoja on tarjolla, ks. http://www.programmableweb.com/ hakusanalla beer
 
 Tämän hetken tarjolla olevista rajapinnoista parhaalta näyttää http://www.programmableweb.com/api/brewery-db
-jonka ilmainen käyttö on kuitenkin rajattu 400 päivittäiseen kyselyyn, joten emme tällä kertaa käytä sitä, vaan Beermapping API:a (ks. http://www.programmableweb.com/api/beer-mapping ja http://beermapping.com/api/), joka tarjoaa mahdollisuuden oluita tarjoilevien ravintoloiden tietojen etsintään.
+jonka ilmainen käyttö on kuitenkin rajattu 400 päivittäiseen kyselyyn, joten emme tällä kertaa käytä sitä, vaan Beermapping API:a (ks. <http://www.programmableweb.com/api/beer-mapping> ja <http://beermapping.com/api/>), joka tarjoaa mahdollisuuden oluita tarjoilevien ravintoloiden tietojen etsintään.
 
-Beermapingin API:a käyttävät sovellukset tarvitsevat yksilöllisen API-avaimen. Saat avaimen sivulta [http://beermapping.com/api/request_key](http://beermapping.com/api/request_key), vastaava käytäntö on olemassa hyvin suuressa osassa nykyään tarjolla olevissa avoimissa rajapinnoissa.
+Beermapingin API:a käyttävät sovellukset tarvitsevat yksilöllisen API-avaimen. Saat avaimen sivulta <http://beermapping.com/api/> kirjauduttuasi ensin sivulle. Vastaava käytäntö on olemassa hyvin suuressa osassa nykyään tarjolla olevissa avoimissa rajapinnoissa.
 
 API:n tarjoamat palvelut on listattu sivulla [http://beermapping.com/api/reference/](http://beermapping.com/api/reference/)
 
@@ -28,8 +28,8 @@ Paikkakunta siis välitetään osana URL:ia.
 Kyselyjen tekemistä voi kokeilla selaimella tai komentoriviltä curl-ohjelmalla. Saamme esimerkiksi Espoon olutravintolat selville seuraavasti:
 
 ```ruby
-mbp-18:ratebeer mluukkai$ curl http://beermapping.com/webservice/loccity/96ce1942872335547853a0bb3b0c24db/espoo
-<?xml version='1.0' encoding='utf-8' ?><bmp_locations><location><id>12411</id><name>Gallows Bird</name><status>Brewery</status><reviewlink>http://beermapping.com/maps/reviews/reviews.php?locid=12411</reviewlink><proxylink>http://beermapping.com/maps/proxymaps.php?locid=12411&amp;d=5</proxylink><blogmap>http://beermapping.com/maps/blogproxy.php?locid=12411&amp;d=1&amp;type=norm</blogmap><street>Merituulentie 30</street><city>Espoo</city><state></state><zip>02200</zip><country>Finland</country><phone>+358 9 412 3253</phone><overall>91.66665</overall><imagecount>0</imagecount></location></bmp_locations>mbp-18:ratebeer mluukkai$
+mluukkai@melkki$ curl http://beermapping.com/webservice/loccity/dd3be700f05c183f8dd40f99a451d424/espoo
+<?xml version='1.0' encoding='utf-8' ?><bmp_locations><location><id>12411</id><name>Gallows Bird</name><status>Brewery</status><reviewlink>http://beermapping.com/maps/reviews/reviews.php?locid=12411</reviewlink><proxylink>http://beermapping.com/maps/proxymaps.php?locid=12411&amp;d=5</proxylink><blogmap>http://beermapping.com/maps/blogproxy.php?locid=12411&amp;d=1&amp;type=norm</blogmap><street>Merituulentie 30</street><city>Espoo</city><state></state><zip>02200</zip><country>Finland</country><phone>+358 9 412 3253</phone><overall>91.66665</overall><imagecount>0</imagecount></location></bmp_locations>mluukkai@melkki$
 ```
 
 Kuten huomaamme, vastaus tulee XML-muodossa. Käytänne on hieman vanhahtava, sillä tällä hetkellä ylivoimaisesti suosituin web-palveluiden välillä käytettävä tiedonvaihdon formaatti on json.
@@ -101,7 +101,7 @@ Otetaan uusi gem käyttöön suorittamalla komentoriviltä tuttu komento <code>b
 Kokeillaan nyt etsiä konsolista käsin Helsingin ravintoloita (muista uudelleenkäynnistää konsoli):
 
 ```ruby
-> api_key = "96ce1942872335547853a0bb3b0c24db"
+> api_key = "dd3be700f05c183f8dd40f99a451d424"
 > url = "http://beermapping.com/webservice/loccity/#{api_key}/"
 > HTTParty.get url+"helsinki"
 ```
@@ -210,7 +210,7 @@ class PlacesController < ApplicationController
   end
 
   def search
-    api_key = "96ce1942872335547853a0bb3b0c24db"
+    api_key = "dd3be700f05c183f8dd40f99a451d424"
     url = "http://beermapping.com/webservice/loccity/#{api_key}/"
     # tai vaihtoehtoisesti
     # url = 'http://stark-oasis-9187.herokuapp.com/api/'
@@ -249,7 +249,7 @@ Laajennetaan sitten koodi näyttämään kaikki panimot ja käyttämään lomakk
 
 ```ruby
   def search
-    api_key = "96ce1942872335547853a0bb3b0c24db"
+    api_key = "dd3be700f05c183f8dd40f99a451d424"
     url = "http://beermapping.com/webservice/loccity/#{api_key}/"
     response = HTTParty.get "#{url}#{params[:city]}"
 
@@ -277,7 +277,7 @@ class PlacesController < ApplicationController
   end
 
   def search
-    api_key = "96ce1942872335547853a0bb3b0c24db"
+    api_key = "dd3be700f05c183f8dd40f99a451d424"
     url = "http://beermapping.com/webservice/loccity/#{api_key}/"
     response = HTTParty.get "#{url}#{params[:city]}"
     places_from_api = response.parsed_response["bmp_locations"]["location"]
@@ -376,7 +376,7 @@ class BeermappingApi
   end
 
   def self.key
-    "96ce1942872335547853a0bb3b0c24db"
+    "dd3be700f05c183f8dd40f99a451d424"
   end
 end
 ```
@@ -446,7 +446,7 @@ Kun nyt testissä tehdään HTTP-pyyntö places-kontrollerille, ja kontrolleri k
 Jos törmäät testejä suorittaessasi virheeseen
 
 ```ruby
-mbp-18:ratebeer mluukkai$ rspec spec/features/places_spec.rb
+mluukkai@melkki$ rspec spec/features/places_spec.rb
 /Users/mluukkai/.rbenv/versions/2.0.0-p247/lib/ruby/gems/2.0.0/gems/activerecord-4.0.2/lib/active_record/migration.rb:379:in `check_pending!': Migrations are pending; run 'bin/rake db:migrate RAILS_ENV=test' to resolve this issue. (ActiveRecord::PendingMigrationError)
 …
 ```
@@ -502,7 +502,7 @@ Tarvitsemme siis testiämme varten sopivan "kovakoodatun" datan, joka kuvaa Beer
 Eräs tapa testisyötteen generointiin on kysyä se rajapinnalta itseltään, eli tehdään komentoriviltä <code>curl</code>-komennolla HTTP GET -pyyntö:
 
 ```ruby
-mbp-18:ratebeer mluukkai$ curl http://beermapping.com/webservice/loccity/96ce1942872335547853a0bb3b0c24db/espoo
+mluukkai@melkki$ curl http://beermapping.com/webservice/loccity/dd3be700f05c183f8dd40f99a451d424/espoo
 <?xml version='1.0' encoding='utf-8' ?><bmp_locations><location><id>12411</id><name>Gallows Bird</name><status>Brewery</status><reviewlink>http://beermapping.com/maps/reviews/reviews.php?locid=12411</reviewlink><proxylink>http://beermapping.com/maps/proxymaps.php?locid=12411&amp;d=5</proxylink><blogmap>http://beermapping.com/maps/blogproxy.php?locid=12411&amp;d=1&amp;type=norm</blogmap><street>Merituulentie 30</street><city>Espoo</city><state></state><zip>02200</zip><country>Finland</country><phone>+358 9 412 3253</phone><overall>91.66665</overall><imagecount>0</imagecount></location></bmp_locations>
 ```
 
@@ -544,11 +544,11 @@ Itse testi tapahtuu suoraviivaisesti tarkastelemalla BeermappingApi:n metodin <c
 ) BeermappingApi When HTTP GET returns no entries, an empty array is returned
      Failure/Error: places = BeermappingApi.places_in("kumpula")
      WebMock::NetConnectNotAllowedError:
-       Real HTTP connections are disabled. Unregistered request: GET http://beermapping.com/webservice/loccity/96ce1942872335547853a0bb3b0c24db/kumpula
+       Real HTTP connections are disabled. Unregistered request: GET http://beermapping.com/webservice/loccity/dd3be700f05c183f8dd40f99a451d424/kumpula
 
        You can stub this request with the following snippet:
 
-       stub_request(:get, "http://beermapping.com/webservice/loccity/96ce1942872335547853a0bb3b0c24db/kumpula").
+       stub_request(:get, "http://beermapping.com/webservice/loccity/dd3be700f05c183f8dd40f99a451d424/kumpula").
          to_return(:status => 200, :body => "", :headers => {})
 ```
 
@@ -643,7 +643,7 @@ class BeermappingApi
   end
 
   def self.key
-    "96ce1942872335547853a0bb3b0c24db"
+    "dd3be700f05c183f8dd40f99a451d424"
   end
 end
 ```
@@ -768,14 +768,14 @@ Ehkä paras vaihtoehto suhteellisen yksinkertaisen sovelluskohtaisen datan talle
 Asetetaan ensin komentoriviltä ympäristömuuttujalle <code>APIKEY</code>
 
 ```ruby
-mbp-18:ratebeer mluukkai$ export APIKEY="96ce1942872335547853a0bb3b0c24db"
+mluukkai@melkki$ export APIKEY="dd3be700f05c183f8dd40f99a451d424"
 ```
 
 Rails-sovellus pääsee ympäristömuuttujiin käsiksi hash-tyyppisen muuttujan <code>ENV</code> kautta:
 
 ```ruby
 > ENV['APIKEY']
- => "96ce1942872335547853a0bb3b0c24db"
+ => "dd3be700f05c183f8dd40f99a451d424"
 >
 ```
 
@@ -797,14 +797,14 @@ Koodiin on myös lisätty suoritettavaksi poikkeus tilanteessa, jossa apiavainta
 Ympäristömuuttujan arvon tulee siis olla määritelty jos käytät olutravintoloiden hakutoimintoa. Saat määriteltyä ympäristömuuttujan käynnistämällä sovelluksen seuraavasti:
 
 ```ruby
-mbp-18:ratebeer mluukkai$export APIKEY="96ce1942872335547853a0bb3b0c24db"
-mbp-18:ratebeer mluukkai$rails s
+mluukkai@melkki$export APIKEY="dd3be700f05c183f8dd40f99a451d424"
+mluukkai@melkki$rails s
 ```
 
 tai määrittelemällä ympäristömuuttujan käynnistyskomennon yhteydessä:
 
 ```ruby
-mbp-18:ratebeer mluukkai$APIKEY="96ce1942872335547853a0bb3b0c24db" rails s
+mluukkai@melkki$APIKEY="dd3be700f05c183f8dd40f99a451d424" rails s
 ```
 
 Voit myös määritellä ympäristömuuttujan arvon (export-komennolla) komentotulkin käynistyksen yhteydessä suoritettavassa tiedostossa (.zshrc, .bascrc tai .profile komentotulkista riippuen).
