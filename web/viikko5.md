@@ -248,6 +248,7 @@ baari.name
 => "Pullman Bar"
 baari.city
 => "Helsinki"
+```
 
 ja näin saamme aikaan olion joka muistuttaa käyttötavaltaan normaaleja Railsin modeleja, kuten Beer, Brewery ym.
 
