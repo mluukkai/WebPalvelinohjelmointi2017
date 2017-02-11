@@ -1864,7 +1864,7 @@ Näkymistä on helppo poistaa oluiden, olutkerhojen ja panimoiden muokkaus -ja l
 Esim. näkymästä views/beers/index.html.erb voidaan nyt poistaa kirjautumattomilta käyttäjiltä sivun lopussa oleva oluiden luomislinkki:
 
 ```erb
-<% if current_user.nil? %>
+<% if not current_user.nil? %>
   <%= link_to('New Beer', new_beer_path) %>
 <% end %>
 ```
