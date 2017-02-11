@@ -1288,6 +1288,8 @@ Hyvä lista oluttyyleistä kuvauksineen löytyy osoitteesta http://beeradvocate.
 >
 > Vaikka hajonneita testejä on suuri määrä, älä mene paniikkiin. Selvitä ongelmat testi testiltä, yksittäinen ongelma kertautuu monteen paikkaan ja testien ajantasaistaminen ei ole loppujenlopuksi kovin vaikeaa.
 
+## Olutsää
+
 > ## Tehtävä 15
 >
 > Lisää olutpaikat näyttävälle sivulle paikan tämänhetkinen säätiedoitus. Säätiedoituksen tarjoavia palveluita on kymmeniä. Itse käytin [https://www.apixu.com](https://www.apixu.com):ta. Muista jälleen käsitellä koodissa apiavainta järkevästi!
