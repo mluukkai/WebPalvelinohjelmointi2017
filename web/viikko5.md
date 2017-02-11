@@ -1288,6 +1288,14 @@ Hyvä lista oluttyyleistä kuvauksineen löytyy osoitteesta http://beeradvocate.
 >
 > Vaikka hajonneita testejä on suuri määrä, älä mene paniikkiin. Selvitä ongelmat testi testiltä, yksittäinen ongelma kertautuu monteen paikkaan ja testien ajantasaistaminen ei ole loppujenlopuksi kovin vaikeaa.
 
+> ## Tehtävä 15
+>
+> Lisää olutpaikat näyttävälle sivulle paikan tämänhetkinen säätiedoitus. Säätiedoituksen tarjoavia palveluita on kymmeniä. Itse käytin [https://www.apixu.com](https://www.apixu.com):ta. Muista jälleen käsitellä koodissa apiavainta järkevästi!
+
+Tehtävän jälkeen olutpaikkojen sivu voi näyttää esim. seuraavalta
+
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2017/raw/master/images/ratebeer-w5-9.png)
+
 ## Tehtävien palautus
 
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
