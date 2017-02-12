@@ -742,7 +742,7 @@ muotoon
 config.cache_store = :file_store, 'tmp/cache_store'
 ```
 
-sekä uudelleenkäynnistä konsoli ja sovellus. Rails nelosen käyttäjillä kaiken pitäisi toimia ilman lisäkonfiguraatioita.
+sekä uudelleenkäynnistä konsoli ja sovellus. Railsin version 4 käyttäjillä kaiken pitäisi toimia ilman lisäkonfiguraatioita.
 
 
 Kokeillaan konsolista:
