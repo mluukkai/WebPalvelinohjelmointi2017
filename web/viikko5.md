@@ -728,7 +728,23 @@ Tällä hetkellä sovelluksemme toimii siten, että se tekee kyselyn beermapping
 
 Rails tarjoaa avain-arvopari-periaatteella toimivan hyvin helppokäyttöisen cachen eli välimuistin sovelluksen käyttöön. 
 
-**Huom:** Jos käytät Railsin versiota 5, suorita ensin komentorivillä cachen development-tilassa aktivoiva komento <code>rails dev:cache</code>. 
+**Huom:** Jos käytät Railsin versiota 5, suorita komentorivillä cachen development-tilassa aktivoiva komento <code>rails dev:cache</code> ja muuta tiedostosta _config/development.rb_
+
+rivi
+
+```ruby
+config.cache_store = :memory_store
+```
+
+muotoon
+
+```ruby
+config.cache_store = :file_store, 'tmp/cache_store'
+```
+
+sekä uudelleenkäynnistä konsoli ja sovellus. Rails nelosen käyttäjillä kaiken pitäisi toimia ilman lisäkonfiguraatioita.
+
+
 Kokeillaan konsolista:
 
 ```ruby
