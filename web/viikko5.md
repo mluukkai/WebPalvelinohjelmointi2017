@@ -726,7 +726,10 @@ Mockeista ja stubeista lisää esim. seuraavassa: http://martinfowler.com/articl
 
 Tällä hetkellä sovelluksemme toimii siten, että se tekee kyselyn beermappingin palveluun aina kun jonkin kaupungin ravintoloita haetaan. Voisimme tehostaa sovellusta muistamalla viime aikoina suoritettuja hakuja.
 
-Rails tarjoaa avain-arvopari-periaatteella toimivan hyvin helppokäyttöisen cachen eli välimuistin sovelluksen käyttöön. Kokeillaan konsolista:
+Rails tarjoaa avain-arvopari-periaatteella toimivan hyvin helppokäyttöisen cachen eli välimuistin sovelluksen käyttöön. 
+
+**Huom:** Jos käytät Railsin versiota 5, suorita ensin komentorivillä cachen development-tilassa aktivoiva komento <code>rails dev:cache</code>. 
+Kokeillaan konsolista:
 
 ```ruby
 > Rails.cache.write "avain", "arvo"
