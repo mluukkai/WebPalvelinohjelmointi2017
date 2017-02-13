@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= @beer.name %>
+</h2>
+
+<p>
+  Brewery by <%= @beer.brewery.name %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @beer.style %>
+</p>
+
+<% if @beer.ratings.empty? %>
+ <p>beer has not yet been rated!</p>
+<% else %>
+  <p>
+    Has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= @beer.average_rating %>
+  </p>
+<% end %>
+
+<% if current_user %>
+  <%= link_to 'Edit', edit_beer_path(@beer) %>
+  <%= link_to 'Destroy', @beer, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
