@@ -570,6 +570,9 @@ Panimoiden sivun template on nyt lähes silmiä hivelevä!
 >* viisi viimeksi tehtyä reittausta.
 >
 > **Vihjeitä:**
+>
+> Jos panimolla/oluella ei ole yhtään ratingia, tuottaa ratingien keskiarvon laskeminen eli metodin <code>average_rating</code> kutsuminen todennäköisestsi virheen (järjestäessäsi panimoita reittauksen perusteella). Korjaa metodi siten, että se osaa laskea reittausten keskiarvon myös reittaamattomille oluille/panimoille.
+>
 > Tee luokalle <code>Rating</code> scope <code>:recent</code>, joka palauttaa viisi viimeisintä reittausta. Scopen vaatimaan tietokantakyselyyn löydät apuja linkistä http://guides.rubyonrails.org/active_record_querying.html, ks. order ja limit. Kokeile ensin kyselyn tekoa konsolista!
 >
 > Parhaiden oluet ja panimot sekä innokkaimmat reittaajat kertovien scopejen teko ei onnistu yhtä helposti, sillä scopen palauttamat oliot pitäisi selvittää tietokantatasolla eli tarvittaisiin monimutkaista SQL:ää.
@@ -741,9 +744,9 @@ http://guides.rubyonrails.org/routing.html#adding-more-restful-actions
 > **Huom:** salasanan validoinnin takia käyttäjän tekeminen adminiksi konsolista ei onnistu, jos salasanakenttiin ei ole asetettu arvoja:
 >
 >```ruby
->irb(main):001:0> u = User.first
->irb(main):002:0> u.admin = true
-> irb(main):003:0> u.save
+>> u = User.first
+>> u.admin = true
+>> u.save
 >   (0.1ms)  rollback transaction
 > => false
 >```
@@ -751,7 +754,7 @@ http://guides.rubyonrails.org/routing.html#adding-more-restful-actions
 > Yksittäisten attribuuttien arvon muuttaminen on kuitenkin mahdollista validaation kiertävällä metodilla <code>update_attr</code>:
 >
 > ```ruby
-> irb(main):005:0> u.update_attribute(:admin, true)
+>> u.update_attribute(:admin, true)
 > ```
 >
 > Validointien suorittamisen voi ohittaa myös tallentamalla olion komennolla <code>u.save(validate: false)</code>
@@ -1070,7 +1073,6 @@ Jos oliolle kutsutaan metodia, jota ei ole olemassa (määriteltynä luokassa it
 NoMethodError: undefined method `paras_bisse' for #<User:0x000001059cb0c0>
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activemodel-4.1.5/lib/active_model/attribute_methods.rb:435:in `method_missing'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activerecord-4.1.5/lib/active_record/attribute_methods.rb:208:in `method_missing'
-  from (irb):69
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/console.rb:90:in `start'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/console.rb:9:in `start'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/commands_tasks.rb:69:in `console'
