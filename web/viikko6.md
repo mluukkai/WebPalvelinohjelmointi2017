@@ -9,7 +9,7 @@ Osa tämän viikon tehtävistä saattaa hajottaa jotain edellisinä viikkoina te
 
 ## Muistutus debuggerista
 
-Viikolla 2 tutustuimme [byebug-debuggeriin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#debuggeri). Valitettavasti debuggeri ei ole vielä löytänyt tietänsä jokaisen kurssilaisen työkaluvalikoimaan.
+Viikolla 2 tutustuimme [debuggeriin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko2.md#debuggeri). Valitettavasti debuggeri ei ole vielä löytänyt tietänsä jokaisen kurssilaisen työkaluvalikoimaan.
 
 Debuggerin käyttö on erittäin helppoa. Riittää kirjoittaa komento <code>binding.pry</code> (tai <code>byebug</code>)  _mihin tahansa_ kohtaan sovelluksen koodia. Seuraavassa esimerkki:
 
@@ -287,7 +287,7 @@ Luokka voidaan lisätä myös niihin linkkeihin, jotka halutaan napin painikkeen
 >
 > Tee jostain sivustosi osasta tyylikkäämpi käyttämällä jotain Bootstrapin komponenttia. Saat merkitä rastin jos käytät aikaa sivustosi ulkoasun parantamiseen vähintään 15 minuuttia. Saat rastin myös jos muutat loputkin sovelluksen taulukoista ja napeista käyttämään bootstrapin tyylejä.
 
-## Scopet
+## Panimon aktiivisuus
 
 Osa panimoista on jo lopettanut toimintansa ja haluaisimme eriyttää lopettaneet panimot aktiivisten panimoiden listalta. Lisätään painimotietokantaan aktiivisuuden merkkaava boolean-arvoinen sarake. Luodaan migraatio:
 
@@ -298,7 +298,7 @@ Huom: koska migraation nimi alkaa sanalla Add ja loppuu olion nimeen Brewery, ja
 Suoritetaan migraatio ja käydään konsolista käsin merkkaamassa kaikki tietokannassa olevat panimot aktiiviseksi:
 
 ```ruby
-irb(main):020:0> Brewery.all.each{ |b| b.active=true; b.save }
+> Brewery.all.each{ |b| b.active=true; b.save }
 ```
 
 Käydään luomassa uusi panimo, jotta saamme tietokantaamme myös yhden epäaktiivisen panimon.
@@ -308,7 +308,7 @@ Muutetaan sitten panimon sivua siten, että se kertoo panimon mahdollisen epäak
 ```erb
 <h2><%= @brewery.name %>
   <% if not @brewery.active  %>
-      <span class="label label-info">retired</span>
+    <span class="label label-info">retired</span>
   <% end %>
 </h2>
 
@@ -447,6 +447,8 @@ Copypastetaan näkymään taulukko kahteen kertaan, erikseen aktiivisille ja el�
 ```
 
 Ratkaisu on toimiva, mutta siinä on parillakin tapaa parantamisen varaa. Parannellaan ensin kontrolleria.
+
+## Scopet
 
 Kontrolleri siis haluaa listan sekä aktiivisista että jo lopettaneista panimoista. Kontrolleri myös kertoo kuinka nuo listat haetaan tietokannasta.
 
@@ -946,10 +948,10 @@ Kutsuttava metodi voidaan antaa myös parametrina. Tällöin eksplisiittisen kut
 Metodia voidaan nyt käyttää seuraavasti:
 
 ```ruby
-2.2.1 :037 > u = User.first
-2.2.1 :038 > u.rating_of :brewery , Brewery.find_by(name:"BrewDog")
+> u = User.first
+> u.rating_of :brewery , Brewery.find_by(name:"BrewDog")
  => 30.2
-2.2.1 :031 > u.rating_of :style , Style.find_by(name:"American IPA")
+> u.rating_of :style , Style.find_by(name:"American IPA")
  => 36.666666666666664
 ```
 
@@ -1064,7 +1066,7 @@ Kommentoidaan metodit hetkeksi pois koodistamme.
 Jos oliolle kutsutaan metodia, jota ei ole olemassa (määriteltynä luokassa itsessään, sen yliluokissa eikä missään luokan tai yliluokkien sisällyttämässä moduulissa), esim.
 
 ```ruby
-2.2.1 :069 > u.paras_bisse
+> u.paras_bisse
 NoMethodError: undefined method `paras_bisse' for #<User:0x000001059cb0c0>
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activemodel-4.1.5/lib/active_model/attribute_methods.rb:435:in `method_missing'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activerecord-4.1.5/lib/active_record/attribute_methods.rb:208:in `method_missing'
@@ -1072,7 +1074,7 @@ NoMethodError: undefined method `paras_bisse' for #<User:0x000001059cb0c0>
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/console.rb:90:in `start'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/console.rb:9:in `start'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/railties-4.1.5/lib/rails/commands/commands_tasks.rb:69:in `console'
-2.2.1 :070 >
+>
 ```
 
 on tästä seurauksena se, että Ruby-tulkki kutsuu olion <code>method_missing</code>-metodia parametrinaan tuntemattoman metodin nimi. Rubyssä kaikki luokat perivät <code>Object</code>-luokan, joka määrittelee <code>method_missing</code>-metodin. Luokkien on sitten tarvittaessa mahdollista ylikirjoittaa tämä metodi ja saada näinollen aikaan "metodeja" joita ei ole olemassa, mutta jotka kutsujan kannalta toimivat aivan kuten normaalit metodit.
@@ -1091,13 +1093,13 @@ Määritellään luokalle <code>User</code> kokeeksi seuraavanlainen <code>metho
 kokeillaan:
 
 ```ruby
-2.2.1 :072 > u.paras_bisse
+> u.paras_bisse
 nonexisting method paras_bisse was called with parameters: []
 NoMethodError: undefined method `paras_bisse' for #<User:0x000001016af8e0>
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activemodel-4.1.5/lib/active_model/attribute_methods.rb:435:in `method_missing'
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activerecord-4.1.5/lib/active_record/attribute_methods.rb:208:in `method_missing'
   from /Users/mluukkai/kurssirepot/ratebeer/app/models/user.rb:30:in `method_missing'
-2.2.1 :073 >
+>
 ```
 
 Eli kuten ylimmältä riviltä huomataan, suoritettiin määrittelemämme <code>method_missing</code>-metodi. Voimmekin ylikirjoittaa method_missingin seuraavasti:
@@ -1118,17 +1120,17 @@ Nyt kaikki <code>favorite_</code>-alkuiset metodikutsut joita ei tunneta tulkita
 Nyt metodit <code>favorite_brewery</code> ja <code>favorite_style</code> "ovat olemassa" ja toimivat:
 
 ```ruby
-2.2.1 :076 > u = User.first
-2.2.1 :077 > u.favorite_brewery.name
+> u = User.first
+> u.favorite_brewery.name
  => "Malmgard"
-2.2.1 :078 > u.favorite_style.name
+> u.favorite_style.name
   => "Baltic porter"
 ```
 
 Ikävänä sivuvaikutuksena metodien määrittelystä method_missing:in avulla  on se, että mikä tahansa favorite_-alkuinen metodi "toimisi", mutta aiheuttaisi kenties epäoptimaalisen virheen.
 
 ```ruby
-2.2.1 :079 > u.favorite_movie
+> u.favorite_movie
 NoMethodError: undefined method `movie' for #<Beer:0x00000105a18690>
   from /Users/mluukkai/.rvm/gems/ruby-2.2.1/gems/activemodel-4.1.5/lib/active_model/attribute_methods.rb:435:in `method_missing'
 ```
