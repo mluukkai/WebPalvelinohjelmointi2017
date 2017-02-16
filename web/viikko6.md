@@ -800,7 +800,7 @@ Emme ole vielä toistaiseksi puhuneet mitään Rails-sovellusten tietoturvasta. 
 >
 > Lue http://guides.rubyonrails.org/security.html
 >
-> Teksti on pitkä mutta asia on tärkeä. Jos haluat optimoida ajankäyttöä, jätä luvut 4, 5 ja 7.4-7.8 lukematta.
+> Teksti on pitkä mutta asia on tärkeä. Jos haluat optimoida ajankäyttöä, jätä luvut 4, 5, 7.4-7.8, 8, 9 ja 10 lukematta.
 >
 > Voit merkata tehtävät tehdyksi kun seuraavat asiat selvillä
 > * SQL-injektio
@@ -838,7 +838,7 @@ Lisätietoa http://www.railsdispatch.com/posts/security ja http://railscasts.com
 
 ## Metaohjelmointia: mielipanimoiden ja tyylin refaktorointi
 
-Viikon 4 [tehtävissä 3 ja 4](ks. https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko4.md#teht%C3%A4v%C3%A4-3)  toteutettiin metodit henkilön suosikkipanimon ja oluttyylin selvittämiseen. Seuraavassa on eräs melko suoraviivainen ratkaisu metodien <code>favorite_style</code> ja <code>favorite_brewery</code> toteuttamiseen:
+Viikon 4 [tehtävissä 3 ja 4](ks. https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko4.md#teht%C3%A4v%C3%A4-3)  toteutettiin metodit henkilön suosikkipanimon ja oluttyylin selvittämiseen. Seuraavassa on eräs (mallivastaus poikkeaa tästä hieman sillä se hyödyntää kokoelmien metodia *group_by*) melko suoraviivainen ratkaisu metodien <code>favorite_style</code> ja <code>favorite_brewery</code> toteuttamiseen:
 
 ```ruby
 class User
