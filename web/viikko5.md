@@ -542,6 +542,9 @@ Luokka siis määrittelee stattisen metodin, joka palauttaa taulukon parametrina
 Kontrollerista tulee nyt siisti:
 
 ```ruby
+# tämä rivi tarvitaan jotta api toimii herokussa ja tarvisissa
+require 'beermapping_api'
+
 class PlacesController < ApplicationController
   def index
   end
@@ -556,6 +559,8 @@ class PlacesController < ApplicationController
   end
 end
 ```
+
+**HUOM:** jotta lib-hakemistoon määritelty _BeermappingApi_ toimisi Herokussa ja Travisissa, tulee koodissa kutsua metodia <code>require 'beermapping_api'</code> .
 
 ## Olutpaikkojen etsimistoiminnon testaaminen
 
