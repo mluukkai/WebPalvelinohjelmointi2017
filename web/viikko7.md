@@ -541,16 +541,41 @@ $(document).ready(function () {
 });
 ```
 
-Javascript-koodimme tulee liitetyksi sovelluksen jokaiselle sivulle. Tästä on se ikävä seuraus, että ollaanpa millä sivulla tahansa, lataa javascript oluiden listan komennon <code>getJSON('beers.json', ...) </code> takia. Viritellään javascript-koodia vielä siten, että oluiden lista käydään lataamassa ainoastaan jos ollaan sivulla josta taulukko <code>beertable</code> löytyy:
+Javascript-koodimme tulee liitetyksi sovelluksen jokaiselle sivulle. Tästä on se ikävä seuraus, että ollaanpa millä sivulla tahansa, lataa javascript oluiden listan komennon <code>getJSON('beers.json', ...) </code> takia. Myös tapahtumakunntelijat yritetään rekisteröidä jokaiselle sivulle vaikka niiden rekisteröinti on mielekästä ainoastaan jos ollaan oluiden listalla.
+
+Viritellään javascript-koodia vielä siten, että <code>$(document).ready</code>:n sisällä oleva koodi suoritetaan ainoastaan jos ollaan sivulla, josta taulukko <code>beertable</code> löytyy:
 
 ```javascript
+$(document).ready(function () {
     if ( $("#beertable").length>0 ) {
+
+      $("#name").click(function (e) {
+          BEERS.sort_by_name();
+          BEERS.show();
+          e.preventDefault();
+      });
+
+      $("#style").click(function (e) {
+          BEERS.sort_by_style();
+          BEERS.show();
+          e.preventDefault();
+      });
+
+      $("#brewery").click(function (e) {
+          BEERS.sort_by_brewery();
+          BEERS.show();
+          e.preventDefault();
+      });
+
+
       $.getJSON('beers.json', function (beers) {
         BEERS.list = beers;
         BEERS.sort_by_name;
         BEERS.show();
       });
+
     }
+});
 ```
 
 Tällä hetkellä trendinä siirtää yhä suurempi osa web-sivujen toiminnallisuudesta selaimeen. Etuna mm. se että web-sovelluksien toiminta saadaan muistuttamaan yhä enenevissä määrin desktop-sovelluksia.
@@ -569,13 +594,19 @@ Javascript-maailma on tällä hetkellä erittäin turbulentissa ja monia turhaut
 
 > ## Tehtävä 3
 >
-> Toteuta edellisten esimerkkien tyyliin javascriptillä  kaikki panimot listaava http:localhost:3000/brewerylist sivu jolla panimot voi järjestää joko aakkos- tai perustamisvuoden mukaiseen järjestykseen tai panimon valmistamien oluiden lukumäärän perusteella. Sivun **ei** tarvitse eritellä lopettaneita panimoita omaan taulukkoonsa.
+> Toteuta edellisten esimerkkien tyyliin javascriptillä  kaikki panimot listaava sivu http:localhost:3000/brewerylist  
+> Sivulla näytetään jokaisesta panimosta nimi, perustusvuosi, panimon valmistamien oluiden lukumäärä ja tieto siitä onko panimo lopettanut. Sivun siis **ei** tarvitse eritellä lopettaneita panimoita omaan taulukkoonsa.
+> Panimoiden järjestäminen toteutetaan vasta seuraavassa tehtäässä.
 >
 > **Muista pitää Javascript-konsoli koko ajan auki tehtävää tehdessäsi!** Voit debugata Javasriptia tulostelemalla konsoliin komennolla <code>console.log()</code>
 >
 > **HUOM:** edellisellä viikolla tekmämme muutoksen takia panimoiden json-lista http://localhost:3000/breweries.json ei toimi, sillä breweries#index-kontrolleri ei enää aseta kaikkien panimoiden listaa muuttujaan <code>@breweries</code>. Korjaa tilanne.
 >
 > **HUOM2:** tehtävä kannattaa tehdä yksi pieni askel kerrallaan, samaan tapaan kuin oluiden lista tehtiin yllä olevassa esimerkissä. Javascriptin debuggaus saattaa olla haasteellista ja **varmin tapa aiheuttaa iso turhautuma onkin yrittää tehdä tehtävä nopeasti copypasteamalla beerlistin koodi**.
+
+> ## Tehtävä 4
+>
+> Laajenna panimoiden listaa siten, että panimot voi järjestää joko aakkos- tai perustamisvuoden mukaiseen järjestykseen tai panimon valmistamien oluiden lukumäärän perusteella. 
 
 ## Selainpuolella toteutetun toiminnallisuuden testaaminen
 
@@ -725,7 +756,7 @@ Tiedämme, että javascriptin pitäisi lisätä sivun taulukkoon rivejä. Saamme
 
 Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon vasta taulukon latauduttua (itseasiassa vain 2 riviä taulukkoa on varmuudella valmiina).
 
-> ## Tehtävä 4
+> ## Tehtävä 5
 >
 > Tee testi joka varmistaa, että oluet ovat beerlist-sivulla oletusarvoisesti nimen mukaan aakkosjärjestyksessä
 >
@@ -745,7 +776,7 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 >
 > Rivin sisältöä voi testata normaaliin tapaan expect ja have_content -metodeilla.
 
-> ## Tehtävä 5
+> ## Tehtävä 6
 >
 > Tee testit seuraaville toiminnallisuuksille
 > * klikattaessa saraketta 'style' järjestyvät oluet tyylin nimen mukaiseen aakkosjärjestykseen
@@ -787,9 +818,8 @@ Lisää asset pipelinestä ja mm. javascriptin liittämisestä railssovelluksiin
 * http://railscasts.com/episodes/279-understanding-the-asset-pipeline
 * http://railsapps.github.io/rails-javascript-include-external.html
 
-#####################
 
-> ## Tehtävä 6-8 (kolmen tehtävän arvoinen)
+> ## Tehtävät 7-9 (kolmen tehtävän arvoinen)
 >
 > ### Tehtävä on hieman työläs, joten tee ensin helpommat pois alta. Muut viikon tehtävät eivät riipu tästä tehtävästä.
 >
@@ -995,7 +1025,7 @@ Muutetaan seuraavaa tehtävää varten kaikki käyttäjät listaava template  mu
 
 Huomaa, että elementin <code>td</code> sisällä olevan if:in ehdon toimivuus riippuu siitä miten olet nimennyt asioita viikolla 5 tehdyn tehtävän koodissa. Voit tarvittaessa poistaa koko ehdon.
 
-> ## Tehtävä 9
+> ## Tehtävä 10
 >
 > Muutos aiheuttaa n+1-ongelman käyttäjien sivulle. Korjaa ongelma edellisen esimerkin tapaan eager loadaamalla tarvittavat oliot käyttäjien hakemisen yhteydessä. Varmista optimointisi onnistuminen miniprofilerilla.
 
@@ -1315,7 +1345,7 @@ Nyt sivun yläreunaan tulee laatikko, joka kertoo välimuistifragmenttien tilan,
 
 **Huom3:** koska debuglaatikko on sivun yläreunassa eli ennen  fragmentin mahdollisesti generoivaa koodia, **tulee sivu aina reloadata**, jotta debuglaatikko näyttäisi fragmenttien ajantasaisen tilanteen.
 
-> ## Tehtävä 10
+> ## Tehtävä 11
 >
 > Toteuta panimot listaavalle sivulle fragmentticachays. Varmista, että sivun sisältöön vaikuttava muutos ekspiroi cachen. Voit jättää huomiotta tehtävässä 2 tehdyn lisäyksen, jonka avulla järjestys saadaan muutettua päinvastaiseksi klikkaamalla sarakkeen nimeä uudelleen.
 
@@ -1384,7 +1414,7 @@ end
 
 Käytännössä <code>belongs_to</code>-yhteyteen liitetty <code>touch: true</code> saa aikaan sen, että yhteyden toisessa päässä olevan olion kenttä <code>updated_at</code> päivittyy.
 
-> ## Tehtävä 11
+> ## Tehtävä 13
 >
 > Toteuta yksittäisen panimon sivulle fragmentticachays. Huomaa, että edellisen esimerkin tapaan panimon sivufragmentin on ekspiroiduttava automaattisesti jos panimon oluisiin tulee muutoksia.
 
@@ -1515,7 +1545,7 @@ Autentikointi tapahtuu OAuth2-standardia (ks. https://tools.ietf.org/html/draft-
 
 OAuth-pohjainen autentikaatio onnistuu Railsilla helposti Omniauth-gemien avulla, ks. http://www.omniauth.org/ Jokaista palveluntarjoajaa kohti on nykyään olemassa oma geminsä, esim. [omniauth-github](https://github.com/intridea/omniauth-github)
 
-> ## Tehtävä 13
+> ## Tehtävä 14
 >
 > Lisää sovellukseen mahdollisuus käyttää sitä GitHub-tunnuksilla. Etene seuraavasti:
 > * Kirjaudu GitHubiin ja mene [setting-sivulle](https://github.com/settings/profile). Valitse vasemmalta _oauth applications_, valitse välilehti _Developer applications_ ja klikkaa _Register new Application_, määrittele _homepage urliksi_ http://localhost:3000 ja _authorization callback urliksi_ http://localhost:3000/auth/github/callback
@@ -1565,7 +1595,7 @@ Jo meille tutuksi tullut <code>Rails.cache</code> on oikeastaan yksinkertainen a
 Uusien tietokantatyyppien noususta huolimatta relaatiotietokannat tulevat kuitenkin säilymään ja on todennäköistä että isommissa sovelluksissa on käytössä rinnakkain erilaisia tietokantoja, ja kuhunkin talletustarkoitukseen pyritään valitsemaan tilanteeseen parhaiten sopiva tietokantatyyppi, ks.
 http://www.martinfowler.com/bliki/PolyglotPersistence.html
 
-> ## Tehtävä 14
+> ## Tehtävä 15
 >
 > Kurssi on tehtävien osalta ohi ja on aika antaa kurssipalaute osoitteessa https://ilmo.cs.helsinki.fi/kurssit/servlet/Valinta
 
