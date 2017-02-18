@@ -106,9 +106,11 @@ joka toimii oleellisesti samoin kuin seuraava
 
 > ## Tehtävä 1
 >
-> Muuta panimot listaavaa sivua siten, että panimot voidaan järjestää nimen mukaiseen aakkosjärjestykseen tai perustamisvuoden mukaiseen järjestykseen. Nimenmukainen järjestys on oletusarvoinen. Viime viikolla laajensimme panimoiden listaa siten että aktiiviset ja lopettaneet panimot ovat omalla listallaan. Voit toteuttaa toiminnallisuuden siten, että molempien listojen järjestys on aina sama.
+> Muuta panimot listaavaa sivua siten, että panimot voidaan järjestää nimen mukaiseen aakkosjärjestykseen tai perustamisvuoden mukaiseen järjestykseen. Nimen mukainen järjestys on oletusarvoinen. Viime viikolla laajensimme panimoiden listaa siten että aktiiviset ja lopettaneet panimot ovat omalla listallaan. Voit toteuttaa toiminnallisuuden siten, että molempien listojen järjestys on aina sama.
 
 > ## Tehtävä 2
+>
+> **HUOM** Tämä tehtävä saattaa olla haastava saada toimimaan oikein. Älä jumita tähän tehtävään, seuraavat tehtävät eivät riipu tästä tehtävästä.
 >
 > Laajenna panimoiden järjestämistoimintoa siten, että jos panimot ovat esim. vuoden mukaan järjestettyjä eli saraketta _year_ on klikattu ja saraketta klikataan heti perään toistamiseen, järjestetään panimot vuoden mukaan käänteiseen järjestykseen.
 >
@@ -227,7 +229,7 @@ Seurauksena on virheilmoitus:
 
 Eli ihan automaattisesti jsonit eivät synny, loimme kaiken reittaukseen liittyvän koodin käsin, ja kuten virheilmoituksesta voimme päätellä, formaatille 'json' ei ole olemassa sopivaa templatea.
 
-Huomaamme, että scaffoldilla luotujen resurssien, esim oluen views-hakemistosta löytyy joukko _json.jbuilder-päätteisiä templateja, ja kuten arvata saattaa, käyttää Rails näitä jos resurssi halutaan json-muotoisena.
+Huomaamme, että scaffoldilla luotujen resurssien, esim oluen views-hakemistosta löytyy joukko _json.jbuilder_-päätteisiä templateja, ja kuten arvata saattaa, käyttää Rails näitä jos resurssi halutaan json-muotoisena.
 
 Ottamalla mallia templatesta app/views/beers/index.json.jbuilder teemme reittauksille seuraavan json.jbuilder-templaten (tiedosto on siis app/views/ratings/index.json.jbuilder):
 
@@ -419,7 +421,7 @@ BEERS.show = function(){
 
 Eli ensin koodi tallettaa viitteen taulukkoon muuttujana <code>table</code> ja lisää sinne <code>append</code>-komennolla uuden rivin kutakin olutta varten.
 
-Laajennetaan sitten metodia näyttämään kaikki tiedot oluista. Huomaamme kuitenkin, että oluiden json-muotoisessa listassa ei ole panimosta muuta tietoa kuin olioiden id:t, haluaisimme kuitenkin näyttää panimon nimen. Oluttyylin tiedot löytyvät kokonaisuudessaan jsonista jo nyt.
+Laajennetaan sitten metodia näyttämään kaikki tiedot oluista. Huomaamme kuitenkin, että oluiden json-muotoisessa listassa <http://localhost:3000/beers.json> ei ole panimosta muuta tietoa kuin olioiden id:t, haluaisimme kuitenkin näyttää panimon nimen. Oluttyylin tiedot löytyvät kokonaisuudessaan jsonista jo nyt.
 
 Ongelma on onneksi helppo ratkaista muokkaamalla oluiden listan tuottavaa json-jbuildertemplatea. Template näyttää nyt seuraavalta:
 
@@ -553,244 +555,19 @@ Javascript-koodimme tulee liitetyksi sovelluksen jokaiselle sivulle. Tästä on 
 
 Tällä hetkellä trendinä siirtää yhä suurempi osa web-sivujen toiminnallisuudesta selaimeen. Etuna mm. se että web-sovelluksien toiminta saadaan muistuttamaan yhä enenevissä määrin desktop-sovelluksia.
 
-## AngularJS
+## AngularJS ja React 
 
-Äsken javascriptillä toteuttamamme oluet listaava sivu oli koodin rakenteen puolesta ihan kohtuullista, mutta Railsin sujuvuuteen ja vaivattomuuteen verrattuna koodi oli raskaahkoa ja paikoin ikävien, rutiininomaisten yksityiskohtien täyttämää.
+Äsken javascriptillä toteuttamamme oluet listaava sivu oli koodin rakenteen puolesta ihan kohtuullista, mutta Railsin sujuvuuteen ja vaivattomuuteen verrattuna koodi oli raskaahkoa ja paikoin ikävien, rutiininomaisten yksityiskohtien täyttämää. Jos sovelluksen selainpuolella toteutettavan koodin määrä alkaa kasvaa, on lopputuloksena helposti sekava koodi, jonka toiminnasta kukaan ei enää ota selvää ja jonka laajentaminen muuttuu erittäin vaikeammaksi.
 
-Katsotaan seuraavassa, miten sama toiminnallisuus toteutettaisiin viime aikoina suurta suosiota saaneen selainpuolen MVC (tai MVW, model view whatever... niinkuin Angularin kehittäjä on itse todennut) -sovelluskehyksen [AnglarJS](http://angularjs.org/)  avulla. Angularissa on Railsin tavoin sopivasti sujuvuutta ja magiaa, ja monet Rails-yhteisön jäsenet ovatkin siirtyneet enenevissä määrin kirjoittamaan sovellusten selainpuolen toiminnallisuuden Angularilla.
+Javascript-sovelluskehykset tuovat asiaan helpotusta. Viime vuoden [materiaalissa](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko7.md#angularjs) tutustuimme nopeasti [AngularJS](https://angularjs.org)-kirjastoon. AngularJS oli hetken maailman ylivoimaisesti suosituin Javascript-sovelluskehys, mutta version [2.0](https://angular.io) ilmestymisen jälkeen se menetti nopeasti asemansa [React](https://facebook.github.io/react/)-nimiselle kirjastolle. 
 
-Käytämme Angularin versiota 1.4. Angularista on pian versio 2.0 joka ei ole taaksepäin yhteensopiva. Eli tässä luvussa tehty koodi ei tule toimimaan Angular 2.0:lla.
+[React](https://facebook.github.io/react/) on tällä hetkellä hypekäyrän huipuilla. Reactin käyttö on kuitenkin siinä määrin kompleksista että emme tällä kurssilla voi tutustua siihen edes pintapuolisesti.
 
-Tehdään toiminnallisuutta varten uusi reitti tiedostoon routes.rb:
-
-    get 'ngbeerlist', to:'beers#nglist'
-
-ja tyhjä kontrollerimetodi:
-
-```ruby
-class BeersController < ApplicationController
-  # muut before_actionit säilyvät ennallaan
-  before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
-
-  def nglist
-  end
-```
-
-Tehdään tällä kertaa javascript-koodi näkymätemplaten sisään sijoitettavaan script-tagiin (tämä ei todellakaan ole suositeltava käytäntö!). Koodin voi halutessaan siirtää omaan tiedostoonsa.
-
-Näkymän app/views/beers/nglist.html.erb ensimmäinen versio on seuraavassa:
-
-```javascript
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
-<script>
-  var myApp = angular.module('myApp', []);
-
-  myApp.controller("BeersController", function ($scope, $http) {
-    $scope.teksti = "Hello Angular!"
-  });
-</script>
-
-<h2>Beers</h2>
-
-<div ng-app="myApp" ng-controller="BeersController">
-
-  {{teksti}}
-
-</div>
-```
-
-Script-tagissa oleva Javascript-koodi luo ensin Angular-moduulin _myApp_ ja määrittelee tämän jälkeen moduuliin kontrollerifunktion _BeersController_.
-
-Sivulla olevan div-tagin sisällä määritellään että kyseessä on <code>ng-app</code> eli Angular-sovellus, jonka määrittelee Angular-moduuli _"myApp"_. Div-tagin sisällä oleva HTML-koodi määritellään kontrollerimetodin <code>BeersController</code> hallinnoivaksi.
-
-Huomaamme, että kontrollerimetodi asettaa muuttujan <code>$scope</code> kentän <code>teksti</code> arvoksi merkkijonon "Hello Angular!". Kaikki <code>$scope</code>-muttujan kentät ovat käytettävissä kontrollerin hallinnoimassa näkymässä. Näkymä sisältää nyt erikoiselta näyttävän merkinnän <code>{{teksti}}</code>. Kun selain renderöi sivun käyttäjälle, tupla-aaltosulkujen sisällä oleva Angular-koodi suoritetaan ja sen tulos renderöityy ruudulle. Ruudulle siis renderöityy kontrollerin muuttujaan sijoittama merkkijono.
-
-Muutetaan koodia seuraavasti:
-
-```javascript
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
-<script>
-  var myApp = angular.module('myApp', []);
-
-  myApp.controller("BeersController", function ($scope, $http) {
-    $scope.beers = [{"id":6,"name":"Hefeweizen","style":{"name":"Weizen"},"brewery":{"name":"Weihenstephaner"}},{"id":7,"name":"Helles","style":{"name":"European pale lager"},"brewery":{"name":"Weihenstephaner"}},{"id":4,"name":"Huvila Pale Ale","style":{"name":"American pale ale"},"brewery":{"name":"Malmgard"}}];
-  });
-</script>
-
-<h2>Beers</h2>
-
-<div ng-app="myApp" ng-controller="BeersController">
-
-  <ul>
-    <li ng-repeat="beer in beers">
-      {{beer.name}} brewed by {{beer.brewery.name}}
-    </li>
-  </ul>
-
-</div>
-```
-
-Nyt selaimeen renderöityy lista oluita panimoineen. Koodin ydin on seuraava
-
-```javascript
-<li ng-repeat="beer in beers">
-   {{beer.name}} brewed by {{beer.brewery.name}}
-</li>
-```
-
-Angularin _ng-repeat_ komento (tai direktiivi) luo jokaiselle kontrollerin scopeen asettaman taulukon <code>beers</code> alkiolle oman li-tagin. Taulukon alkioihin viitataan tagin sisällä nimellä <code>beer</code>. Kuten huomaamme, ero Railsin näkymätemplateihin ei ole suuri. Huomattava ero tietenkin on se, että kaikki tapahtuu nyt selaimessa.
-
-Angularin avulla on hyvin helppo hakea json-muotoinen data palvelimelta. Riittää, että muutetaan kontrollerifunktiota seuraavasti:
-
-```javascript
-  myApp.controller("BeersController", function ($scope, $http) {
-    $http.get('beers.json').success( function(data, status, headers, config) {
-      $scope.beers = data;
-    });
-  });
-```
-
-<code>$http.get</code> tekee niinkuin olettaa saattaa GET-kutsun parametrina olevaan osoitteeseen. Rekisteröity takaisinkutsufunktio asettaa palvelimelta tulevan datan scopen muuttujaan <code>beers</code>.
-
-Muutetaan sitten näkymätemplatea siten, että listan sijaan oluet näytetään taulukossa:
-
-```html
-<div ng-app="myApp" ng-controller="BeersController">
-
-  <table class="table table-hover">
-    <thead>
-    <th> <a>name</a> </th>
-    <th> <a>style</a> </th>
-    <th> <a>brewery</a> </th>
-    </thead>
-    <tr ng-repeat="beer in beers">
-      <td>{{beer.name}}</td>
-      <td>{{beer.style.name}}</td>
-      <td>{{beer.brewery.name}}</td>
-    </tr>
-  </table>
-
-</div>
-```
-
-Lisäsimme myös järjestämistä varten otsikot jotka ovat a-tagin sisällä, eli linkkejä. Lisätään sitten järjestämistä varten tarvittava magia:
-
-```javascript
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
-<script>
-   var myApp = angular.module('myApp', []);
-
-   myApp.controller("BeersController", function ($scope, $http) {
-        $http.get('beers.json').success( function(data, status, headers, config) {
-            $scope.beers = data;
-        });
-
-        $scope.order = 'name';
-
-        $scope.sort_by = function (order) {
-            $scope.order = order;
-            console.log(order);
-        }
-   });
-</script>
-
-<h2>Beers</h2>
-
-<div ng-app="myApp" ng-controller="BeersController">
-
-  <table class="table table-hover">
-    <thead>
-    <th> <a ng-click="sort_by('name')">name</a> </th>
-    <th> <a ng-click="sort_by('style.name')">style</a> </th>
-    <th> <a ng-click="sort_by('brewery.name')">brewery</a> </th>
-    </thead>
-    <tr ng-repeat="beer in beers| orderBy:order">
-      <td>{{beer.name}}</td>
-      <td>{{beer.style.name}}</td>
-      <td>{{beer.brewery.name}}</td>
-    </tr>
-  </table>
-
-</div>
-```
-
-Lisäsimme koodiin muutaman asian. Määrittelimme scopeen metodin <code>sort_by</code>, jota klikkaamalla voidaan määritellä scopeen lisätyn muuttujan <code>order</code> arvo. Oletusarvoisesti arvona on 'name', mutta klikkaamalla panimosarakkeen otsikkoa, muuttuu arvoksi 'brewery.name' ja vastaavasti klikkaamalla tyylisarakkeen otsikkoa arvoksi muuttuu 'style.name'. ng-repeatiin on tehty seuraava lisäys:
-
-```javascript
-ng-repeat="beer in beers| orderBy:order"
-```
-
-Nyt muuttujassa oleva kokoelma <code>beers</code> järjestetään <code>orderBy</code>-filtterin avulla muuttujan <code>order</code> arvon nimisen kentän perusteella.
-
-Tehdään vielä bonuksena sovellukseen ominaisuus, jonka avulla näytettävien oluiden listan voi rajata:
-
-```javascript
-<script>
-  var myApp = angular.module('myApp', []);
-
-  myApp.controller("BeersController", function ($scope, $http) {
-    $http.get('beers.json').success( function(data, status, headers, config) {
-      $scope.beers = data;
-    });
-
-    $scope.order = 'name';
-
-    $scope.sort_by = function (order){
-      $scope.order = order;
-      console.log(order);
-    }
-
-    $scope.searchText = '';
-  });
-</script>
-
-<h2>Beers</h2>
-
-<div ng-app="myApp" ng-controller="BeersController">
-
-  search:  <input ng-model="searchText">
-
-  <table class="table table-hover">
-    <thead>
-    <th> <a ng-click="sort_by('name')">name</a> </th>
-    <th> <a ng-click="sort_by('style.name')">style</a> </th>
-    <th> <a ng-click="sort_by('brewery.name')">brewery</a> </th>
-    </thead>
-    <tr ng-repeat="beer in beers| orderBy:order | filter:searchText">
-      <td>{{beer.name}}</td>
-      <td>{{beer.style.name}}</td>
-      <td>{{beer.brewery.name}}</td>
-    </tr>
-  </table>
-
-</div>
-```
-
-ng-repeatiin on lisätty vielä yksi filtteri, nimeltään <code>filter</code> joka rajaa kokoelmasta näytettävät olit niihin joissa esiintyy filtterin parametrina olevassa scopen muuttujassa <code>searchText</code> oleva merkkijono.
-
-Etsintää rajoittava merkkijono syötetään input-tagin avulla:
-
-```javascript
-<input ng-model="searchText">
-```
-
-Kuten huomaat, Angularin magia päivittää scopessa olevan muuttujan <code>searchText</code> arvoa samalla kuin kirjoitat tekstiä hakukenttään.
-
-Jos kiinnostus heräsi, jatka tutustumista esim. seuraavasta:
-http://docs.angularjs.org/tutorial
-
-[Angular-harjoitustyötä varten kirjotettu tutoriaali](https://github.com/tuhoojabotti/AngularJS-ohjelmointiprojekti-k2014/blob/master/material/aloitusluento.md) voi myös olla hyödyllinen. Tutoriaalissa rakennetaan Angularilla sivu, joka käyttää Railsia backendinä.
-
-Angularin oppimiskäyrä on "jääkiekkomailamainen", alkuun pääsee aika helposti, mutta kehys on laaja ja sen täysimittainen hallinta vaatii pitkäjänteistä perehtymistä. Onneksi Angularin käyttö ei ole kaikki tai ei mitään -ratkaisu. Mikään ei estä Angularin varovaista käyttöönottoa, esim. rikastamalla sivujen joitain osia Angularilla ja tuottamalla osa sisällöstä Railsin templatejen avulla palvelinpuolella. Näin on toimittu esim. kurssin laskaristatistiikkasivulla http://wadrorstats2017.herokuapp.com/, missä graafien piirtäminen hoidetaan Angularin ja GoogleChartsin avulla.
-
-Ei ole vakiintunutta parasta käytännettä miten Rails+AngularJS-projetki kannattaisi organisoida. Eräs hyvä näkemys asiasta on seuraavassa
-http://rockyj.in/2013/10/24/angular_rails.html
-
-Kannattaa kuitenkin pitää mielessä, että Angular 2.0 ilmestyy pian ja saattakin olla parasta opetella heti käyttämään uutta versiota.
+Jos olet kiinnostunut Reactista ja haluat käyttää sitä esim. periodin 4 [harjoitustyössä](), voit tutustua aiheeseen seuraavassa pienessä tutoriaalissa <https://github.com/mluukkai/reactbeer>. Reactbeerissä käydään läpi myös muutamia asioita, joita tulee huomioida siinä tapauksessa jos Railsia käytetään ensisijaisesti _json-muotoista_ dataa tarjoavana "backendinä".
 
 > ## Tehtävä 3
 >
-> Toteuta edellisten esimerkkien tyyliin javascriptillä (JQueryllä tai AngularJS:llä) kaikki panimot listaava http:localhost:3000/brewerylist sivu jolla panimot voi järjestää joko aakkos- tai perustamisvuoden mukaiseen järjestykseen tai panimon valmistamien oluiden lukumäärän perusteella. Sivun **ei** tarvitse eritellä lopettaneita panimoita omaan taulukkoonsa.
+> Toteuta edellisten esimerkkien tyyliin javascriptillä  kaikki panimot listaava http:localhost:3000/brewerylist sivu jolla panimot voi järjestää joko aakkos- tai perustamisvuoden mukaiseen järjestykseen tai panimon valmistamien oluiden lukumäärän perusteella. Sivun **ei** tarvitse eritellä lopettaneita panimoita omaan taulukkoonsa.
 >
 > Muista pitää Javascript-konsoli koko ajan auki tehtävää tehdessäsi! Voit debugata Javasriptia tulostelemalla konsoliin komennolla <code>console.log()</code>
 >
