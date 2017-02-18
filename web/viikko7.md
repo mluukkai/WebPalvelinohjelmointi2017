@@ -575,7 +575,7 @@ Javascript-maailma on tällä hetkellä erittäin turbulentissa ja monia turhaut
 >
 > **HUOM:** edellisellä viikolla tekmämme muutoksen takia panimoiden json-lista http://localhost:3000/breweries.json ei toimi, sillä breweries#index-kontrolleri ei enää aseta kaikkien panimoiden listaa muuttujaan <code>@breweries</code>. Korjaa tilanne.
 >
-> **HUOM2:** tehtävä kannattaa tehdä yksi pieni askel kerrallaan, samaan tapaan kuin oluiden lista tehtiin yllä olevassa esimerkissä. Javascriptin debuggaus saattaa olla haasteellista ja varmin tapa aiheuttaa iso turhautuma onkin yrittää tehdä tehtävä nopeasti copypasteamalla beerlistin koodi.
+> **HUOM2:** tehtävä kannattaa tehdä yksi pieni askel kerrallaan, samaan tapaan kuin oluiden lista tehtiin yllä olevassa esimerkissä. Javascriptin debuggaus saattaa olla haasteellista ja **varmin tapa aiheuttaa iso turhautuma onkin yrittää tehdä tehtävä nopeasti copypasteamalla beerlistin koodi**.
 
 ## Selainpuolella toteutetun toiminnallisuuden testaaminen
 
