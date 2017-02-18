@@ -557,19 +557,21 @@ Tällä hetkellä trendinä siirtää yhä suurempi osa web-sivujen toiminnallis
 
 ## AngularJS ja React 
 
-Äsken javascriptillä toteuttamamme oluet listaava sivu oli koodin rakenteen puolesta ihan kohtuullista, mutta Railsin sujuvuuteen ja vaivattomuuteen verrattuna koodi oli raskaahkoa ja paikoin ikävien, rutiininomaisten yksityiskohtien täyttämää. Jos sovelluksen selainpuolella toteutettavan koodin määrä alkaa kasvaa, on lopputuloksena helposti sekava koodi, jonka toiminnasta kukaan ei enää ota selvää ja jonka laajentaminen muuttuu erittäin vaikeammaksi.
+Äsken javascriptillä toteuttamamme oluet listaava sivu oli koodin rakenteen puolesta ihan kohtuullista, mutta Railsin sujuvuuteen ja vaivattomuuteen verrattuna koodi oli raskaahkoa ja paikoin ikävien, rutiininomaisten yksityiskohtien täyttämää. Jos sovelluksen selainpuolella toteutettavan koodin määrä alkaa kasvaa, on lopputuloksena helposti sekava koodi, jonka toiminnasta kukaan ei enää ota selvää ja jonka laajentaminen muuttuu erittäin haastavaksi.
 
-Javascript-sovelluskehykset tuovat asiaan helpotusta. Viime vuoden [materiaalissa](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko7.md#angularjs) tutustuimme nopeasti [AngularJS](https://angularjs.org)-kirjastoon. AngularJS oli hetken maailman ylivoimaisesti suosituin Javascript-sovelluskehys, mutta version [2.0](https://angular.io) ilmestymisen jälkeen se menetti nopeasti asemansa [React](https://facebook.github.io/react/)-nimiselle kirjastolle. 
+Javascript-frontendsovelluskehykset tuovat asiaan helpotusta. Viime vuoden [materiaalissa](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko7.md#angularjs) tutustuimme nopeasti [AngularJS](https://angularjs.org)-kirjastoon. AngularJS oli hetken maailman ylivoimaisesti suosituin fronendsovelluskehys, mutta version [2.0](https://angular.io) ilmestymisen jälkeen se menetti nopeasti asemansa [React](https://facebook.github.io/react/)-nimiselle kirjastolle. 
 
 [React](https://facebook.github.io/react/) on tällä hetkellä hypekäyrän huipuilla. Reactin käyttö on kuitenkin siinä määrin kompleksista että emme tällä kurssilla voi tutustua siihen edes pintapuolisesti.
 
-Jos olet kiinnostunut Reactista ja haluat käyttää sitä esim. periodin 4 [harjoitustyössä](), voit tutustua aiheeseen seuraavassa pienessä tutoriaalissa <https://github.com/mluukkai/reactbeer>. Reactbeerissä käydään läpi myös muutamia asioita, joita tulee huomioida siinä tapauksessa jos Railsia käytetään ensisijaisesti _json-muotoista_ dataa tarjoavana "backendinä".
+Jos olet kiinnostunut Reactista ja haluat käyttää sitä esim. periodin 4 [harjoitustyössä](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/projekti), voit tutustua aiheeseen osoitteesta <https://github.com/mluukkai/reactbeer> löytyvässä pienessä tutoriaalissa. Reactbeerissä käydään läpi myös muutamia asioita, joita tulee huomioida siinä tapauksessa että Railsia käytetään ensisijaisesti _json-muotoista_ dataa tarjoavana "backendinä".
+
+Javascript-maailma on tällä hetkellä erittäin turbulentissa tilassa. React näyttää juuri nyt siltä hevoselta minkä varaan rahat kannattaa pelata. Vuoden tai parin päästä tilanne voi jo olla ihan toinen. Juuri tällä hetkellä eniten js-hipsterien silmissä asemiaan nostava frontendsovelluskehys on <https://vuejs.org>. 
 
 > ## Tehtävä 3
 >
 > Toteuta edellisten esimerkkien tyyliin javascriptillä  kaikki panimot listaava http:localhost:3000/brewerylist sivu jolla panimot voi järjestää joko aakkos- tai perustamisvuoden mukaiseen järjestykseen tai panimon valmistamien oluiden lukumäärän perusteella. Sivun **ei** tarvitse eritellä lopettaneita panimoita omaan taulukkoonsa.
 >
-> Muista pitää Javascript-konsoli koko ajan auki tehtävää tehdessäsi! Voit debugata Javasriptia tulostelemalla konsoliin komennolla <code>console.log()</code>
+> **Muista pitää Javascript-konsoli koko ajan auki tehtävää tehdessäsi!** Voit debugata Javasriptia tulostelemalla konsoliin komennolla <code>console.log()</code>
 >
 > **HUOM:** edellisellä viikolla tekmämme muutoksen takia panimoiden json-lista http://localhost:3000/breweries.json ei toimi, sillä breweries#index-kontrolleri ei enää aseta kaikkien panimoiden listaa muuttujaan <code>@breweries</code>. Korjaa tilanne.
 
