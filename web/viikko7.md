@@ -565,7 +565,7 @@ Javascript-frontendsovelluskehykset tuovat asiaan helpotusta. Viime vuoden [mate
 
 Jos olet kiinnostunut Reactista ja haluat käyttää sitä esim. periodin 4 [harjoitustyössä](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/projekti), voit tutustua aiheeseen osoitteesta <https://github.com/mluukkai/reactbeer> löytyvässä pienessä tutoriaalissa. Reactbeerissä käydään läpi myös muutamia asioita, joita tulee huomioida siinä tapauksessa että Railsia käytetään ensisijaisesti _json-muotoista_ dataa tarjoavana "backendinä".
 
-Javascript-maailma on tällä hetkellä erittäin turbulentissa tilassa. React näyttää juuri nyt siltä hevoselta minkä varaan rahat kannattaa pelata. Vuoden tai parin päästä tilanne voi jo olla ihan toinen. Juuri tällä hetkellä eniten js-hipsterien silmissä asemiaan nostava frontendsovelluskehys on <https://vuejs.org>. 
+Javascript-maailma on tällä hetkellä erittäin turbulentissa ja monia turhauttavassa tilassa (ks. esim. <http://thefullstack.xyz/javascript-fatigue/>, <https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f#.vg5ddumd2>). React näyttää juuri nyt siltä hevoselta minkä varaan rahat kannattaa pelata. Vuoden tai parin päästä tilanne voi jo olla ihan toinen. Juuri tällä hetkellä eniten js-hipsterien silmissä asemiaan nostava frontendsovelluskehys on <https://vuejs.org>. 
 
 > ## Tehtävä 3
 >
