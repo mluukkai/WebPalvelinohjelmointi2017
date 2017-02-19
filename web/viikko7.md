@@ -1537,7 +1537,7 @@ Luodaan Sucker Punch -operaatioita varten hakemisto _app/jobs_ (Rails 5 luo hake
 
 eli määritellään Rails lataamaan automaattisesti luomaamme hakemistoon määritelty koodi.
 
-Luodaan nyt Sucker Punch -operatio, eli tiedosto _test_jor.rb_ jolla on seuraava sisältö:
+Luodaan nyt Sucker Punch -operatio, eli tiedosto _test_job.rb_ jolla on seuraava sisältö:
 
 ```ruby
 class TestJob
@@ -1549,7 +1549,7 @@ class TestJob
 end
 ```
 
-Voimme suorittaa operaation antamalla rails-konsolista (tai mistä tahansa sovelluksen koodia) komennon
+Voimme suorittaa operaation antamalla rails-konsolista (tai mistä tahansa kohtaa sovelluksen koodia) komennon
 
 ```ruby
 TestJob.perform_async
@@ -1574,7 +1574,7 @@ class TestJob
 end
 ```
 
-eli nyt operaation suoritus kestää 10 sekuntia. Kun suoritat operaation komennolla <code>TestJob.perform_async</code> huomaat, että pääset takaisin konsoliin välittömästi komennon suorituksen jälkeen (joudut todennäköisesti painamaan enteriä) ja operaation suoritus tapahtuu taustalla, samalla kun voit suorittaa konsolista halutessasi jotain muuta koodia.
+eli nyt operaation suoritus kestää 11 sekuntia. Kun suoritat operaation komennolla <code>TestJob.perform_async</code> huomaat, että pääset takaisin konsoliin välittömästi komennon suorituksen jälkeen (joudut todennäköisesti painamaan enteriä että saat konsolin komentokehotteen näkyviin) ja operaation suoritus tapahtuu taustalla, samalla kun voit suorittaa konsolista halutessasi jotain muuta koodia.
 
 Voit suorittaa operaation myös _synkronisesti_ antamalla komennon <code>TestJob.new.perform</code>. Tällöin joudut odottamaan komennon suorituksen loppuun asti ennen kuin konsoli aktivoituu uudelleen.
 
@@ -1600,9 +1600,11 @@ ja annat komennon <code>TestJob.perform_async</code> operaatio suoritetaan toist
 
 > ## Tehtävä 13
 >
-> Nopeuta ratings-sivun toimintaa. Voit olettaa, että käyttäjät ovat tyytyväisiä eventual consistency -mallin mukaiseen tiedon ajantasaisuuteen.  
+> Nopeuta ratings-sivun toimintaa haluamasi tekniikan. Voit olettaa, että käyttäjät ovat tyytyväisiä eventual consistency -mallin mukaiseen tiedon ajantasaisuuteen.  
 >
 >Kirjoita ratings-kontrollerin <code>index</code>-metodiin pieni selitys nopeutusstrategiastasi jos se ei ole koodin perusteella muuten ilmeistä.
+>
+> Jos päädyt käyttämään asynkronisia workereita, ei koodia ole välttämättä ihan helppoa saada toimimaan täysin oikein.
 
 ## Sovelluksen koostaminen palveluista
 
