@@ -989,7 +989,7 @@ tai määrittelemällä ympäristömuuttujan käynnistyskomennon yhteydessä:
 mluukkai@melkki$ APIKEY="dd3be700f05c183f8dd40f99a451d424" rails s
 ```
 
-Voit myös määritellä ympäristömuuttujan arvon (export-komennolla) komentotulkin käynnistyksen yhteydessä suoritettavassa tiedostossa (.zshrc, .bascrc tai .profile komentotulkista riippuen).
+Voit myös määritellä ympäristömuuttujan arvon (export-komennolla) komentotulkin käynnistyksen yhteydessä suoritettavassa tiedostossa (.zshrc, .bashrc tai .profile komentotulkista riippuen).
 
 Ympäristömuuttujille on helppo asettaa arvo myös Herokussa, ks.
 https://devcenter.heroku.com/articles/config-vars
