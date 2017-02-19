@@ -142,6 +142,8 @@ class BeersController < ApplicationController
 end
 ```
 
+**HUOM** lisäsimme metodin <code>list</code> niiden joita ennen ei tarvitse suorittaa <code>ensure_that_signed_in</code>-metodia, eli oluiden javascriptilla tuotetun listan näkeminen ei edellytä sivulle kirjautumista!
+
 Myös näkymä views/beers/list.html.erb on minimalistinen:
 
 ```erb
@@ -610,7 +612,7 @@ Javascript-maailma on tällä hetkellä erittäin turbulentissa ja monia turhaut
 
 ## Selainpuolella toteutetun toiminnallisuuden testaaminen
 
-Tehdään rspec/capybaralla muutama testi javascriptillä toteutetulle oluiden listalle. Seuraavassa on lähtökohtamme, tiedosto spec/features/beerlist_spec.rb:
+Tehdään rspec/capybaralla muutama testi javascriptillä toteutetulle oluiden listalle. Seuraavassa on lähtökohtamme, tiedosto spec/features/beerlist_page_spec.rb:
 
 ```ruby
 require 'rails_helper'
@@ -635,7 +637,7 @@ describe "Beerlist page" do
 end
 ```
 
-Suoritetaan testi komennolla <code>rspec spec/features/beerlist_spec.rb</code>. Tuloksena on kuitenkin virheilmoitus:
+Suoritetaan testi komennolla <code>rspec spec/features/beerlist_page_spec.rb</code>. Tuloksena on kuitenkin virheilmoitus:
 
 ```ruby
   1) beerlist page Beerlist page shows one known beer
@@ -662,7 +664,7 @@ Ja korjauskin on helppo. Javascriptiä tarvitseviin testeihin riittää lisätä
 
 Jotta selenium saadaan käyttöön, on Gemfilen test-scopeen lisättävä seuraava gem:
 
-    gem 'selenium-webdriver'
+    gem 'selenium-webdriver', '2.53.4'
 
 Suoritetaan <code>bundle install</code>, ja ajetaan testit. Jälleen törmäämme virheilmoitukseen:
 
@@ -766,14 +768,6 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 > find('table').find('tr:nth-child(2)')
 > ``` 
 >
-> tai seuraavasti (huomaa indekstointi!)
->
-> ``` ruby
-> page.all('tr')[1].text
-> ```
->
-> Jostain syystä ensimmäinen muoto ei toiminut Angularilla tehdyillä sivuilla. 
->
 > Rivin sisältöä voi testata normaaliin tapaan expect ja have_content -metodeilla.
 
 > ## Tehtävä 6
@@ -781,9 +775,6 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 > Tee testit seuraaville toiminnallisuuksille
 > * klikattaessa saraketta 'style' järjestyvät oluet tyylin nimen mukaiseen aakkosjärjestykseen
 > * klikattaessa saraketta 'brewery' järjestyvät oluet panimon nimen mukaiseen aakkosjärjestykseen
->
-> **Huom:** napin painaminen komennolla <code>click_link('brewery')</code> ei ehkä toimi Angularilla tehdyillä sivuilla. Klikkaa tällöin komennolla <code>page.all('a', :text => 'brewery').first.click</code>
-
 
 **Huom.** Travis ei osaa suoraan ajaa Selenium-testejä. Ongelmaan löytyy vastaus täältä  http://about.travis-ci.org/docs/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-GUI-(e.g.-a-Web-browser)
 Travisin toimintaansaattaminen muutosten jälkeen on vapaaehtoista.
@@ -831,7 +822,8 @@ Lisää asset pipelinestä ja mm. javascriptin liittämisestä railssovelluksiin
 > * Näytä kerhon sivulla jäsenille lista vahvistamattomana olevista jäsenyyksistä (eli jäsenhakemuksista)
 > * Jäsenyyden statuksen muutos voidaan hoitaa esim. oman [custom-reitin](https://github.com/mluukkai/WebPalvelinohjelmointi2017/blob/master/web/viikko6.md#reitti-panimon-statuksen-muuttamiselle) avulla.
 >
-> Tehtävä saattaa olla hieman haastava. Active Record Associations -guiden luku [4.3.3 Scopes for has_many](http://guides.rubyonrails.org/association_basics.html#controlling-association-scope) tarjoaa erään hyvän työvälineen tehtävään. Tehtävän voi toki tehdä monella muullakin tavalla.
+> Tehtävä saattaa olla hieman haastava. [Active Record Associations -guiden](http://guides.rubyonrails.org/association_basics.html) luku **4.3.3 Scopes for has_many** tarjoaa erään hyvän työvälineen tehtävään. Tehtävän voi toki tehdä monella muullakin tavalla.
+> Myös luku **4.3.2.3 :class_name** voi olla hyödyksi.
 
 Tehtävän jälkeen sovelluksesi voi näyttää esim. seuraavalta. Olutseuran sivulla näytetään lista jäsenyyttä hakeneista, jos kirjautuneena on olutseurassa jo jäsenenä oleva käyttäjä:
 
@@ -1150,7 +1142,7 @@ Cachays ei ole oletusarvoisesti päällä kun sovellusta suoritetaan development
 
     config.action_controller.perform_caching = false
 
-Käynnistä nyt sovellus uudelleen.
+**Käynnistä nyt sovellus uudelleen.**
 
 Päätetään cachata oluiden listan näyttäminen.
 
@@ -1171,25 +1163,25 @@ Fragmentticachayksen lisääminen oluiden listalle views/beers/index.html on hel
 
 <% cache 'beerlist', skip_digest: true do %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th> <%= link_to 'Name', beers_path(order:"name") %> </th>
-      <th> <%= link_to 'Style', beers_path(order:"style") %> </th>
-      <th> <%= link_to 'Brewery', beers_path(order:"brewery") %> </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @beers.each do |beer| %>
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= link_to beer.name, beer %></td>
-        <td><%= link_to beer.style, beer.style %></td>
-        <td><%= link_to beer.brewery.name, beer.brewery %></td>
+        <th> <%= link_to 'Name', beers_path(order:"name") %> </th>
+        <th> <%= link_to 'Style', beers_path(order:"style") %> </th>
+        <th> <%= link_to 'Brewery', beers_path(order:"brewery") %> </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @beers.each do |beer| %>
+        <tr>
+          <td><%= link_to beer.name, beer %></td>
+          <td><%= link_to beer.style, beer.style %></td>
+          <td><%= link_to beer.brewery.name, beer.brewery %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 <% end %>
 
@@ -1414,7 +1406,7 @@ end
 
 Käytännössä <code>belongs_to</code>-yhteyteen liitetty <code>touch: true</code> saa aikaan sen, että yhteyden toisessa päässä olevan olion kenttä <code>updated_at</code> päivittyy.
 
-> ## Tehtävä 13
+> ## Tehtävä 12
 >
 > Toteuta yksittäisen panimon sivulle fragmentticachays. Huomaa, että edellisen esimerkin tapaan panimon sivufragmentin on ekspiroiduttava automaattisesti jos panimon oluisiin tulee muutoksia.
 
@@ -1521,7 +1513,7 @@ Ennen Rails 4:sta Rails-sovellukset toimivat oletusarvoisesti yksisäikeisinä. 
 
 Lisää säikeistettyjen Rails-sovellusten tekemisestä [Rails-castista] (https://www.cs.helsinki.fi/i/mluukkai/365-thread-safety.mp4). Huomaa, että säikeistyksen sallimisen jälkeen on huolehdittava siitä että koodi on säieturvallista!
 
-> ## Tehtävä 12
+> ## Tehtävä 13
 >
 > Nopeuta ratings-sivun toimintaa. Voit olettaa, että käyttäjät ovat tyytyväisiä eventual consistency -mallin mukaiseen tiedon ajantasaisuuteen. Jos haluat voit käyttää taustaprosessointikirjastoja, mutta se ei ole tarpeen, ainakaan Herokuun deployaamista ei tarvita, [sekään ei tosin ole vaikeaa](http://blog.mattheworiordan.com/post/44862390383/running-sidekiq-concurrently-on-a-single-worker). Kirjoita ratings-kontrollerin <code>index</code>-metodiin pieni selitys nopeutusstrategiastasi jos se ei ole koodin perusteella muuten ilmeistä.
 
