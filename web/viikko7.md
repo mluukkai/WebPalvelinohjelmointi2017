@@ -1507,7 +1507,7 @@ Välimuistin päivitys voitaisiin sitten suorittaa omassa taustalla olevassa, ai
 
 Ylläesitellyn kaltainen taustaprosessointitapa on siinä mielessä yksinkertainen, että sovelluksen ja taustaprosessointia suorittavan säikeen/prosessin ei tarvitse synkronoida toimintojaan. Toisinaan taas taustaprosessoinnin tarpeen laukaisee jokin sovellukselle tuleva pyyntö. Tällöin sovelluksen ja taustaprosessoijien välisen synkronoinnin voi hoitaa esim. viestijonojen avulla.
 
-Viestijonoilla ja erillisillä prosesseilla tai säikeillä hoidetun taustaprosessoinnin toteuttamiseen Railsissa on paljon erilaisia vaihtoehtoja, tämän hetken paras ratkaisu näistä on [Sidekiq](http://railscasts.com/episodes/366-sidekiq).
+Viestijonoilla ja erillisillä prosesseilla tai säikeillä hoidetun taustaprosessoinnin toteuttamiseen Railsissa on paljon erilaisia vaihtoehtoja, tämän hetken paras ratkaisu näistä on [Sidekiq](http://railscasts.com/episodes/366-sidekiq). 
 
 Jos sovellus tarvitsee ainoastaan jonkin yksinkertaisen, tasaisin aikavälein suoritettavan taustaoperaation, saattaa [Heroku scheduler](https://devcenter.heroku.com/articles/scheduler) olla yksinkertaisin vaihtoehto. Tällöin taustaoperaatio määritellään [Rake-taskina](http://railscasts.com/episodes/66-custom-rake-tasks), jonka Heroku suorittaa joko kerran vuorokaudessa, tunnissa tai kymmenessä minuutissa.
 
@@ -1515,9 +1515,94 @@ Ennen Rails 4:sta Rails-sovellukset toimivat oletusarvoisesti yksisäikeisinä. 
 
 Lisää säikeistettyjen Rails-sovellusten tekemisestä [Rails-castista] (https://www.cs.helsinki.fi/i/mluukkai/365-thread-safety.mp4). Huomaa, että säikeistyksen sallimisen jälkeen on huolehdittava siitä että koodi on säieturvallista!
 
+## Sucker Punch
+
+Kuten edellä todettiin, paras vaihtoehto asynkronisten operaatioiden suorittamiseen Railsilla on [Sidekiq](http://railscasts.com/episodes/366-sidekiq). Sidekiq kuitenkin vaatii oman prosessinsta, eli esim. Herokussa sidekiqia ei ole helppoa suorittaa varaamatta sille omaa prosessia eli [dynoa](https://devcenter.heroku.com/articles/dynos), ja se taas maksaa vähintään 7 dollaria kuussa.
+
+Ilmaisten Heroku-palveluiden yhteydessä on madollista [Sucker Punch](https://github.com/brandonhilkert/sucker_punch)- kirjastoa:
+
+> Sucker Punch is a single-process Ruby asynchronous processing library. This reduces costs of hosting on a service like Heroku along with the memory footprint of having to maintain additional jobs if hosting on a dedicated server. All queues can run within a single application (eg. Rails, Sinatra, etc.) process.
+
+Eli Sucker Punch suorittaa asynkroniset työt samassa prosessissa, missä itse Rails-sovellustakin suoritetaan. 
+
+Sucker Punchin käyttö on melko helppoa. 
+
+Lisää gemfileen <code>gem 'sucker_punch', '~> 2.0'</code> ja suorita bundle install.
+
+Luodaan Sucker Punch -operaatioita varten hakemisto _app/jobs_ (Rails 5 luo hakemiston oletusarvoisesti). Listätään tiedostoon _application.rb_ seuraava rivi (Rails 5:llä tämä ei ole tarpeen):
+
+```ruby
+    config.autoload_paths += Dir["#{Rails.root}/app/jobs"]
+```
+
+eli määritellään Rails lataamaan automaattisesti luomaamme hakemistoon määritelty koodi.
+
+Luodaan nyt Sucker Punch -operatio, eli tiedosto _test_jor.rb_ jolla on seuraava sisältö:
+
+```ruby
+class TestJob
+  include SuckerPunch::Job
+
+  def perform
+    puts "running job..."
+  end
+end
+```
+
+Voimme suorittaa operaation antamalla rails-konsolista (tai mistä tahansa sovelluksen koodia) komennon
+
+```ruby
+TestJob.perform_async
+```
+
+Operaatio tulostaa konsoliin _running job..._. Ei kovin vakuuttavaa.
+
+Huomionarvoista tässä on kuitenkin se, että operaatio suoritetaan asynkronisesti taustalla, eli kontrolli palaa konsoliin jo ennen kuin operaatio on suoritettu.
+
+Muutetaan operaatiota seuraavasti:
+
+```ruby
+class TestJob
+  include SuckerPunch::Job
+
+  def perform
+    sleep 1
+    puts "starting job..."
+    sleep 10
+    puts "job ready!"
+  end
+end
+```
+
+eli nyt operaation suoritus kestää 10 sekuntia. Kun suoritat operaation komennolla <code>TestJob.perform_async</code> huomaat, että pääset takaisin konsoliin välittömästi komennon suorituksen jälkeen (joudut todennäköisesti painamaan enteriä) ja operaation suoritus tapahtuu taustalla, samalla kun voit suorittaa konsolista halutessasi jotain muuta koodia.
+
+Voit suorittaa operaation myös _synkronisesti_ antamalla komennon <code>TestJob.new.perform</code>. Tällöin joudut odottamaan komennon suorituksen loppuun asti ennen kuin konsoli aktivoituu uudelleen.
+
+Voit myös suorittaa operaatioita ajastetusti, esim. jos annat komennon <code>TestJob.perform_in(10.seconds)</code> suoritetaan operaatio asynkronisesti 10 sekunnin kuluttua.
+
+Asynkroninen operaatio voi käynnistää itse itsensä, eli jos muutat koodin muotoon 
+
+```ruby
+class TestJob
+  include SuckerPunch::Job
+
+  def perform
+    sleep 1
+    puts "starting job..."
+    sleep 10
+    puts "job ready!"
+    TestJob.perform_in(30.seconds)
+  end
+end
+```
+
+ja annat komennon <code>TestJob.perform_async</code> operaatio suoritetaan toistuvasti 30 sekunin välein niin kauan kunnes konsoli suljetaan.
+
 > ## Tehtävä 13
 >
-> Nopeuta ratings-sivun toimintaa. Voit olettaa, että käyttäjät ovat tyytyväisiä eventual consistency -mallin mukaiseen tiedon ajantasaisuuteen. Jos haluat voit käyttää taustaprosessointikirjastoja, mutta se ei ole tarpeen, ainakaan Herokuun deployaamista ei tarvita, [sekään ei tosin ole vaikeaa](http://blog.mattheworiordan.com/post/44862390383/running-sidekiq-concurrently-on-a-single-worker). Kirjoita ratings-kontrollerin <code>index</code>-metodiin pieni selitys nopeutusstrategiastasi jos se ei ole koodin perusteella muuten ilmeistä.
+> Nopeuta ratings-sivun toimintaa. Voit olettaa, että käyttäjät ovat tyytyväisiä eventual consistency -mallin mukaiseen tiedon ajantasaisuuteen.  
+>
+>Kirjoita ratings-kontrollerin <code>index</code>-metodiin pieni selitys nopeutusstrategiastasi jos se ei ole koodin perusteella muuten ilmeistä.
 
 ## Sovelluksen koostaminen palveluista
 
