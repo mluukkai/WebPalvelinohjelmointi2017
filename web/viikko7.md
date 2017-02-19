@@ -1631,7 +1631,7 @@ OAuth-pohjainen autentikaatio onnistuu Railsilla helposti Omniauth-gemien avulla
 > ## Tehtävä 14
 >
 > Lisää sovellukseen mahdollisuus käyttää sitä GitHub-tunnuksilla. Etene seuraavasti:
-> * Kirjaudu GitHubiin ja mene [setting-sivulle](https://github.com/settings/profile). Valitse vasemmalta _oauth applications_, valitse välilehti _Developer applications_ ja klikkaa _Register new Application_, määrittele _homepage urliksi_ http://localhost:3000 ja _authorization callback urliksi_ http://localhost:3000/auth/github/callback
+> * Kirjaudu GitHubiin ja mene [setting-sivulle](https://github.com/settings/profile). Valitse vasemmalta _oauth applications_ ja klikkaa _Register new Application_, määrittele _homepage urliksi_ http://localhost:3000 ja _authorization callback urliksi_ http://localhost:3000/auth/github/callback
 > * asenna [omniauth-github](https://github.com/intridea/omniauth-github) gem
 > * Luo hakemistoon _config/initializers_ tiedosto _omniauth.rb_, jolla on seuraava sisältö:
 > ```ruby
@@ -1659,7 +1659,6 @@ OAuth-pohjainen autentikaatio onnistuu Railsilla helposti Omniauth-gemien avulla
 > * sessiokontrollerin uuteen metodiin tulee kirjoittaa koodi, joka tarkastaa käyttäjän identiteetin ja luo tarvittaessa GitHub-käyttäjää vastaavan <code>User</code>-olion
 > * joudut muokkaamaan <code>User</code>-modelia siten, että sen avulla hoidetaan sekä järjestelmän omaa salasanaa hyödyntävät käyttäjät, että GitHubin kautta kirjautuvat
 > * tällä hetkellä <code>User</code>-olioiden validoinnissa vaaditaan, että olioilla on vähintään 4 merkin mittainen salasana. Joudut tekemään validoinnin ehdolliseksi, siten ettei sitä vaadita GitHubin tunnuksilla kirjautuvalta käyttäjältä (katso apua googlella) tai toinen vaihtoehto on generoida myös GitHubin kautta kirjautuville esim. satunnainen salasana
-> * <code>User</code>-olioiden validoinnissa vaaditaan myös että usernamen pituus on korkeintaan 15 merkkiä. Tämä saattaa muodostaa ongelman jos haluat luoda usernamen GitHubin-kirjautujan nimestä. Kasvata käyttäjätunnuksen maksimipituutta tarvittaessa.
 
 ## NoSQL-tietokannat
 
