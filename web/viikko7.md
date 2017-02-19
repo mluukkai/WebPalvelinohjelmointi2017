@@ -1618,6 +1618,8 @@ Jos haluaisimme esim. että sovelluksemme tekisi käyttäjälle suosikkioluttyyl
 
 Jos haluaisimme vastaavasti, että sovelluksemme näyttäisi käyttäjälle olutsuosituksia käyttäjän oman suosikkityylin perusteella, olisi tämän toiminnallisuuden eriyttäminen omaksi, erillisellä palvelimella toimivaksi palveluksi hieman haastavampaa, sillä suositukset todennäköisesti riippuisivat muiden ihmisten tekemistä reittauksista ja tähän tietoon käsille pääsy taas edellyttäisi olutsuosittelijalta pääsyä sovelluksemme tietokantaan. Eli jos oluiden suosittelija haluttaisiin toteuttaa omana erillisenä palvelunaan, olisi sovelluksemme rakennetta kenties mietittävä kokonaan uudelleen, jotta tieto reittauksista saataisiin jaettua ratebeer-sovelluksen ja olutsuosituspalvelun kesken.
 
+Viime aikoina onkin noussut suosioon tyyli, jossa sovellus koostetaan [mikropalveluista (engl. micro service)](https://martinfowler.com/articles/microservices.html) eli melko pienistä, yhden erillisen tehtävän itsenäisesti hoitavista palveluista. 
+
 ## Single sign on
 
 Monilla sivustoilla on viime aikoina yleistynyt käytäntö, jossa mahdollistetaan sivulle kirjautuminen esim. Google-,  Facebook- tai GitHub-tunnuksilla. Sivustot siis ovat ulkoistaneet käyttäjänhallinnan ja autentikoinnin erillisille palveluille.
