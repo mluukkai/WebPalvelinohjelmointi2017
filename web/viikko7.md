@@ -1341,26 +1341,28 @@ Nyt sivun yläreunaan tulee laatikko, joka kertoo välimuistifragmenttien tilan,
 >
 > Toteuta panimot listaavalle sivulle fragmentticachays. Varmista, että sivun sisältöön vaikuttava muutos ekspiroi cachen. Voit jättää huomiotta tehtävässä 2 tehdyn lisäyksen, jonka avulla järjestys saadaan muutettua päinvastaiseksi klikkaamalla sarakkeen nimeä uudelleen.
 
+## yksittäisen oluen sivun cashays
+
 Jos haluaisimme cachata yksittäisen oluen sivun, kannattaa fragmentin avaimeksi laittaa itse cachattava olio:
 
 ```ruby
 <% cache @beer do %>
 
-    <h2>
-      <%= @beer.name %>
-    </h2>
+  <h2>
+    <%= @beer.name %>
+  </h2>
 
-    <p>
-      <%= link_to @beer.style, @beer.style %>
-      brewed by
-      <%= link_to @beer.brewery.name, @beer.brewery %>
-    </p>
+  <p>
+    <%= link_to @beer.style, @beer.style %>
+    brewed by
+    <%= link_to @beer.brewery.name, @beer.brewery %>
+  </p>
 
-    <% if @beer.ratings.empty? %>
-        <p>beer has not yet been rated! </p>
-    <% else %>
-        <p>Has <%= pluralize(@beer.ratings.count,'rating') %>, average <%= round(@beer.average_rating) %> </p>
-    <% end %>
+  <% if @beer.ratings.empty? %>
+      <p>beer has not yet been rated! </p>
+  <% else %>
+      <p>Has <%= pluralize(@beer.ratings.count,'rating') %>, average <%= round(@beer.average_rating) %> </p>
+  <% end %>
 
 <% end %>
 
@@ -1368,15 +1370,15 @@ Jos haluaisimme cachata yksittäisen oluen sivun, kannattaa fragmentin avaimeksi
 
 <% if current_user %>
 
-    <h4>give a rating:</h4>
+  <h4>give a rating:</h4>
 
-    <%= form_for(@rating) do |f| %>
-        <%= f.hidden_field :beer_id %>
-        score: <%= f.number_field :score %>
-        <%= f.submit class:"btn btn-primary"  %>
-    <% end %>
+  <%= form_for(@rating) do |f| %>
+      <%= f.hidden_field :beer_id %>
+      score: <%= f.number_field :score %>
+      <%= f.submit class:"btn btn-primary"  %>
+  <% end %>
 
-    <p></p>
+  <p></p>
 
 <% end %>
 
