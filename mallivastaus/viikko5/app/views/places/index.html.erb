@@ -5,7 +5,25 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% if @places %>
+<% if @weather %>
+  <h4>The current beer weather in <%= @weather.city %></h4>
+  <img src="<%= @weather.image %>" >
+  <br>
+  <div>
+    <%= @weather.temperature %> Celcius
+  </div>
+  <br>
+  <div>
+    <strong>wind:</strong> 
+      <%= @weather.wind_speed %> m/sec,
+      direction <%= @weather.wind_direction %> 
+  </div>  
+<% end %>
+
+<% if @places and @places.empty?%>
+  <h4>No locations known...</h4>
+<% elsif @places %>
+  <h4>Places to get your beer</h4>
   <table>
     <thead>
       <td>name</td>

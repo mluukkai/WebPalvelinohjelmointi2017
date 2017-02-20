@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/mluukkai/opetus/ratebeer/app/models/rating.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/rating.rb": [
         1,
         1,
         1,
@@ -15,35 +15,35 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/application_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/beer_clubs_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/beer_clubs_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/beers_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/beers_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/breweries_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/breweries_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/memberships_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/memberships_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/styles_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/styles_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/helpers/users_helper.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/helpers/users_helper.rb": [
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/beer.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/beer.rb": [
         1,
         1,
         null,
@@ -65,7 +65,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/concerns/rating_average.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/concerns/rating_average.rb": [
         1,
         1,
         null,
@@ -74,7 +74,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/brewery.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/brewery.rb": [
         1,
         1,
         null,
@@ -87,7 +87,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/user.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/user.rb": [
         1,
         1,
         null,
@@ -143,7 +143,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/styles_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/styles_controller.rb": [
         1,
         1,
         null,
@@ -219,7 +219,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/application_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -237,7 +237,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/style.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/style.rb": [
         1,
         1,
         null,
@@ -246,7 +246,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/sessions_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/sessions_controller.rb": [
         1,
         1,
         null,
@@ -270,7 +270,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/users_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/users_controller.rb": [
         1,
         1,
         null,
@@ -346,19 +346,19 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/membership.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/membership.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/beer_club.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/beer_club.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/beers_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/beers_controller.rb": [
         1,
         1,
         1,
@@ -442,7 +442,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/breweries_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/breweries_controller.rb": [
         1,
         1,
         1,
@@ -520,7 +520,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/lib/beermapping_api.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/lib/beermapping_api.rb": [
         1,
         1,
         9,
@@ -553,7 +553,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/models/place.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/place.rb": [
         1,
         1,
         6,
@@ -568,27 +568,36 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/places_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/lib/weather_service.rb": [
         1,
-        1,
-        null,
-        null,
         1,
         0,
-        null,
-        null,
-        1,
-        3,
-        3,
-        3,
-        1,
-        null,
-        2,
-        null,
+        0,
+        0,
+        0,
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/ratings_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/places_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        3,
+        3,
+        3,
+        3,
+        null,
+        3,
+        null,
+        null
+      ],
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/ratings_controller.rb": [
         1,
         1,
         2,
@@ -619,7 +628,7 @@
         null,
         null
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/beer_clubs_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/beer_clubs_controller.rb": [
         0,
         0,
         0,
@@ -702,7 +711,7 @@
         0,
         0
       ],
-      "/Users/mluukkai/opetus/ratebeer/app/controllers/memberships_controller.rb": [
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/controllers/memberships_controller.rb": [
         0,
         0,
         0,
@@ -771,6 +780,18 @@
         0,
         0,
         0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/mluukkai/opetus/wadror/mallivastaus/viikko5/app/models/weather.rb": [
         0,
         0,
         0,
@@ -783,6 +804,6 @@
         0
       ]
     },
-    "timestamp": 1486574817
+    "timestamp": 1487584496
   }
 }

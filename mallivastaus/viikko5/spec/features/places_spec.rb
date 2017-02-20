@@ -6,6 +6,10 @@ describe "Places" do
       [ Place.new( name:"Oljenkorsi", id: 1 ) ]
     )
 
+    allow(WeatherService).to receive(:weather_for).with("kumpula").and_return(
+      nil
+    )
+
     visit places_path
     fill_in('city', with: 'kumpula')
     click_button "Search"
@@ -22,6 +26,10 @@ describe "Places" do
       ]
     )
 
+    allow(WeatherService).to receive(:weather_for).with("malmi").and_return(
+      nil
+    )
+
     visit places_path
     fill_in('city', with: 'malmi')
     click_button "Search"
@@ -36,9 +44,13 @@ describe "Places" do
       [ ]
     )
 
+    allow(WeatherService).to receive(:weather_for).with("nuorgam").and_return(
+      nil
+    )
+
     visit places_path
     fill_in('city', with: 'nuorgam')
     click_button "Search"
-    expect(page).to have_content "No locations in nuorgam"
+    expect(page).to have_content "No locations known"
   end  
 end
