@@ -1691,7 +1691,7 @@ Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2017.herokuapp.
 
 Jos Rails kiinnostaa, kannattaa tutustumista jatkaa esim. seuraaviin suuntiin
 
-* https://leanpub.com/tr4w The Kirja. Kannattaa __ehdottomasti__ hankkia ja lukea kannesta kanteen
+* https://leanpub.com/tr5w The Kirja. Kannattaa __ehdottomasti__ hankkia ja lukea kannesta kanteen
 * http://guides.rubyonrails.org/ Paljon hyvää asiaa...
 * http://railscasts.com/ erinomaisia yhteen teemaan keskittyviä videoita. Uusia videoita ei valitettavasti ole tullut yli vuoteen, toivottavasti sivu aktivoituu vielä. Useimmat maksulliset pro-episodit näköjään löytyvät youtubesta...
 * https://www.ruby-toolbox.com/ apua gemien etsimiseen
