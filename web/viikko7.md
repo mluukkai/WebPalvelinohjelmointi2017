@@ -1696,3 +1696,6 @@ Jos Rails kiinnostaa, kannattaa tutustumista jatkaa esim. seuraaviin suuntiin
 * http://railscasts.com/ erinomaisia yhteen teemaan keskittyviä videoita. Uusia videoita ei valitettavasti ole tullut yli vuoteen, toivottavasti sivu aktivoituu vielä. Useimmat maksulliset pro-episodit näköjään löytyvät youtubesta...
 * https://www.ruby-toolbox.com/ apua gemien etsimiseen
 * [Eloquent Ruby](http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional-Series/dp/0321584104) erinomainen kirja Rubystä.
+
+Ja jos aikaa ja kiinnostusta riittää, kannattaa osallistua periodilla 4 pidettävään Web-palvelinohjelmointi Ruby on Rails
+[harjoitustyöhön](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/projekti)

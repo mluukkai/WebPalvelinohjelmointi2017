@@ -502,7 +502,7 @@ ja tuloksena olisi SQL-kysely
   SELECT "breweries".* FROM "breweries" WHERE "breweries"."active" = ? AND (year>2000)
 ```
 
-ActiveRecord osaa siis optimoida ketjutetut metodikutsut yhdeksi SQL-operaatioksi. Myös scope toimii osana ketjutusta, eli vuoden 2000 jälkeen persutetut, edelleen aktiiviset panimot saataisiin selville myös seuraavalla 'onlinerilla':
+ActiveRecord osaa siis optimoida ketjutetut metodikutsut yhdeksi SQL-operaatioksi. Myös scope toimii osana ketjutusta, eli vuoden 2000 jälkeen perustetut, edelleen aktiiviset panimot saataisiin selville myös seuraavalla 'onlinerilla':
 
 ```ruby
   Brewery.active.where("year>2000")
