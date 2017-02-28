@@ -1,0 +1,26 @@
+<h1>Beers</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Style</th>
+      <th>Brewery</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @beers.each do |beer| %>
+    <% binding.pry if beer.brewery.nil? %>
+      <tr>
+        <td><%= link_to beer.name, beer %></td>
+        <td><%= beer.style %></td>
+        <td><%= link_to beer.brewery.name, beer.brewery %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to('New Beer', new_beer_path) if current_user %>

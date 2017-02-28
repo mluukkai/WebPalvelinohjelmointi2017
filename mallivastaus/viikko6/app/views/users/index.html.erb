@@ -1,0 +1,19 @@
+<h1>Users</h1>
+
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user.username, user %>
+        </td>
+        <td>
+          <% if user.blocked? %>
+            <span class="label label-info">acoount frozen</span>
+          <% end %>          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
