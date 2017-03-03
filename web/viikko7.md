@@ -1698,4 +1698,4 @@ Jos Rails kiinnostaa, kannattaa tutustumista jatkaa esim. seuraaviin suuntiin
 * [Eloquent Ruby](http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional-Series/dp/0321584104) erinomainen kirja Rubystä.
 
 Ja jos aikaa ja kiinnostusta riittää, kannattaa osallistua periodilla 4 pidettävään Web-palvelinohjelmointi Ruby on Rails
-[harjoitustyöhön](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/projekti)
+[harjoitustyöhön](https://github.com/mluukkai/WebPalvelinohjelmointi2017/wiki/harjoitustyö)
