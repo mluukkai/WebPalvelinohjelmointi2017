@@ -662,9 +662,10 @@ Ja korjauskin on helppo. Javascriptiä tarvitseviin testeihin riittää lisätä
     it "shows the known beers", js:true do
 ```
 
-Jotta selenium saadaan käyttöön, on Gemfilen test-scopeen lisättävä seuraava gem:
+Jotta selenium saadaan käyttöön, on Gemfilen test-scopeen lisättävä seuraavat gemit:
 
     gem 'selenium-webdriver', '2.53.4'
+    gem "chromedriver-helper"
 
 Suoritetaan <code>bundle install</code>, ja ajetaan testit. Jälleen törmäämme virheilmoitukseen:
 
@@ -732,6 +733,20 @@ end
 ```
 
 Jouduimme jo näkemään hieman vaivaa, mutta testi toimii vihdoin!
+
+**HUOM** Selenium käyttää oletusarvoisesti Firefoxia ja ei tällä hetkellä tue Firefoxin uusimpia versioita, tuki on versioon 45 asti. Eli jos testi ei toimi, syynä on todennäköisesti Firefoxin liian uusi versio. Voit tässä tilanteessa (tai muutenkin) käyttää Firefoxin sijaan Chromea tekemällä <code>before :all</cocde> seuraavan lisäyksen
+
+```ruby
+describe "Beerlist page" do
+  before :all do
+    self.use_transactional_fixtures = false
+    WebMock.disable_net_connect!(allow_localhost:true)
+    Capybara.register_driver :selenium do |app|
+      Capybara::Selenium::Driver.new(app, :browser => :chrome)
+    end
+  end
+end
+```
 
 Kun sivuille luodaan sisältöä javascriptillä, ei sisältö ilmesty sivulle vielä samalla hetkellä kuin sivun html-pohja ladataan vaan vasta javascript takaisinkutsufunktion suorituksen jälkeen. Eli jos katsomme sivun sisältöä välittömästi sivulle navigoinnin jälkeen, ei javascript ole vielä ehtinyt muodostaa sivun lopullista sisältöä. Esim. seuraavassa <code>save_and_open_page</code> saattaa avata sivun, jossa ei vielä näy yhtään olutta:
 
