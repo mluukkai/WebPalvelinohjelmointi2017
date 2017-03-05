@@ -734,7 +734,7 @@ end
 
 Jouduimme jo näkemään hieman vaivaa, mutta testi toimii vihdoin!
 
-**HUOM** Selenium käyttää oletusarvoisesti Firefoxia ja ei tällä hetkellä tue Firefoxin uusimpia versioita, tuki on versioon 45 asti. Eli jos testi ei toimi, syynä on todennäköisesti Firefoxin liian uusi versio. Voit tässä tilanteessa (tai muutenkin) käyttää Firefoxin sijaan Chromea tekemällä <code>before :all</cocde> seuraavan lisäyksen
+**HUOM** Selenium käyttää oletusarvoisesti Firefoxia ja ei tällä hetkellä tue Firefoxin uusimpia versioita, tuki on versioon 45 asti. Eli jos testi ei toimi, syynä on todennäköisesti Firefoxin liian uusi versio. Voit tässä tilanteessa (tai muutenkin) käyttää Firefoxin sijaan Chromea tekemällä <code>before :all</code> seuraavan lisäyksen
 
 ```ruby
 describe "Beerlist page" do
@@ -1275,11 +1275,13 @@ Voisimme siistiä ratkaisua aavistuksen palauttamalla metodin <code>index</code>
   before_action :skip_if_cached, only:[:index]
 
   def skip_if_cached
-    return render :index if fragment_exist?( 'beerlist' )
+    return render :index if request.format.html? and fragment_exist?( 'beerlist' )
   end
 ```
 
-Jos esifiltteri <code>skip_if_cached</code> huomaa, että fragmentti on olemassa, se renderöi näkymätemplaten suoraan. Tässä tapauksessa varsinaista kontrollerimetodia ei suoriteta ollenkaan.
+Jos esifiltteri <code>skip_if_cached</code> huomaa, että fragmentti on olemassa, se renderöi näkymätemplaten suoraan. Tässä tapauksessa varsinaista kontrollerimetodia ei suoriteta ollenkaan. 
+
+Ehdossa oleva <code>request.format.html?</code> varmistaa sen, että suoritamme kontrollerimetodin kaiken koodin siinä tapauksessa jos muodostamme _json_-muotoisen vastauksen.
 
 Huomaamme kuitenkin että sivulla on pieni ongelma. Oluet sai järjestettyä sarakkeita klikkaamalla vaihtoehtoisiin järjestyksiin. Cachays on kuitenkin rikkonut toiminnon!
 
@@ -1296,7 +1298,7 @@ Järjestys talletetaan siis muuttujaan <code>@order</code> kontrollerissa. Seura
 ```ruby
   def skip_if_cached
     @order = params[:order] || 'name'
-    return render :index if fragment_exist?( "beerlist-#{@order}"  )
+    return render :index if request.format.html? and fragment_exist?( "beerlist-#{@order}"  )
   end
 
   def index
