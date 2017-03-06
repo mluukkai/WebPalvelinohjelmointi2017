@@ -1,0 +1,19 @@
+<h2>
+  <%= @style.name %>
+</h2>
+
+<quote>
+  <%= @style.description %>
+</quote>
+
+<h4>Beers</h4>
+
+<ul>
+  <% @style.beers.each do |beer| %>
+    <li>
+      <%= link_to beer, beer %>
+    </li>
+  <% end %>
+</ul>
+
+<%= edit_and_destroy_buttons(@style) %>

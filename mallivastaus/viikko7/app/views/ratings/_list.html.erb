@@ -1,0 +1,16 @@
+<table class="table .table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= round(item.average_rating) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

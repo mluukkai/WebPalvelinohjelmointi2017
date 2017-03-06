@@ -1,0 +1,59 @@
+<h2>
+  <%= @beer_club.name %> <%= @beer_club.city %>
+</h2>
+
+<p>
+  Founded: <%= @beer_club.founded %>
+</p>
+
+<h4>Members</h4>
+
+<% if @beer_club.members.any? %>
+  <ul>
+    <% @beer_club.members.each do |member| %>
+      <li>
+        <%= link_to member.username, member %>
+      </li>      
+    <% end %>
+  </ul>
+<% else %>
+  <p>no members</p>
+<% end %>
+
+<% if current_user and current_user.is_member_of?(@beer_club) %>
+
+  <h4>Outstanding appliactions</h4>
+
+  <% if @beer_club.applications.any? %>
+    <ul>
+      <% @beer_club.applications.each do |application| %>
+        <li>
+          <%= link_to application.user.username, application.user %> 
+          <%= link_to 'confirm', confirm_membership_path(application), method: :post, class: "btn btn-primary" %>
+        </li>      
+      <% end %>
+    </ul>
+  <% else %>
+    <p>no applications</p>
+  <% end %>
+
+<% end %>
+
+<% if current_user %>
+  <% if current_user.is_member_of? @beer_club %>
+    <%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value: "end the membership" %>
+    <% end %>     
+  <% elsif current_user.has_applied_membership_of? @beer_club %>
+    <p><em>you have a membership application waiting to be accepted...<em></p>
+  <% else %>
+    <%= form_for(@membership) do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value:"apply membership" %>
+    <% end %>
+  <% end %>
+
+  <%= link_to 'Edit', edit_beer_club_path(@beer_club) %>
+  <%= link_to 'Destroy', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

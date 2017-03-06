@@ -1,0 +1,61 @@
+<h2> <%= @user.username %> </h2>
+
+<p>Has made <%= @user.ratings.count %> ratings</p>
+
+<h3>Beer clubs</h3>
+
+<% if @user.beer_clubs.any? %>
+  <strong>member of</strong>
+  <ul>
+    <% @user.beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>no beerclub memberships</p>
+<% end %>
+
+<% if @user.membership_requests.any? %>
+  <strong>applied membership of</strong>
+  <ul>
+    <% @user.membership_requests.each do |club| %>
+      <li>
+        <%= link_to club.name, club%>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @user.ratings.any? %>
+  <p> Favorite beer: <%= @user.favorite_beer.name %> </p>
+  <p> Favorite brewery: <%= @user.favorite_brewery.name %> </p>
+  <p> Favorite style: <%= @user.favorite_style %> </p>
+
+  <p> average rating <%= @user.average_rating %></p>
+
+  <h3>ratings</h3>
+
+  <ul>
+  <% @user.ratings.each do |r| %>
+    <li>
+      <%= r %>
+      <% if @user == current_user %>
+        <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+
+<% end %>
+
+<% if @user==current_user %>
+  <%= link_to 'change password', edit_user_path(@user) %> <br>
+  <%= link_to 'destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }  %> 
+<% end %>
+
+<% if admin_user %>
+  <%= link_to "froze", toggle_frozen_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+<% end %>
+
