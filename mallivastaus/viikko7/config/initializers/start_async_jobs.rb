@@ -1,1 +1,0 @@
-UpdateRatingsJob.perform_async
