@@ -302,7 +302,7 @@ Eksplisiittinen render-metodin kutsu jätetään kuitenkin yleensä pois jos ren
 
 Yhteen olueeseen liittyy useita reittauksia, eli oliomalli pitää päivittää seuraavanlaiseksi:
 
-![olueeseen liittyy reittauksia](http://yuml.me/4ef16c6a)
+![olueeseen liittyy reittauksia](http://yuml.me/4ef16c6a.png)
 
 Tarvitsemme siis tietokantataulun ja vastaavan model-olion.
 
